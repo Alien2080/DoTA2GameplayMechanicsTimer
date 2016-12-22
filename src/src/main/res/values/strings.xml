@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DoTAtime</string>
+    <string name="game_timer_button_start">Start</string>
+</resources>
