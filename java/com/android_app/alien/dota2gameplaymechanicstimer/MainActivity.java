@@ -1,10 +1,15 @@
 package com.android_app.alien.dota2gameplaymechanicstimer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,6 +18,7 @@ import android.widget.TextView;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.drawable.roshan;
 
 public class MainActivity extends AppCompatActivity {
+
     static int ROSHAN_MIN_RESPAWN = (8 * 60 * 1000);  //respawn times in milliseconds. Roshan respawns between 8 and 11 minutes, correct to version 7.01
     static int ROSHAN_MAX_RESPAWN = (11 * 60 * 1000);
     static int AEGIS_RECLAIM_TIME = (5 * 60 * 1000); //Aegis is reclaimed 5 minutes after being picked up
@@ -41,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             timerHandler.postDelayed(this, 500);
         }
     };
-
     //runs without a timer by reposting this handler at the end of the runnable
     Handler roshanTimerHandler = new Handler();
     Runnable roshanTimerRunnable = new Runnable() {
@@ -89,23 +94,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //to stop the screen from turning off, will cause battery drain
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         roshanDeadTime = 0;
         roshanEarliestRespawnTime = 0;
         roshanLatestRespawnTime = 0;
         aegisReclaimTime = 0;
         played = true;
-
-        setContentView(R.layout.activity_main);
-
-        //to stop the screen from turning off, will cause battery drain
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         game_time_text_view = (TextView) findViewById(R.id.game_time_text_view);
         roshan_respawn_button = (Button) findViewById(R.id.roshan_respawn_button);
         aegis_reclaim_button = (Button) findViewById(R.id.aegis_reclaim_button);
-
         Button gameStartbutton = (Button) findViewById(R.id.game_start_button);
+        mediaplayer = MediaPlayer.create(this, R.raw.ff7victory);
+
         gameStartbutton.setText(getString(R.string.game_timer_button_start));
         gameStartbutton.setOnClickListener(new View.OnClickListener() {
 
@@ -122,10 +125,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        mediaplayer = MediaPlayer.create(this, R.raw.ff7victory);
     }
 
-    //called when roshan timer button is clicked
+    //called when roshan_timer_button is clicked
     public void roshanTimer(View view) {
         played = false;
         roshanDeadTime = System.currentTimeMillis();
@@ -135,9 +137,16 @@ public class MainActivity extends AppCompatActivity {
         roshanTimerHandler.postDelayed(roshanTimerRunnable, 0);
     }
 
+    //called when aegis_button is clicked
     public void aegisTimer(View view) {
         aegisReclaimTime = System.currentTimeMillis() + AEGIS_RECLAIM_TIME;
         roshanTimerHandler.postDelayed(roshanTimerRunnable, 0);
+    }
+
+    //called when select_hero_button is clicked
+    public void heroSelect (View view){
+        Intent intent = new Intent (this, HeroPickerActivity.class) ;
+        startActivity(intent);
     }
 }
 
