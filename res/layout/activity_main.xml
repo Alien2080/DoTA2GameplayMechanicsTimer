@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.android_app.alien.dota2gameplaymechanicstimer.MainActivity">
+<Button
+    android:id="@+id/select_hero_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:text="Select Enemy\n Heroes"
+    android:textColor="#000"
+    android:onClick="heroSelect" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -37,9 +46,11 @@
         android:layout_alignLeft="@id/game_time_text_view"
         android:layout_alignRight="@id/game_time_text_view"
         android:gravity="center"
+
         />
 
     <LinearLayout
+        android:id="@+id/roshan_buttons_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/game_time_label_text_view"
@@ -71,13 +82,22 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/game_start_button"
+    <ListView
+        android:id="@+id/selected_hero_list_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/roshan_buttons_linearLayout"
+        >
+
+    </ListView>
+    <Button
+        android:id="@+id/game_start_button"
+        android:layout_width="120dp"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:text="start" />
+        android:text="start"
+        android:textSize="24dp"/>
 
 </RelativeLayout>
