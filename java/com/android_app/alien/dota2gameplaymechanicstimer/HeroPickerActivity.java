@@ -21,9 +21,138 @@ import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.aegis_recla
 
 public class HeroPickerActivity extends AppCompatActivity {
 
-    ListView hero_list_view;
     static int MAX_SELECTED_HEROES = 5;
-    String[] heroSelected = new String [MAX_SELECTED_HEROES];
+
+    //cooldown times of heroes in milliseconds
+    static int ABBADON_ULT_CD_L1 = (60 * 1000);
+    static int ABBADON_ULT_CD_L2 = (50 * 1000);
+    static int ABBADON_ULT_CD_L3 = (40 * 1000);
+    static int ALCHEMIST_ULT_CD_L1 = (45 * 1000);
+    static int ALCHEMIST_ULT_CD_L2 = ALCHEMIST_ULT_CD_L1;
+    static int ALCHEMIST_ULT_CD_L3 = ALCHEMIST_ULT_CD_L1;
+    static int ANCIENT_APPARITION_ULT_CD_L1 = (40 * 1000);
+    static int ANCIENT_APPARITION_ULT_CD_L2 = ANCIENT_APPARITION_ULT_CD_L1;
+    static int ANCIENT_APPARITION_ULT_CD_L3 = ANCIENT_APPARITION_ULT_CD_L1;
+    static int ANTI_MAGE_ULT_CD_L1 = (70 * 1000);
+    static int ANTI_MAGE_ULT_CD_L2 = (70 * 1000);
+    static int ANTI_MAGE_ULT_CD_L3 = (70 * 1000);
+    static int ARC_WARDEN_ULT_CD_L1 = (60 * 1000);
+    static int ARC_WARDEN_ULT_CD_L2 = (50 * 1000);
+    static int ARC_WARDEN_ULT_CD_L3 = (40 * 1000);
+    static int AXE_ULT_CD_L1 = (75 * 1000);
+    static int AXE_ULT_CD_L2 = (65 * 1000);
+    static int AXE_ULT_CD_L3 = (55 * 1000);
+    static int BANE_ULT_CD_L1 = (100 * 1000);
+    static int BANE_ULT_CD_L2 = BANE_ULT_CD_L1;
+    static int BANE_ULT_CD_L3 = BANE_ULT_CD_L1;
+    static int BAT_RIDER_ULT_CD_L1 = (90 * 1000);
+    static int BAT_RIDER_ULT_CD_L2 = (75 * 1000);
+    static int BAT_RIDER_ULT_CD_L3 = (60 * 1000);
+    static int BEASTMASTER_ULT_CD_L1 = (80 * 1000);
+    static int BEASTMASTER_ULT_CD_L2 = (75 * 1000);
+    static int BEASTMASTER_ULT_CD_L3 = (70 * 1000);
+    static int BLOODSEEKER_ULT_CD_L1 = (60 * 1000);
+    static int BLOODSEEKER_ULT_CD_L2 = BLOODSEEKER_ULT_CD_L1;
+    static int BLOODSEEKER_ULT_CD_L3 = BLOODSEEKER_ULT_CD_L1;
+    static int BOUNTY_HUNTER_ULT_CD_L1 = (4 * 1000);
+    static int BOUNTY_HUNTER_ULT_CD_L2 = BOUNTY_HUNTER_ULT_CD_L1;
+    static int BOUNTY_HUNTER_ULT_CD_L3 = BOUNTY_HUNTER_ULT_CD_L1;
+    static int BREWMASTER_ULT_CD_L1 = (140 * 1000);
+    static int BREWMASTER_ULT_CD_L2 = (120 * 1000);
+    static int BREWMASTER_ULT_CD_L3 = (100 * 1000);
+    static int BRISTLEBACK_ULT_CD_L1 = (0 * 1000);
+    static int BRISTLEBACK_ULT_CD_L2 = (0 * 1000);
+    static int BRISTLEBACK_ULT_CD_L3 = (0 * 1000);
+    static int BROODMOTHER_ULT_CD_L1 = (45 * 1000);
+    static int BROODMOTHER_ULT_CD_L2 = BROODMOTHER_ULT_CD_L1;
+    static int BROODMOTHER_ULT_CD_L3 = BROODMOTHER_ULT_CD_L1;
+    static int CENTAUR_ULT_CD_L1 = (90 * 1000);
+    static int CENTAUR_ULT_CD_L2 = (75 * 1000);
+    static int CENTAUR_ULT_CD_L3 = (60 * 1000);
+    static int CHAOS_ULT_CD_L1 = (130 * 1000);
+    static int CHAOS_ULT_CD_L2 = CHAOS_ULT_CD_L1;
+    static int CHAOS_ULT_CD_L3 = CHAOS_ULT_CD_L1;
+    static int CHEN_ULT_CD_L1 = (160 * 1000);
+    static int CHEN_ULT_CD_L2 = (140 * 1000);
+    static int CHEN_ULT_CD_L3 = (120 * 1000);
+    static int CLINKZ_ULT_CD_L1 = (45 * 1000);
+    static int CLINKZ_ULT_CD_L2 = (30 * 1000);
+    static int CLINKZ_ULT_CD_L3 = (15 * 1000);
+    static int CLOCKWERK_ULT_CD_L1 = (70 * 1000);
+    static int CLOCKWERK_ULT_CD_L2 = (55 * 1000);
+    static int CLOCKWERK_ULT_CD_L3 = (40 * 1000);
+    static int CM_ULT_CD_L1 = (90 * 1000);
+    static int CM_ULT_CD_L2 = CM_ULT_CD_L1;
+    static int CM_ULT_CD_L3 = CM_ULT_CD_L1;
+
+    //default cooldown time of each heroes ultimate ability, the position in array relates to the heros name in heroNames array x3
+    int[] ultTimes = new int[]{
+            ABBADON_ULT_CD_L1,
+            ABBADON_ULT_CD_L2,
+            ABBADON_ULT_CD_L3,
+            ALCHEMIST_ULT_CD_L1,
+            ALCHEMIST_ULT_CD_L2 = ALCHEMIST_ULT_CD_L1,
+            ALCHEMIST_ULT_CD_L3 = ALCHEMIST_ULT_CD_L1,
+            ANCIENT_APPARITION_ULT_CD_L1,
+            ANCIENT_APPARITION_ULT_CD_L2,
+            ANCIENT_APPARITION_ULT_CD_L3,
+            ANTI_MAGE_ULT_CD_L1,
+            ANTI_MAGE_ULT_CD_L2,
+            ANTI_MAGE_ULT_CD_L3,
+            ARC_WARDEN_ULT_CD_L1,
+            ARC_WARDEN_ULT_CD_L2,
+            ARC_WARDEN_ULT_CD_L3,
+            AXE_ULT_CD_L1,
+            AXE_ULT_CD_L2,
+            AXE_ULT_CD_L3,
+            BANE_ULT_CD_L1,
+            BANE_ULT_CD_L2,
+            BANE_ULT_CD_L3,
+            BAT_RIDER_ULT_CD_L1,
+            BAT_RIDER_ULT_CD_L2,
+            BAT_RIDER_ULT_CD_L3,
+            BEASTMASTER_ULT_CD_L1,
+            BEASTMASTER_ULT_CD_L2,
+            BEASTMASTER_ULT_CD_L3,
+            BLOODSEEKER_ULT_CD_L1,
+            BLOODSEEKER_ULT_CD_L2,
+            BLOODSEEKER_ULT_CD_L3,
+            BOUNTY_HUNTER_ULT_CD_L1,
+            BOUNTY_HUNTER_ULT_CD_L2,
+            BOUNTY_HUNTER_ULT_CD_L3,
+            BREWMASTER_ULT_CD_L1,
+            BREWMASTER_ULT_CD_L2,
+            BREWMASTER_ULT_CD_L3,
+            BRISTLEBACK_ULT_CD_L1,
+            BRISTLEBACK_ULT_CD_L2,
+            BRISTLEBACK_ULT_CD_L3,
+            BROODMOTHER_ULT_CD_L1,
+            BROODMOTHER_ULT_CD_L2,
+            BROODMOTHER_ULT_CD_L3,
+            CENTAUR_ULT_CD_L1,
+            CENTAUR_ULT_CD_L2,
+            CENTAUR_ULT_CD_L3,
+            CHAOS_ULT_CD_L1,
+            CHAOS_ULT_CD_L2,
+            CHAOS_ULT_CD_L3,
+            CHEN_ULT_CD_L1,
+            CHEN_ULT_CD_L2,
+            CHEN_ULT_CD_L3,
+            CLINKZ_ULT_CD_L1,
+            CLINKZ_ULT_CD_L2,
+            CLINKZ_ULT_CD_L3,
+            CLOCKWERK_ULT_CD_L1,
+            CLOCKWERK_ULT_CD_L2,
+            CLOCKWERK_ULT_CD_L3,
+            CM_ULT_CD_L1,
+            CM_ULT_CD_L2,
+            CM_ULT_CD_L3
+    };
+
+    ListView hero_list_view;
+    String[] heroSelected = new String[MAX_SELECTED_HEROES];
+    //each hero has 3 levels of ultimate and thus 3 ultimate cooldown times
+    int[] heroSelectedUltTimes = new int[MAX_SELECTED_HEROES * 3];
     int i = 0;
 
     @Override
@@ -33,7 +162,7 @@ public class HeroPickerActivity extends AppCompatActivity {
 
         hero_list_view = (ListView) findViewById(R.id.hero_list_view);
 
-
+        //position in array links the hero to their ultimate cooldown time by having the time in the same position as the hero name x3
         String[] heroNames = new String[]{
                 "Abaddon",
                 "Alchemist",
@@ -150,6 +279,7 @@ public class HeroPickerActivity extends AppCompatActivity {
                 "Zeus"
         };
 
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, heroNames);
 
@@ -163,21 +293,24 @@ public class HeroPickerActivity extends AppCompatActivity {
                                     int position, long id) {
 
                 // ListView Clicked item index
-                int itemPosition     = position;
+                int itemPosition = position;
 
                 // ListView Clicked item value
-                String  itemValue    = (String) hero_list_view.getItemAtPosition(position);
+                String itemValue = (String) hero_list_view.getItemAtPosition(position);
 
-                // Add hero name to selectedHero array
+                // Add hero name to selectedHero array and ult time to heroSelectedUltTimes array to be passed with activity switch
                 heroSelected[i] = itemValue;
+                heroSelectedUltTimes[i * 3] = ultTimes[position * 3];
+                heroSelectedUltTimes[(i * 3) + 1] = ultTimes[(position * 3) + 1];
+                heroSelectedUltTimes[(i * 3) + 2] = ultTimes[(position * 3) + 2];
                 i++;
-                if (i >= MAX_SELECTED_HEROES){
+                if (i >= MAX_SELECTED_HEROES) {
                     i = 0;
                 }
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
                         .show();
             }
 
@@ -185,9 +318,10 @@ public class HeroPickerActivity extends AppCompatActivity {
     }
 
     //called when backToMain button is clicked
-    public void returnToMain (View view){
-        Intent intent = new Intent (this, MainActivity.class);
-        intent.putExtra ("selectedHeroes", heroSelected);
+    public void returnToMain(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("selectedHeroes", heroSelected);
+        intent.putExtra("selectedHeroesUltTimes", heroSelectedUltTimes);
         startActivity(intent);
     }
 }
