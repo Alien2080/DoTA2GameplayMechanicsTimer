@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:onClick="heroSelect"
         android:text="Select Enemy\n Heroes"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:layout_margin="10dp"/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -58,7 +59,7 @@
         <Button
             android:id="@+id/roshan_respawn_button"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
@@ -69,7 +70,7 @@
         <Button
             android:id="@+id/aegis_reclaim_button"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
@@ -95,16 +96,17 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/game_start_button"
         android:layout_margin="10dp"
-        android:background="#fff"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <!-- this hardcodes the hero amount to 5, should use MAX_HERO_SELECTED -->
         <LinearLayout
+            android:id="@+id/hero1_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:background="#b2ff59"
+            android:orientation="horizontal"
+            android:padding="3dp">
 
             <TextView
                 android:id="@+id/hero1_textview"
@@ -112,170 +114,209 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#000"
-                />
+                android:textAlignment="center"
+                android:clickable="true"
+                android:onClick="adjustCDReduction1"/>
 
             <Button
-            android:id="@+id/hero1_1_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Level 1"
-            android:onClick="hero1_1UltTimer"/>
+                android:id="@+id/hero1_1_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="hero1_1UltTimer"
+                android:text="Level 1" />
+
             <Button
                 android:id="@+id/hero1_2_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 2"
-                android:onClick="hero1_2UltTimer"/>
+                android:onClick="hero1_2UltTimer"
+                android:text="Level 2" />
+
             <Button
                 android:id="@+id/hero1_3_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 3"
-                android:onClick="hero1_3UltTimer"/>
+                android:onClick="hero1_3UltTimer"
+                android:text="Level 3" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hero2_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:background="#b2ff59"
+            android:orientation="horizontal"
+            android:padding="3dp">
 
             <TextView
                 android:id="@+id/hero2_textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:onClick="adjustCDReduction2"/>
+
             <Button
                 android:id="@+id/hero2_1_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 1"
-                android:onClick="hero2_1UltTimer"/>
+                android:onClick="hero2_1UltTimer"
+                android:text="Level 1" />
+
             <Button
                 android:id="@+id/hero2_2_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 2"
-                android:onClick="hero2_2UltTimer"/>
+                android:onClick="hero2_2UltTimer"
+                android:text="Level 2" />
+
             <Button
                 android:id="@+id/hero2_3_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 3"
-                android:onClick="hero2_3UltTimer"/>
+                android:onClick="hero2_3UltTimer"
+                android:text="Level 3" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hero3_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:background="#b2ff59"
+            android:orientation="horizontal"
+            android:padding="3dp">
 
             <TextView
                 android:id="@+id/hero3_textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:onClick="adjustCDReduction3"/>
 
             <Button
                 android:id="@+id/hero3_1_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 1"
-                android:onClick="hero3_1UltTimer"/>
+                android:onClick="hero3_1UltTimer"
+                android:text="Level 1" />
+
             <Button
                 android:id="@+id/hero3_2_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 2"
-                android:onClick="hero3_2UltTimer"/>
+                android:onClick="hero3_2UltTimer"
+                android:text="Level 2" />
+
             <Button
                 android:id="@+id/hero3_3_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 3"
-                android:onClick="hero3_3UltTimer"/>
+                android:onClick="hero3_3UltTimer"
+                android:text="Level 3" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hero4_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:background="#b2ff59"
+            android:orientation="horizontal"
+            android:padding="3dp">
 
             <TextView
                 android:id="@+id/hero4_textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:onClick="adjustCDReduction4"/>
+
             <Button
                 android:id="@+id/hero4_1_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 1"
-                android:onClick="hero4_1UltTimer"/>
+                android:onClick="hero4_1UltTimer"
+                android:text="Level 1" />
+
             <Button
                 android:id="@+id/hero4_2_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 2"
-                android:onClick="hero4_2UltTimer"/>
+                android:onClick="hero4_2UltTimer"
+                android:text="Level 2" />
+
             <Button
                 android:id="@+id/hero4_3_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 3"
-                android:onClick="hero4_3UltTimer"/>
+                android:onClick="hero4_3UltTimer"
+                android:text="Level 3" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hero5_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:background="#b2ff59"
+            android:orientation="horizontal"
+            android:padding="3dp">
 
             <TextView
                 android:id="@+id/hero5_textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:onClick="adjustCDReduction5"/>
+
             <Button
                 android:id="@+id/hero5_1_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 1"
-                android:onClick="hero5_1UltTimer"/>
+                android:onClick="hero5_1UltTimer"
+                android:text="Level 1" />
+
             <Button
                 android:id="@+id/hero5_2_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 2"
-                android:onClick="hero5_2UltTimer"/>
+                android:onClick="hero5_2UltTimer"
+                android:text="Level 2" />
+
             <Button
                 android:id="@+id/hero5_3_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Level 3"
-                android:onClick="hero5_3UltTimer"/>
+                android:onClick="hero5_3UltTimer"
+                android:text="Level 3" />
         </LinearLayout>
     </LinearLayout>
 

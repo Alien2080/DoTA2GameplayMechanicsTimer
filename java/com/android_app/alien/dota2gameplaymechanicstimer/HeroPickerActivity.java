@@ -84,6 +84,27 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int CM_ULT_CD_L1 = (90 * 1000);
     static int CM_ULT_CD_L2 = CM_ULT_CD_L1;
     static int CM_ULT_CD_L3 = CM_ULT_CD_L1;
+    static int DARK_SEER_ULT_CD_L1 = (100 * 1000);
+    static int DARK_SEER_ULT_CD_L2 = (100 * 1000);
+    static int DARK_SEER_ULT_CD_L3 = (100 * 1000);
+    static int DAZZLE_ULT_CD_L1 = (40 * 1000);
+    static int DAZZLE_ULT_CD_L2 = (40 * 1000);
+    static int DAZZLE_ULT_CD_L3 = (40 * 1000);
+    static int DEATH_PROPHET_CD_L1 = (145 * 1000);
+    static int DEATH_PROPHET_CD_L2 = (145 * 1000);
+    static int DEATH_PROPHET_CD_L3 = (145 * 1000);
+    static int DISRUPTOR_CD_L1 = (90 * 1000);
+    static int DISRUPTOR_CD_L2 = (80 * 1000);
+    static int DISRUPTOR_CD_L3 = (70 * 1000);
+    static int DOOM_CD_L1 = (145 * 1000);
+    static int DOOM_CD_L2 = (145 * 1000);
+    static int DOOM_CD_L3 = (145 * 1000);
+    static int DRAGON_KNIGHT_CD_L1 = (115 * 1000);
+    static int DRAGON_KNIGHT_CD_L2 = (115 * 1000);
+    static int DRAGON_KNIGHT_CD_L3 = (115 * 1000);
+    static int DROW_CD_L1 = (0 * 1000);
+    static int DROW_CD_L2 = (0 * 1000);
+    static int DROW_CD_L3 = (0 * 1000);
 
     //default cooldown time of each heroes ultimate ability, the position in array relates to the heros name in heroNames array x3
     int[] ultTimes = new int[]{
@@ -146,7 +167,28 @@ public class HeroPickerActivity extends AppCompatActivity {
             CLOCKWERK_ULT_CD_L3,
             CM_ULT_CD_L1,
             CM_ULT_CD_L2,
-            CM_ULT_CD_L3
+            CM_ULT_CD_L3,
+            DARK_SEER_ULT_CD_L1,
+            DARK_SEER_ULT_CD_L2,
+            DARK_SEER_ULT_CD_L3,
+            DAZZLE_ULT_CD_L1,
+            DAZZLE_ULT_CD_L2,
+            DAZZLE_ULT_CD_L3,
+            DEATH_PROPHET_CD_L1,
+            DEATH_PROPHET_CD_L2,
+            DEATH_PROPHET_CD_L3,
+            DISRUPTOR_CD_L1,
+            DISRUPTOR_CD_L2,
+            DISRUPTOR_CD_L3,
+            DOOM_CD_L1,
+            DOOM_CD_L2,
+            DOOM_CD_L3,
+            DRAGON_KNIGHT_CD_L1,
+            DRAGON_KNIGHT_CD_L2,
+            DRAGON_KNIGHT_CD_L3,
+            DROW_CD_L1 ,
+            DROW_CD_L2 ,
+            DROW_CD_L3
     };
 
     ListView hero_list_view;
@@ -322,6 +364,7 @@ public class HeroPickerActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("selectedHeroes", heroSelected);
         intent.putExtra("selectedHeroesUltTimes", heroSelectedUltTimes);
+
         startActivity(intent);
     }
 }

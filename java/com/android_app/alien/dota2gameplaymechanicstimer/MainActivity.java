@@ -1,6 +1,8 @@
 package com.android_app.alien.dota2gameplaymechanicstimer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 
@@ -16,6 +18,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static android.R.attr.button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.drawable.roshan;
@@ -23,10 +29,15 @@ import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.game_start_
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_1_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_2_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_3_button;
+import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_layout;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_textview;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero2_1_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero2_2_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero2_3_button;
+import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero2_layout;
+import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero3_layout;
+import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero4_layout;
+import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero5_layout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
     Button hero5_3_button;
 
     LinearLayout hereos_selected_layout;
+    LinearLayout hero1_layout;
+    LinearLayout hero2_layout;
+    LinearLayout hero3_layout;
+    LinearLayout hero4_layout;
+    LinearLayout hero5_layout;
 
     //    ListView selected_hero_list_view;
     TextView game_time_text_view;
@@ -79,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
     long hero3UltTime = 0;
     long hero4UltTime = 0;
     long hero5UltTime = 0;
+    double hero1CDFactor = 1;
+    double hero2CDFactor = 1;
+    double hero3CDFactor = 1;
+    double hero4CDFactor = 1;
+    double hero5CDFactor = 1;
 
     int[] ultTimes = new int[5 * 3];
 
@@ -214,6 +235,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null){
+            gameStartTime = savedInstanceState.getLong("gameStartTime");
+            timerHandler.postDelayed(timerRunnable, 0);
+        }
+
         setContentView(R.layout.activity_main);
 
         //to stop the screen from turning off, will cause battery drain
@@ -241,8 +268,12 @@ public class MainActivity extends AppCompatActivity {
         hero5_2_button = (Button) findViewById(R.id.hero5_2_button);
         hero5_3_button = (Button) findViewById(R.id.hero5_3_button);
 
-        //this use a constant 5 but should really use the MAX_SELECTED_HEROES static int
-        String[] selectedHeroes;
+        hereos_selected_layout = (LinearLayout) findViewById(R.id.hereos_selected_layout);
+        hero1_layout = (LinearLayout) findViewById(R.id.hero1_layout);
+        hero2_layout = (LinearLayout) findViewById(R.id.hero2_layout);
+        hero3_layout = (LinearLayout) findViewById(R.id.hero3_layout);
+        hero4_layout = (LinearLayout) findViewById(R.id.hero4_layout);
+        hero5_layout = (LinearLayout) findViewById(R.id.hero5_layout);
 
         //roshanDeadTime = 0;
         //roshanEarliestRespawnTime = 0;
@@ -255,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
         select_hero_button = (Button) findViewById(R.id.select_hero_button);
         Button gameStartbutton = (Button) findViewById(R.id.game_start_button);
         mediaplayer = MediaPlayer.create(this, R.raw.ff7victory);
-        hereos_selected_layout = (LinearLayout) findViewById(R.id.hereos_selected_layout);
+
 
         //this places the string literal into the res/values/strings.xml file where they all should be for easy of translation (among other reasons)
         gameStartbutton.setText(getString(R.string.game_timer_button_start));
@@ -264,35 +295,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Button b = (Button) v;
-                if (b.getText().equals("pause")) {
+                if (b.getText().equals("Pause")) {
                     timerHandler.removeCallbacks(timerRunnable);
-                    b.setText(getString(R.string.game_timer_button_start));
+                    b.setText("Resume");
                 } else if (b.getText().equals("New Game")) {
                     gameStartTime = System.currentTimeMillis();
                     timerHandler.postDelayed(timerRunnable, 0);
-                    b.setText("pause");
-                } else if (b.getText().equals("start")) {
+                    b.setText("Pause");
+                } else if (b.getText().equals("Resume")) {
                     timerHandler.postDelayed(timerRunnable, 0);
-                    b.setText("pause");
+                    b.setText("Pause");
                 }
             }
         });
+    }
 
-        //gets String array of selected heroes from hero select screen
-        Intent intent = getIntent();
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            selectedHeroes = intent.getStringArrayExtra("selectedHeroes");
-            ultTimes = intent.getIntArrayExtra("selectedHeroesUltTimes");
-            hero1_textview.setText(selectedHeroes[0]);
-            hero2_textview.setText(selectedHeroes[1]);
-            hero3_textview.setText(selectedHeroes[2]);
-            hero4_textview.setText(selectedHeroes[3]);
-            hero5_textview.setText(selectedHeroes[4]);
-            select_hero_button.setText("Restart");
-        }else{
-            hereos_selected_layout.setVisibility(View.INVISIBLE);
-        }
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        gameStartTime = savedInstanceState.getLong("gameStartTime");
+        timerHandler.postDelayed(timerRunnable, 0);
     }
 
     //called when roshan_timer_button is clicked
@@ -319,76 +341,283 @@ public class MainActivity extends AppCompatActivity {
 
     //called when hero1 ultiamte button is clicked
     public void hero1_1UltTimer(View view) {
-        hero1UltTime = System.currentTimeMillis() + ultTimes[0];
+        hero1UltTime = System.currentTimeMillis() + (long)(ultTimes[0] * hero1CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero1_2UltTimer(View view) {
-        hero1UltTime = System.currentTimeMillis() + ultTimes[1];
+        hero1UltTime = System.currentTimeMillis() + (long)(ultTimes[1] * hero1CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero1_3UltTimer(View view) {
-        hero1UltTime = System.currentTimeMillis() + ultTimes[2];
+        hero1UltTime = System.currentTimeMillis() + (long)(ultTimes[2] * hero1CDFactor);
     }
     //called when hero1 ultiamte button is clicked
     public void hero2_1UltTimer(View view) {
-        hero2UltTime = System.currentTimeMillis() + ultTimes[3];
+        hero2UltTime = System.currentTimeMillis() + (long)(ultTimes[3] * hero2CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero2_2UltTimer(View view) {
-        hero2UltTime = System.currentTimeMillis() + ultTimes[4];
+        hero2UltTime = System.currentTimeMillis() + (long)(ultTimes[4] * hero2CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero2_3UltTimer(View view) {
-        hero2UltTime = System.currentTimeMillis() + ultTimes[5];
+        hero2UltTime = System.currentTimeMillis() + (long)(ultTimes[5] * hero2CDFactor);
     }
     //called when hero1 ultiamte button is clicked
     public void hero3_1UltTimer(View view) {
-        hero3UltTime = System.currentTimeMillis() + ultTimes[6];
+        hero3UltTime = System.currentTimeMillis() + (long)(ultTimes[6] * hero3CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero3_2UltTimer(View view) {
-        hero3UltTime = System.currentTimeMillis() + ultTimes[7];
+        hero3UltTime = System.currentTimeMillis() + (long)(ultTimes[7] * hero3CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero3_3UltTimer(View view) {
-        hero3UltTime = System.currentTimeMillis() + ultTimes[8];
+        hero3UltTime = System.currentTimeMillis() + (long)(ultTimes[8] * hero3CDFactor);
     }
     //called when hero1 ultiamte button is clicked
     public void hero4_1UltTimer(View view) {
-        hero4UltTime = System.currentTimeMillis() + ultTimes[9];
+        hero4UltTime = System.currentTimeMillis() + (long)(ultTimes[9] * hero4CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero4_2UltTimer(View view) {
-        hero4UltTime = System.currentTimeMillis() + ultTimes[10];
+        hero4UltTime = System.currentTimeMillis() + (long)(ultTimes[10] * hero4CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero4_3UltTimer(View view) {
-        hero4UltTime = System.currentTimeMillis() + ultTimes[11];
+        hero4UltTime = System.currentTimeMillis() + (long)(ultTimes[11] * hero4CDFactor);
     }
     //called when hero1 ultiamte button is clicked
     public void hero5_1UltTimer(View view) {
-        hero5UltTime = System.currentTimeMillis() + ultTimes[12];
+        hero5UltTime = System.currentTimeMillis() + (long)(ultTimes[12] * hero5CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero5_2UltTimer(View view) {
-        hero5UltTime = System.currentTimeMillis() + ultTimes[13];
+        hero5UltTime = System.currentTimeMillis() + (long)(ultTimes[13] * hero5CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero5_3UltTimer(View view) {
-        hero5UltTime = System.currentTimeMillis() + ultTimes[14];
+        hero5UltTime = System.currentTimeMillis() + (long)(ultTimes[14] * hero5CDFactor);
     }
 
+    // invoked when the activity may be temporarily destroyed, save the instance state here
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putLong("gameStartTime", gameStartTime);
+        // call superclass to save any view hierarchy
+        super.onSaveInstanceState(outState);
+    }
 
+    @Override
+    public void onPause (){
+        super.onPause();
+        timerHandler.removeCallbacks(timerRunnable);
+    }
+    @Override
+    public void onResume (){
+        super.onResume();
+        if (gameStartTime != 0) {
+            timerHandler.postDelayed(timerRunnable, 0);
+        }
+        //this use a constant 5 but should really use the MAX_SELECTED_HEROES static int
+        String[] selectedHeroes;
+        //gets String array of selected heroes from hero select screen
+        Intent intent = getIntent();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            selectedHeroes = intent.getStringArrayExtra("selectedHeroes");
+            ultTimes = intent.getIntArrayExtra("selectedHeroesUltTimes");
+            if(selectedHeroes[0] != null) {
+                hero1_textview.setText(selectedHeroes[0]);
+                hero1_layout.setVisibility(View.VISIBLE);
+                hereos_selected_layout.setVisibility(View.VISIBLE);
+            }else{
+                hereos_selected_layout.setVisibility(View.INVISIBLE);
+                hero1_layout.setVisibility(View.INVISIBLE);
+            }
+            if(selectedHeroes[1] != null) {
+                hero2_textview.setText(selectedHeroes[1]);
+                hero2_layout.setVisibility(View.VISIBLE);
+            }else{
+                hero2_layout.setVisibility(View.INVISIBLE);
+            }
+            if(selectedHeroes[2] != null) {
+                hero3_textview.setText(selectedHeroes[2]);
+                hero3_layout.setVisibility(View.VISIBLE);
+            }else{
+                hero3_layout.setVisibility(View.INVISIBLE);
+            }
+            if(selectedHeroes[3] != null) {
+                hero4_textview.setText(selectedHeroes[3]);
+                hero4_layout.setVisibility(View.VISIBLE);
+            }else{
+                hero4_layout.setVisibility(View.INVISIBLE);
+            }
+            if(selectedHeroes[4] != null) {
+                hero5_textview.setText(selectedHeroes[4]);
+                hero5_layout.setVisibility(View.VISIBLE);
+            }else{
+                hero5_layout.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            hereos_selected_layout.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        //now getIntent() should always return the last received intent
+    }
+
+    public void adjustCDReduction1 (View view) {
+        buildCDDIalog(view, 1);
+    }
+    public void adjustCDReduction2 (View view) {
+        buildCDDIalog(view, 2);
+    }
+    public void adjustCDReduction3 (View view) {
+        buildCDDIalog(view, 3);
+    }
+    public void adjustCDReduction4 (View view) {
+        buildCDDIalog(view, 4);
+    }
+    public void adjustCDReduction5 (View view) {
+        buildCDDIalog(view, 5);
+    }
+
+    public void buildCDDIalog (View view, final int heronumber){
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+        // String array for alert dialog multi choice items
+        String[] modifiers = new String[]{
+                "Octerine Core",
+                "Talent 10%",
+                "Talent 12%",
+                "Talent 15%",
+                "Talent 20%",
+                "aghanim scepter, does nothing ATM!",
+                "KOTL chakra magic, does nothing!!"
+        };
+
+        // Boolean array for initial selected items
+        final boolean[] checkedModifiers = new boolean[]{
+                false, // Octerine
+                false, // 10%
+                false, // 12%
+                false, // 15%
+                false, // 20%
+                false, // aghs
+                false  // kotl
+        };
+
+        // Convert the color array to list
+        final List<String> modifiersList = Arrays.asList(modifiers);
+
+        // Set multiple choice items for alert dialog
+                /*
+                    AlertDialog.Builder setMultiChoiceItems(CharSequence[] items, boolean[]
+                    checkedItems, DialogInterface.OnMultiChoiceClickListener listener)
+                        Set a list of items to be displayed in the dialog as the content,
+                        you will be notified of the selected item via the supplied listener.
+                 */
+                /*
+                    DialogInterface.OnMultiChoiceClickListener
+                    public abstract void onClick (DialogInterface dialog, int which, boolean isChecked)
+
+                        This method will be invoked when an item in the dialog is clicked.
+
+                        Parameters
+                        dialog The dialog where the selection was made.
+                        which The position of the item in the list that was clicked.
+                        isChecked True if the click checked the item, else false.
+                 */
+        builder.setMultiChoiceItems(modifiers, checkedModifiers, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                // Update the current focused item's checked status
+                checkedModifiers[which] = isChecked;
+
+                // Get the current focused item
+                String currentItem = modifiersList.get(which);
+
+                // Notify the current action
+                Toast.makeText(getApplicationContext(),
+                        currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Specify the dialog is not cancelable
+        builder.setCancelable(false);
+
+        // Set a title for alert dialog
+        builder.setTitle("Cooldown Reduction Modifiers");
+
+        // Set the positive/yes button click listener
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click positive button
+                double cooldownModifier = 1;
+                if (checkedModifiers[0]){
+                    cooldownModifier = (cooldownModifier * 0.75);
+                }
+                if (checkedModifiers[1]){
+                    cooldownModifier = (cooldownModifier * 0.9);
+                }
+                if (checkedModifiers[2]){
+                    cooldownModifier = (cooldownModifier * 0.88);
+                }
+                if (checkedModifiers[3]){
+                    cooldownModifier = (cooldownModifier * 0.85);
+                }
+                if (checkedModifiers[4]){
+                    cooldownModifier = (cooldownModifier * 0.80);
+                }
+                if (heronumber == 1){
+                    hero1CDFactor = cooldownModifier;
+                }
+                if (heronumber == 2){
+                    hero2CDFactor = cooldownModifier;
+                }
+                if (heronumber == 3){
+                    hero3CDFactor = cooldownModifier;
+                }
+                if (heronumber == 4){
+                    hero4CDFactor = cooldownModifier;
+                }
+                if (heronumber == 5){
+                    hero5CDFactor = cooldownModifier;
+                }
+            }
+        });
+
+        // Set the neutral/cancel button click listener
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click the neutral button
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        // Display the alert dialog on interface
+        dialog.show();
+    }
 }
+
 
 
