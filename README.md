@@ -4,4 +4,4 @@ Android app; Several timers for various gameplay mechanisms such as Roshan respa
 Created by Tom Aylen 
 started 21/12/16
 
-Attempting to learn how to write Android apps. Using Android Studio IDE. This GitHub project is copy of the 'app' folder in the Android Studio project.
+Attempting to learn how to write Android apps. Using Android Studio IDE. This GitHub project is copy of the 'app/src/main' folder in the Android Studio project.
