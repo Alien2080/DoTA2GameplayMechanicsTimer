@@ -12,9 +12,12 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 
 import android.widget.Button;
@@ -34,6 +37,8 @@ import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_2_but
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_3_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_layout;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_textview;
+import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_textview_overlay;
+import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_time_textview;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero2_1_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero2_2_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero2_3_button;
@@ -49,12 +54,25 @@ public class MainActivity extends AppCompatActivity {
     static int ROSHAN_MAX_RESPAWN = (11 * 60 * 1000);
     //Aegis is reclaimed 5 minutes after being picked up
     static int AEGIS_RECLAIM_TIME = (5 * 60 * 1000);
+    int buttonWidth;
 
     TextView hero1_textview;
     TextView hero2_textview;
     TextView hero3_textview;
     TextView hero4_textview;
     TextView hero5_textview;
+
+    TextView hero1_textview_overlay;
+    TextView hero2_textview_overlay;
+    TextView hero3_textview_overlay;
+    TextView hero4_textview_overlay;
+    TextView hero5_textview_overlay;
+
+    TextView hero1_time_textview;
+    TextView hero2_time_textview;
+    TextView hero3_time_textview;
+    TextView hero4_time_textview;
+    TextView hero5_time_textview;
 
     Button hero1_1_button;
     Button hero1_2_button;
@@ -83,7 +101,13 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout hero4_layout;
     LinearLayout hero5_layout;
 
-    //    ListView selected_hero_list_view;
+    LinearLayout hereos_selected_layout_overlay;
+    LinearLayout hero1_layout_overlay;
+    LinearLayout hero2_layout_overlay;
+    LinearLayout hero3_layout_overlay;
+    LinearLayout hero4_layout_overlay;
+    LinearLayout hero5_layout_overlay;
+
     TextView game_time_text_view;
     Button roshan_respawn_button;
     Button aegis_reclaim_button;
@@ -118,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+
             long millis = System.currentTimeMillis() - gameStartTime;
             int seconds = (int) (millis / 1000);
             int minutes = seconds / 60;
@@ -165,52 +190,45 @@ public class MainActivity extends AppCompatActivity {
             secondsHero5Ult = secondsHero5Ult % 60;
 
             if (System.currentTimeMillis() <= hero1UltTime) {
-                hero1_1_button.setText(String.format("%d:%02d", minutesHero1Ult, secondsHero1Ult));
-                hero1_2_button.setText(String.format("%d:%02d", minutesHero1Ult, secondsHero1Ult));
-                hero1_3_button.setText(String.format("%d:%02d", minutesHero1Ult, secondsHero1Ult));
+                hero1_time_textview.setText(String.format("%d:%02d", minutesHero1Ult, secondsHero1Ult));
+                hero1_layout_overlay.setVisibility(View.VISIBLE);
+                hero1_layout.setVisibility(View.INVISIBLE);
             } else {
-                hero1_1_button.setText("Level 1");
-                hero1_2_button.setText("Level 2");
-                hero1_3_button.setText("Level 3");
+                hero1_layout_overlay.setVisibility(View.INVISIBLE);
+                hero1_layout.setVisibility(View.VISIBLE);
             }
-
             if (System.currentTimeMillis() <= hero2UltTime) {
-                hero2_1_button.setText(String.format("%d:%02d", minutesHero2Ult, secondsHero2Ult));
-                hero2_2_button.setText(String.format("%d:%02d", minutesHero2Ult, secondsHero2Ult));
-                hero2_3_button.setText(String.format("%d:%02d", minutesHero2Ult, secondsHero2Ult));
+                hero2_time_textview.setText(String.format("%d:%02d", minutesHero2Ult, secondsHero2Ult));
+                hero2_layout_overlay.setVisibility(View.VISIBLE);
+                hero2_layout.setVisibility(View.INVISIBLE);
             } else {
-                hero2_1_button.setText("Level 1");
-                hero2_2_button.setText("Level 2");
-                hero2_3_button.setText("Level 3");
+                hero2_layout_overlay.setVisibility(View.INVISIBLE);
+                hero2_layout.setVisibility(View.VISIBLE);
             }
             if (System.currentTimeMillis() <= hero3UltTime) {
-                hero3_1_button.setText(String.format("%d:%02d", minutesHero3Ult, secondsHero3Ult));
-                hero3_2_button.setText(String.format("%d:%02d", minutesHero3Ult, secondsHero3Ult));
-                hero3_3_button.setText(String.format("%d:%02d", minutesHero3Ult, secondsHero3Ult));
+                hero3_time_textview.setText(String.format("%d:%02d", minutesHero3Ult, secondsHero3Ult));
+                hero3_layout_overlay.setVisibility(View.VISIBLE);
+                hero3_layout.setVisibility(View.INVISIBLE);
             } else {
-                hero3_1_button.setText("Level 1");
-                hero3_2_button.setText("Level 2");
-                hero3_3_button.setText("Level 3");
+                hero3_layout_overlay.setVisibility(View.INVISIBLE);
+                hero3_layout.setVisibility(View.VISIBLE);
             }
             if (System.currentTimeMillis() <= hero4UltTime) {
-                hero4_1_button.setText(String.format("%d:%02d", minutesHero4Ult, secondsHero4Ult));
-                hero4_2_button.setText(String.format("%d:%02d", minutesHero4Ult, secondsHero4Ult));
-                hero4_3_button.setText(String.format("%d:%02d", minutesHero4Ult, secondsHero4Ult));
+                hero4_time_textview.setText(String.format("%d:%02d", minutesHero4Ult, secondsHero4Ult));
+                hero4_layout_overlay.setVisibility(View.VISIBLE);
+                hero4_layout.setVisibility(View.INVISIBLE);
             } else {
-                hero4_1_button.setText("Level 1");
-                hero4_2_button.setText("Level 2");
-                hero4_3_button.setText("Level 3");
+                hero4_layout_overlay.setVisibility(View.INVISIBLE);
+                hero4_layout.setVisibility(View.VISIBLE);
             }
             if (System.currentTimeMillis() <= hero5UltTime) {
-                hero5_1_button.setText(String.format("%d:%02d", minutesHero5Ult, secondsHero5Ult));
-                hero5_2_button.setText(String.format("%d:%02d", minutesHero5Ult, secondsHero5Ult));
-                hero5_3_button.setText(String.format("%d:%02d", minutesHero5Ult, secondsHero5Ult));
+                hero5_time_textview.setText(String.format("%d:%02d", minutesHero5Ult, secondsHero5Ult));
+                hero5_layout_overlay.setVisibility(View.VISIBLE);
+                hero5_layout.setVisibility(View.INVISIBLE);
             } else {
-                hero5_1_button.setText("Level 1");
-                hero5_2_button.setText("Level 2");
-                hero5_3_button.setText("Level 3");
+                hero5_layout_overlay.setVisibility(View.INVISIBLE);
+                hero5_layout.setVisibility(View.VISIBLE);
             }
-
             aegis_reclaim_button.setText("aegis reclaim\n" + String.format("%d:%02d", minutesAegis, secondsAegis));
             if (System.currentTimeMillis() <= roshanEarliestRespawnTime) {
                 roshan_respawn_button.setText("roshan respawn\n" + String.format("%d:%02d", minutesMin, secondsMin) + " and " + String.format("%d:%02d", minutesMax, secondsMax));
@@ -234,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             gameStartTime = savedInstanceState.getLong("gameStartTime");
             timerHandler.postDelayed(timerRunnable, 0);
         }
@@ -249,6 +267,18 @@ public class MainActivity extends AppCompatActivity {
         hero3_textview = (TextView) findViewById(R.id.hero3_textview);
         hero4_textview = (TextView) findViewById(R.id.hero4_textview);
         hero5_textview = (TextView) findViewById(R.id.hero5_textview);
+
+        hero1_textview_overlay = (TextView) findViewById(R.id.hero1_textview_overlay);
+        hero2_textview_overlay = (TextView) findViewById(R.id.hero2_textview_overlay);
+        hero3_textview_overlay = (TextView) findViewById(R.id.hero3_textview_overlay);
+        hero4_textview_overlay = (TextView) findViewById(R.id.hero4_textview_overlay);
+        hero5_textview_overlay = (TextView) findViewById(R.id.hero5_textview_overlay);
+
+        hero1_time_textview = (TextView) findViewById(R.id.hero1_time_textview);
+        hero2_time_textview = (TextView) findViewById(R.id.hero2_time_textview);
+        hero3_time_textview = (TextView) findViewById(R.id.hero3_time_textview);
+        hero4_time_textview = (TextView) findViewById(R.id.hero4_time_textview);
+        hero5_time_textview = (TextView) findViewById(R.id.hero5_time_textview);
 
         hero1_1_button = (Button) findViewById(R.id.hero1_1_button);
         hero1_2_button = (Button) findViewById(R.id.hero1_2_button);
@@ -273,10 +303,13 @@ public class MainActivity extends AppCompatActivity {
         hero4_layout = (LinearLayout) findViewById(R.id.hero4_layout);
         hero5_layout = (LinearLayout) findViewById(R.id.hero5_layout);
 
-        //roshanDeadTime = 0;
-        //roshanEarliestRespawnTime = 0;
-        //roshanLatestRespawnTime = 0;
-        //aegisReclaimTime = 0;
+        hereos_selected_layout_overlay = (LinearLayout) findViewById(R.id.hereos_selected_layout_overlay);
+        hero1_layout_overlay = (LinearLayout) findViewById(R.id.hero1_layout_overlay);
+        hero2_layout_overlay = (LinearLayout) findViewById(R.id.hero2_layout_overlay);
+        hero3_layout_overlay = (LinearLayout) findViewById(R.id.hero3_layout_overlay);
+        hero4_layout_overlay = (LinearLayout) findViewById(R.id.hero4_layout_overlay);
+        hero5_layout_overlay = (LinearLayout) findViewById(R.id.hero5_layout_overlay);
+
         played = true;
         game_time_text_view = (TextView) findViewById(R.id.game_time_text_view);
         roshan_respawn_button = (Button) findViewById(R.id.roshan_respawn_button);
@@ -284,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
         select_hero_button = (Button) findViewById(R.id.select_hero_button);
         Button gameStartbutton = (Button) findViewById(R.id.game_start_button);
         mediaplayer = MediaPlayer.create(this, R.raw.ff7victory);
-
 
         //this places the string literal into the res/values/strings.xml file where they all should be for easy of translation (among other reasons)
         gameStartbutton.setText(getString(R.string.game_timer_button_start));
@@ -339,73 +371,77 @@ public class MainActivity extends AppCompatActivity {
 
     //called when hero1 ultiamte button is clicked
     public void hero1_1UltTimer(View view) {
-        hero1UltTime = System.currentTimeMillis() + (long)(ultTimes[0] * hero1CDFactor);
+        hero1UltTime = System.currentTimeMillis() + (long) (ultTimes[0] * hero1CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero1_2UltTimer(View view) {
-        hero1UltTime = System.currentTimeMillis() + (long)(ultTimes[1] * hero1CDFactor);
+        hero1UltTime = System.currentTimeMillis() + (long) (ultTimes[1] * hero1CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero1_3UltTimer(View view) {
-        hero1UltTime = System.currentTimeMillis() + (long)(ultTimes[2] * hero1CDFactor);
+        hero1UltTime = System.currentTimeMillis() + (long) (ultTimes[2] * hero1CDFactor);
     }
+
     //called when hero1 ultiamte button is clicked
     public void hero2_1UltTimer(View view) {
-        hero2UltTime = System.currentTimeMillis() + (long)(ultTimes[3] * hero2CDFactor);
+        hero2UltTime = System.currentTimeMillis() + (long) (ultTimes[3] * hero2CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero2_2UltTimer(View view) {
-        hero2UltTime = System.currentTimeMillis() + (long)(ultTimes[4] * hero2CDFactor);
+        hero2UltTime = System.currentTimeMillis() + (long) (ultTimes[4] * hero2CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero2_3UltTimer(View view) {
-        hero2UltTime = System.currentTimeMillis() + (long)(ultTimes[5] * hero2CDFactor);
+        hero2UltTime = System.currentTimeMillis() + (long) (ultTimes[5] * hero2CDFactor);
     }
+
     //called when hero1 ultiamte button is clicked
     public void hero3_1UltTimer(View view) {
-        hero3UltTime = System.currentTimeMillis() + (long)(ultTimes[6] * hero3CDFactor);
+        hero3UltTime = System.currentTimeMillis() + (long) (ultTimes[6] * hero3CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero3_2UltTimer(View view) {
-        hero3UltTime = System.currentTimeMillis() + (long)(ultTimes[7] * hero3CDFactor);
+        hero3UltTime = System.currentTimeMillis() + (long) (ultTimes[7] * hero3CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero3_3UltTimer(View view) {
-        hero3UltTime = System.currentTimeMillis() + (long)(ultTimes[8] * hero3CDFactor);
+        hero3UltTime = System.currentTimeMillis() + (long) (ultTimes[8] * hero3CDFactor);
     }
+
     //called when hero1 ultiamte button is clicked
     public void hero4_1UltTimer(View view) {
-        hero4UltTime = System.currentTimeMillis() + (long)(ultTimes[9] * hero4CDFactor);
+        hero4UltTime = System.currentTimeMillis() + (long) (ultTimes[9] * hero4CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero4_2UltTimer(View view) {
-        hero4UltTime = System.currentTimeMillis() + (long)(ultTimes[10] * hero4CDFactor);
+        hero4UltTime = System.currentTimeMillis() + (long) (ultTimes[10] * hero4CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero4_3UltTimer(View view) {
-        hero4UltTime = System.currentTimeMillis() + (long)(ultTimes[11] * hero4CDFactor);
+        hero4UltTime = System.currentTimeMillis() + (long) (ultTimes[11] * hero4CDFactor);
     }
+
     //called when hero1 ultiamte button is clicked
     public void hero5_1UltTimer(View view) {
-        hero5UltTime = System.currentTimeMillis() + (long)(ultTimes[12] * hero5CDFactor);
+        hero5UltTime = System.currentTimeMillis() + (long) (ultTimes[12] * hero5CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero5_2UltTimer(View view) {
-        hero5UltTime = System.currentTimeMillis() + (long)(ultTimes[13] * hero5CDFactor);
+        hero5UltTime = System.currentTimeMillis() + (long) (ultTimes[13] * hero5CDFactor);
     }
 
     //called when hero1 ultiamte button is clicked
     public void hero5_3UltTimer(View view) {
-        hero5UltTime = System.currentTimeMillis() + (long)(ultTimes[14] * hero5CDFactor);
+        hero5UltTime = System.currentTimeMillis() + (long) (ultTimes[14] * hero5CDFactor);
     }
 
     // invoked when the activity may be temporarily destroyed, save the instance state here
@@ -417,12 +453,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onPause (){
+    public void onPause() {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
     }
+
     @Override
-    public void onResume (){
+    public void onResume() {
         super.onResume();
         if (gameStartTime != 0) {
             timerHandler.postDelayed(timerRunnable, 0);
@@ -438,6 +475,7 @@ public class MainActivity extends AppCompatActivity {
             if (selectedHeroes != null) {
                 if (selectedHeroes[0] != null) {
                     hero1_textview.setText(selectedHeroes[0]);
+                    hero1_textview_overlay.setText(selectedHeroes[0]);
                     hero1_layout.setVisibility(View.VISIBLE);
                     hereos_selected_layout.setVisibility(View.VISIBLE);
                 } else {
@@ -446,24 +484,28 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (selectedHeroes[1] != null) {
                     hero2_textview.setText(selectedHeroes[1]);
+                    hero2_textview_overlay.setText(selectedHeroes[1]);
                     hero2_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero2_layout.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[2] != null) {
                     hero3_textview.setText(selectedHeroes[2]);
+                    hero3_textview_overlay.setText(selectedHeroes[2]);
                     hero3_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero3_layout.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[3] != null) {
                     hero4_textview.setText(selectedHeroes[3]);
+                    hero4_textview_overlay.setText(selectedHeroes[3]);
                     hero4_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero4_layout.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[4] != null) {
                     hero5_textview.setText(selectedHeroes[4]);
+                    hero5_textview_overlay.setText(selectedHeroes[4]);
                     hero5_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero5_layout.setVisibility(View.INVISIBLE);
@@ -471,7 +513,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 hereos_selected_layout.setVisibility(View.INVISIBLE);
             }
-        }else {
+        } else {
             hereos_selected_layout.setVisibility(View.INVISIBLE);
         }
     }
@@ -483,23 +525,27 @@ public class MainActivity extends AppCompatActivity {
         //now getIntent() should always return the last received intent
     }
 
-    public void adjustCDReduction1 (View view) {
+    public void adjustCDReduction1(View view) {
         buildCDDIalog(view, 1);
     }
-    public void adjustCDReduction2 (View view) {
+
+    public void adjustCDReduction2(View view) {
         buildCDDIalog(view, 2);
     }
-    public void adjustCDReduction3 (View view) {
+
+    public void adjustCDReduction3(View view) {
         buildCDDIalog(view, 3);
     }
-    public void adjustCDReduction4 (View view) {
+
+    public void adjustCDReduction4(View view) {
         buildCDDIalog(view, 4);
     }
-    public void adjustCDReduction5 (View view) {
+
+    public void adjustCDReduction5(View view) {
         buildCDDIalog(view, 5);
     }
 
-    public void buildCDDIalog (View view, final int heronumber){
+    public void buildCDDIalog(View view, final int heronumber) {
         // Build an AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
@@ -574,34 +620,34 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Do something when click positive button
                 double cooldownModifier = 1;
-                if (checkedModifiers[0]){
+                if (checkedModifiers[0]) {
                     cooldownModifier = (cooldownModifier * 0.75);
                 }
-                if (checkedModifiers[1]){
+                if (checkedModifiers[1]) {
                     cooldownModifier = (cooldownModifier * 0.9);
                 }
-                if (checkedModifiers[2]){
+                if (checkedModifiers[2]) {
                     cooldownModifier = (cooldownModifier * 0.88);
                 }
-                if (checkedModifiers[3]){
+                if (checkedModifiers[3]) {
                     cooldownModifier = (cooldownModifier * 0.85);
                 }
-                if (checkedModifiers[4]){
+                if (checkedModifiers[4]) {
                     cooldownModifier = (cooldownModifier * 0.80);
                 }
-                if (heronumber == 1){
+                if (heronumber == 1) {
                     hero1CDFactor = cooldownModifier;
                 }
-                if (heronumber == 2){
+                if (heronumber == 2) {
                     hero2CDFactor = cooldownModifier;
                 }
-                if (heronumber == 3){
+                if (heronumber == 3) {
                     hero3CDFactor = cooldownModifier;
                 }
-                if (heronumber == 4){
+                if (heronumber == 4) {
                     hero4CDFactor = cooldownModifier;
                 }
-                if (heronumber == 5){
+                if (heronumber == 5) {
                     hero5CDFactor = cooldownModifier;
                 }
             }
