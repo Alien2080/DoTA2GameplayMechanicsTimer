@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"
-        android:src="@drawable/roshan_face" />
+        android:src="@drawable/roshan_face"/>
 
     <TextView
         android:id="@+id/game_time_text_view"
@@ -37,8 +37,7 @@
         android:paddingRight="4dp"
         android:text="00:00"
         android:textColor="#000000"
-        android:textSize="32dp"
-        />
+        android:textSize="32dp"/>
 
     <TextView
         android:id="@+id/game_time_label_text_view"
@@ -145,8 +144,7 @@
                 android:text="Level 1"
                 android:textSize="20dp"
                 android:background="@drawable/round_shape_button"
-                android:layout_marginRight="3dp"
-                />
+                android:layout_marginRight="3dp" />
 
             <Button
                 android:id="@+id/hero1_2_button"
@@ -169,8 +167,6 @@
                 android:textSize="20dp"
                 android:background="@drawable/round_shape_button"
                 android:layout_marginRight="3dp"/>
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -342,8 +338,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/round_shape_textview"
             android:orientation="horizontal"
-            android:padding="3dp"
-            >
+            android:padding="3dp">
 
             <TextView
                 android:id="@+id/hero5_textview"
@@ -391,7 +386,6 @@
         </LinearLayout>
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/hereos_selected_layout_overlay"
         android:layout_width="match_parent"
@@ -399,7 +393,6 @@
         android:layout_above="@id/game_start_button"
         android:layout_margin="10dp"
         android:orientation="vertical">
-
         <!-- this hardcodes the hero amount to 5, should use MAX_HERO_SELECTED -->
         <LinearLayout
             android:id="@+id/hero1_layout_overlay"
@@ -444,7 +437,6 @@
             android:orientation="horizontal"
             android:padding="3dp"
             android:visibility="invisible">
-
             <TextView
                 android:id="@+id/hero2_textview_overlay"
                 android:layout_width="0dp"
@@ -466,7 +458,6 @@
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:layout_gravity="center"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -478,7 +469,6 @@
             android:orientation="horizontal"
             android:padding="3dp"
             android:visibility="invisible">
-
             <TextView
                 android:id="@+id/hero3_textview_overlay"
                 android:layout_width="0dp"
@@ -499,7 +489,6 @@
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:layout_gravity="center"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -511,7 +500,6 @@
             android:orientation="horizontal"
             android:padding="3dp"
             android:visibility="invisible">
-
             <TextView
                 android:id="@+id/hero4_textview_overlay"
                 android:layout_width="0dp"
@@ -532,7 +520,6 @@
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:layout_gravity="center"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -564,8 +551,153 @@
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:layout_gravity="center"/>
-
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/ultimate_timer_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/hereos_selected_layout"
+        android:layout_centerInParent="true"
+        android:text="Ultimate Timers"
+        android:background="@drawable/round_shape_textview"
+        android:textSize="32dp"
+        android:textColor="#000"
+        android:padding="5dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="420dp">
+        <ImageView
+            android:id="@+id/hero1_OC_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/oc"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero1_aghs_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/aghs"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero1_talent_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/talent_tree"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="330dp">
+        <ImageView
+            android:id="@+id/hero2_OC_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/oc"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero2_aghs_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/aghs"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero2_talent_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/talent_tree"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="255dp">
+        <ImageView
+            android:id="@+id/hero3_OC_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/oc"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero3_aghs_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/aghs"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero3_talent_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/talent_tree"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="175dp">
+        <ImageView
+            android:id="@+id/hero4_OC_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/oc"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero4_aghs_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/aghs"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero4_talent_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/talent_tree"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="90dp">
+        <ImageView
+            android:id="@+id/hero5_OC_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/oc"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero5_aghs_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/aghs"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/hero5_talent_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/talent_tree"
+            android:visibility="invisible"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -27,84 +27,230 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int ABBADON_ULT_CD_L1 = (60 * 1000);
     static int ABBADON_ULT_CD_L2 = (50 * 1000);
     static int ABBADON_ULT_CD_L3 = (40 * 1000);
+
     static int ALCHEMIST_ULT_CD_L1 = (45 * 1000);
     static int ALCHEMIST_ULT_CD_L2 = ALCHEMIST_ULT_CD_L1;
     static int ALCHEMIST_ULT_CD_L3 = ALCHEMIST_ULT_CD_L1;
+
     static int ANCIENT_APPARITION_ULT_CD_L1 = (40 * 1000);
     static int ANCIENT_APPARITION_ULT_CD_L2 = ANCIENT_APPARITION_ULT_CD_L1;
     static int ANCIENT_APPARITION_ULT_CD_L3 = ANCIENT_APPARITION_ULT_CD_L1;
+
     static int ANTI_MAGE_ULT_CD_L1 = (70 * 1000);
     static int ANTI_MAGE_ULT_CD_L2 = (70 * 1000);
     static int ANTI_MAGE_ULT_CD_L3 = (70 * 1000);
+
     static int ARC_WARDEN_ULT_CD_L1 = (60 * 1000);
     static int ARC_WARDEN_ULT_CD_L2 = (50 * 1000);
     static int ARC_WARDEN_ULT_CD_L3 = (40 * 1000);
+
     static int AXE_ULT_CD_L1 = (75 * 1000);
     static int AXE_ULT_CD_L2 = (65 * 1000);
     static int AXE_ULT_CD_L3 = (55 * 1000);
+
     static int BANE_ULT_CD_L1 = (100 * 1000);
     static int BANE_ULT_CD_L2 = BANE_ULT_CD_L1;
     static int BANE_ULT_CD_L3 = BANE_ULT_CD_L1;
+
     static int BAT_RIDER_ULT_CD_L1 = (90 * 1000);
     static int BAT_RIDER_ULT_CD_L2 = (75 * 1000);
     static int BAT_RIDER_ULT_CD_L3 = (60 * 1000);
+
     static int BEASTMASTER_ULT_CD_L1 = (80 * 1000);
     static int BEASTMASTER_ULT_CD_L2 = (75 * 1000);
     static int BEASTMASTER_ULT_CD_L3 = (70 * 1000);
+
     static int BLOODSEEKER_ULT_CD_L1 = (60 * 1000);
     static int BLOODSEEKER_ULT_CD_L2 = BLOODSEEKER_ULT_CD_L1;
     static int BLOODSEEKER_ULT_CD_L3 = BLOODSEEKER_ULT_CD_L1;
+
     static int BOUNTY_HUNTER_ULT_CD_L1 = (4 * 1000);
     static int BOUNTY_HUNTER_ULT_CD_L2 = BOUNTY_HUNTER_ULT_CD_L1;
     static int BOUNTY_HUNTER_ULT_CD_L3 = BOUNTY_HUNTER_ULT_CD_L1;
+
     static int BREWMASTER_ULT_CD_L1 = (140 * 1000);
     static int BREWMASTER_ULT_CD_L2 = (120 * 1000);
     static int BREWMASTER_ULT_CD_L3 = (100 * 1000);
+
     static int BRISTLEBACK_ULT_CD_L1 = (0 * 1000);
     static int BRISTLEBACK_ULT_CD_L2 = (0 * 1000);
     static int BRISTLEBACK_ULT_CD_L3 = (0 * 1000);
+
     static int BROODMOTHER_ULT_CD_L1 = (45 * 1000);
     static int BROODMOTHER_ULT_CD_L2 = BROODMOTHER_ULT_CD_L1;
     static int BROODMOTHER_ULT_CD_L3 = BROODMOTHER_ULT_CD_L1;
+
     static int CENTAUR_ULT_CD_L1 = (90 * 1000);
     static int CENTAUR_ULT_CD_L2 = (75 * 1000);
     static int CENTAUR_ULT_CD_L3 = (60 * 1000);
+
     static int CHAOS_ULT_CD_L1 = (130 * 1000);
     static int CHAOS_ULT_CD_L2 = CHAOS_ULT_CD_L1;
     static int CHAOS_ULT_CD_L3 = CHAOS_ULT_CD_L1;
+
     static int CHEN_ULT_CD_L1 = (160 * 1000);
     static int CHEN_ULT_CD_L2 = (140 * 1000);
     static int CHEN_ULT_CD_L3 = (120 * 1000);
+
     static int CLINKZ_ULT_CD_L1 = (45 * 1000);
     static int CLINKZ_ULT_CD_L2 = (30 * 1000);
     static int CLINKZ_ULT_CD_L3 = (15 * 1000);
+
     static int CLOCKWERK_ULT_CD_L1 = (70 * 1000);
     static int CLOCKWERK_ULT_CD_L2 = (55 * 1000);
     static int CLOCKWERK_ULT_CD_L3 = (40 * 1000);
+
     static int CM_ULT_CD_L1 = (90 * 1000);
     static int CM_ULT_CD_L2 = CM_ULT_CD_L1;
     static int CM_ULT_CD_L3 = CM_ULT_CD_L1;
+
     static int DARK_SEER_ULT_CD_L1 = (100 * 1000);
     static int DARK_SEER_ULT_CD_L2 = (100 * 1000);
     static int DARK_SEER_ULT_CD_L3 = (100 * 1000);
+
     static int DAZZLE_ULT_CD_L1 = (40 * 1000);
     static int DAZZLE_ULT_CD_L2 = (40 * 1000);
     static int DAZZLE_ULT_CD_L3 = (40 * 1000);
+
     static int DEATH_PROPHET_CD_L1 = (145 * 1000);
     static int DEATH_PROPHET_CD_L2 = (145 * 1000);
     static int DEATH_PROPHET_CD_L3 = (145 * 1000);
+
     static int DISRUPTOR_CD_L1 = (90 * 1000);
     static int DISRUPTOR_CD_L2 = (80 * 1000);
     static int DISRUPTOR_CD_L3 = (70 * 1000);
+
     static int DOOM_CD_L1 = (145 * 1000);
     static int DOOM_CD_L2 = (145 * 1000);
     static int DOOM_CD_L3 = (145 * 1000);
+
     static int DRAGON_KNIGHT_CD_L1 = (115 * 1000);
     static int DRAGON_KNIGHT_CD_L2 = (115 * 1000);
     static int DRAGON_KNIGHT_CD_L3 = (115 * 1000);
+
     static int DROW_CD_L1 = (0 * 1000);
     static int DROW_CD_L2 = (0 * 1000);
     static int DROW_CD_L3 = (0 * 1000);
+
+    static int EARTH_SPIRIT_CD_L1 = (100 * 1000);
+    static int EARTH_SPIRIT_CD_L2 = (90 * 1000);
+    static int EARTH_SPIRIT_CD_L3 = (80 * 1000);
+
+    static int EARTHSHAKER_CD_L1 = (150 * 1000);
+    static int EARTHSHAKER_CD_L2 = (130 * 1000);
+    static int EARTHSHAKER_CD_L3 = (110 * 1000);
+
+    static int ELDER_TITAN_CD_L1 = (100 * 1000);
+    static int ELDER_TITAN_CD_L2 = (100 * 1000);
+    static int ELDER_TITAN_CD_L3 = (100 * 1000);
+
+    static int EMBER_SPIRIT_CD_L1 = (45 * 1000);
+    static int EMBER_SPIRIT_CD_L2 = (45 * 1000);
+    static int EMBER_SPIRIT_CD_L3 = (45 * 1000);
+
+    static int ENCHANTRESS_CD_L1 = (0 * 1000);
+    static int ENCHANTRESS_CD_L2 = (0 * 1000);
+    static int ENCHANTRESS_CD_L3 = (0 * 1000);
+
+    static int ENIGMA_CD_L1 = (200 * 1000);
+    static int ENIGMA_CD_L2 = (180 * 1000);
+    static int ENIGMA_CD_L3 = (160 * 1000);
+
+    static int FACELESS_CD_L1 = (140 * 1000);
+    static int FACELESS_CD_L2 = (125 * 1000);
+    static int FACELESS_CD_L3 = (110 * 1000);
+
+    static int GYROCOPTER_CD_L1 = (55 * 1000);
+    static int GYROCOPTER_CD_L2 = (50 * 1000);
+    static int GYROCOPTER_CD_L3 = (45 * 1000);
+
+    static int HUSKAR_CD_L1 = (12 * 1000);
+    static int HUSKAR_CD_L2 = (12 * 1000);
+    static int HUSKAR_CD_L3 = (12 * 1000);
+
+    static int INVOKER_CD_L1 = (6 * 1000);
+    static int INVOKER_CD_L2 = (6 * 1000);
+    static int INVOKER_CD_L3 = (6 * 1000);
+
+    static int IO_CD_L1 = (90 * 1000);
+    static int IO_CD_L2 = (75 * 1000);
+    static int IO_CD_L3 = (60 * 1000);
+
+    static int JAKIRO_CD_L1 = (60 * 1000);
+    static int JAKIRO_CD_L2 = (60 * 1000);
+    static int JAKIRO_CD_L3 = (60 * 1000);
+
+    static int JUGGERNAUT_CD_L1 = (130 * 1000);
+    static int JUGGERNAUT_CD_L2 = (120 * 1000);
+    static int JUGGERNAUT_CD_L3 = (110 * 1000);
+
+    static int KOTL_CD_L1 = (80 * 1000);
+    static int KOTL_CD_L2 = (70 * 1000);
+    static int KOTL_CD_L3 = (60 * 1000);
+
+    static int KUNKKA_CD_L1 = (60 * 1000);
+    static int KUNKKA_CD_L2 = (50 * 1000);
+    static int KUNKKA_CD_L3 = (40 * 1000);
+
+    static int LC_CD_L1 = (50 * 1000);
+    static int LC_CD_L2 = (50 * 1000);
+    static int LC_CD_L3 = (50 * 1000);
+
+    static int LESHRAC_CD_L1 = (1 * 1000);
+    static int LESHRAC_CD_L2 = (1 * 1000);
+    static int LESHRAC_CD_L3 = (1 * 1000);
+
+    static int LICH_CD_L1 = (120 * 1000);
+    static int LICH_CD_L2 = (90 * 1000);
+    static int LICH_CD_L3 = (60 * 1000);
+
+    static int LIFESTEALER_CD_L1 = (100 * 1000);
+    static int LIFESTEALER_CD_L2 = (75 * 1000);
+    static int LIFESTEALER_CD_L3 = (50 * 1000);
+
+    static int LINA_CD_L1 = (70 * 1000);
+    static int LINA_CD_L2 = (60 * 1000);
+    static int LINA_CD_L3 = (50 * 1000);
+
+    static int LION_CD_L1 = (160 * 1000);
+    static int LION_CD_L2 = (100 * 1000);
+    static int LION_CD_L3 = (40 * 1000);
+
+    static int LONE_DRUID_CD_L1 = (0 * 1000);
+    static int LONE_DRUID_CD_L2 = (0 * 1000);
+    static int LONE_DRUID_CD_L3 = (0 * 1000);
+
+    static int LUNA_CD_L1 = (140 * 1000);
+    static int LUNA_CD_L2 = (140 * 1000);
+    static int LUNA_CD_L3 = (140 * 1000);
+
+    static int LYCAN_CD_L1 = (120 * 1000);
+    static int LYCAN_CD_L2 = (90 * 1000);
+    static int LYCAN_CD_L3 = (60 * 1000);
+
+    static int MAGNUS_CD_L1 = (120 * 1000);
+    static int MAGNUS_CD_L2 = (110 * 1000);
+    static int MAGNUS_CD_L3 = (100 * 1000);
+
+    static int MEDUSA_CD_L1 = (90 * 1000);
+    static int MEDUSA_CD_L2 = (90 * 1000);
+    static int MEDUSA_CD_L3 = (90 * 1000);
+
+    static int MEEPO_CD_L1 = (0 * 1000);
+    static int MEEPO_CD_L2 = (0 * 1000);
+    static int MEEPO_CD_L3 = (0 * 1000);
+
+    static int MIRANA_CD_L1 = (140 * 1000);
+    static int MIRANA_CD_L2 = (120 * 1000);
+    static int MIRANA_CD_L3 = (100 * 1000);
+
+    static int MONKEY_KING_CD_L1 = (100 * 1000);
+    static int MONKEY_KING_CD_L2 = (85 * 1000);
+    static int MONKEY_KING_CD_L3 = (70 * 1000);
+
+    static int MORPH_CD_L1 = (80 * 1000);
+    static int MORPH_CD_L2 = (80 * 1000);
+    static int MORPH_CD_L3 = (80 * 1000);
 
     //default cooldown time of each heroes ultimate ability, the position in array relates to the heros name in heroNames array x3
     int[] ultTimes = new int[]{
@@ -188,8 +334,98 @@ public class HeroPickerActivity extends AppCompatActivity {
             DRAGON_KNIGHT_CD_L3,
             DROW_CD_L1 ,
             DROW_CD_L2 ,
-            DROW_CD_L3
-    };
+            DROW_CD_L3,
+            EARTH_SPIRIT_CD_L1,
+            EARTH_SPIRIT_CD_L2,
+            EARTH_SPIRIT_CD_L3,
+            EARTHSHAKER_CD_L1 ,
+            EARTHSHAKER_CD_L2,
+            EARTHSHAKER_CD_L3,
+            ELDER_TITAN_CD_L1,
+            ELDER_TITAN_CD_L2,
+            ELDER_TITAN_CD_L3,
+            EMBER_SPIRIT_CD_L1,
+            EMBER_SPIRIT_CD_L2,
+            EMBER_SPIRIT_CD_L3,
+            ENCHANTRESS_CD_L1,
+            ENCHANTRESS_CD_L2,
+            ENCHANTRESS_CD_L3,
+            ENIGMA_CD_L1,
+            ENIGMA_CD_L2,
+            ENIGMA_CD_L3,
+            FACELESS_CD_L1,
+            FACELESS_CD_L2,
+            FACELESS_CD_L3,
+            GYROCOPTER_CD_L1,
+            GYROCOPTER_CD_L2 ,
+            GYROCOPTER_CD_L3,
+            HUSKAR_CD_L1,
+            HUSKAR_CD_L2 ,
+            HUSKAR_CD_L3,
+            INVOKER_CD_L1,
+            INVOKER_CD_L2,
+            INVOKER_CD_L3,
+            IO_CD_L1,
+            IO_CD_L2,
+            IO_CD_L3,
+            JAKIRO_CD_L1 ,
+            JAKIRO_CD_L2,
+            JAKIRO_CD_L3,
+            JUGGERNAUT_CD_L1,
+            JUGGERNAUT_CD_L2,
+            JUGGERNAUT_CD_L3,
+            KOTL_CD_L1 ,
+            KOTL_CD_L2,
+            KOTL_CD_L3,
+            KUNKKA_CD_L1,
+            KUNKKA_CD_L2,
+            KUNKKA_CD_L3,
+            LC_CD_L1 ,
+            LC_CD_L2,
+            LC_CD_L3,
+            LESHRAC_CD_L1 ,
+            LESHRAC_CD_L2,
+            LESHRAC_CD_L3,
+            LICH_CD_L1 ,
+            LICH_CD_L2,
+            LICH_CD_L3,
+            LIFESTEALER_CD_L1,
+            LIFESTEALER_CD_L2,
+            LIFESTEALER_CD_L3,
+            LINA_CD_L1 ,
+            LINA_CD_L2,
+            LINA_CD_L3,
+            LION_CD_L1,
+            LION_CD_L2 ,
+            LION_CD_L3,
+            LONE_DRUID_CD_L1,
+            LONE_DRUID_CD_L2,
+            LONE_DRUID_CD_L3,
+            LUNA_CD_L1,
+            LUNA_CD_L2,
+            LUNA_CD_L3,
+            LYCAN_CD_L1 ,
+            LYCAN_CD_L2 ,
+            LYCAN_CD_L3,
+            MAGNUS_CD_L1 ,
+            MAGNUS_CD_L2 ,
+            MAGNUS_CD_L3,
+            MEDUSA_CD_L1,
+            MEDUSA_CD_L2,
+            MEDUSA_CD_L3,
+            MEEPO_CD_L1,
+            MEEPO_CD_L2,
+            MEEPO_CD_L3,
+            MIRANA_CD_L1,
+            MIRANA_CD_L2,
+            MIRANA_CD_L3,
+            MONKEY_KING_CD_L1,
+            MONKEY_KING_CD_L2,
+            MONKEY_KING_CD_L3,
+            MORPH_CD_L1 ,
+             MORPH_CD_L2 ,
+            MORPH_CD_L3,
+};
 
     ListView hero_list_view;
     String[] heroSelected = new String[MAX_SELECTED_HEROES];
