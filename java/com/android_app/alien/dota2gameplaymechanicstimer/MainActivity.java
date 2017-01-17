@@ -5,31 +5,37 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+//import android.graphics.Color;
+//import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
+//import android.text.Layout;
+//import android.util.Log;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
+//import android.view.ViewGroup;
+//import android.view.ViewGroup.LayoutParams;
+//import android.view.WindowManager;
 
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 import java.util.List;
 
 import static android.R.attr.button;
+import static android.R.attr.name;
+import static android.R.id.list;
+import static android.os.Build.VERSION_CODES.M;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.drawable.roshan;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.game_start_button;
 import static com.android_app.alien.dota2gameplaymechanicstimer.R.id.hero1_1_button;
@@ -54,64 +60,75 @@ public class MainActivity extends AppCompatActivity {
     static int ROSHAN_MAX_RESPAWN = (11 * 60 * 1000);
     //Aegis is reclaimed 5 minutes after being picked up
     static int AEGIS_RECLAIM_TIME = (5 * 60 * 1000);
-    int buttonWidth;
-
+    // Boolean array for initial selected items
+    final boolean[] checkedModifiers = new boolean[]{
+            false, // Octarine
+            false, // Talent
+            false, // Aghs
+    };
     TextView hero1_textview;
     TextView hero2_textview;
     TextView hero3_textview;
     TextView hero4_textview;
     TextView hero5_textview;
-
     TextView hero1_textview_overlay;
     TextView hero2_textview_overlay;
     TextView hero3_textview_overlay;
     TextView hero4_textview_overlay;
     TextView hero5_textview_overlay;
-
     TextView hero1_time_textview;
     TextView hero2_time_textview;
     TextView hero3_time_textview;
     TextView hero4_time_textview;
     TextView hero5_time_textview;
-
+    TextView ultimate_timer_textview;
     Button hero1_1_button;
     Button hero1_2_button;
     Button hero1_3_button;
-
     Button hero2_1_button;
     Button hero2_2_button;
     Button hero2_3_button;
-
     Button hero3_1_button;
     Button hero3_2_button;
     Button hero3_3_button;
-
     Button hero4_1_button;
     Button hero4_2_button;
     Button hero4_3_button;
-
     Button hero5_1_button;
     Button hero5_2_button;
     Button hero5_3_button;
-
     LinearLayout hereos_selected_layout;
     LinearLayout hero1_layout;
     LinearLayout hero2_layout;
     LinearLayout hero3_layout;
     LinearLayout hero4_layout;
     LinearLayout hero5_layout;
-
     LinearLayout hereos_selected_layout_overlay;
     LinearLayout hero1_layout_overlay;
     LinearLayout hero2_layout_overlay;
     LinearLayout hero3_layout_overlay;
     LinearLayout hero4_layout_overlay;
     LinearLayout hero5_layout_overlay;
-
+    ImageView hero1_aghs_imageview;
+    ImageView hero1_OC_imageview;
+    ImageView hero1_talent_imageview;
+    ImageView hero2_aghs_imageview;
+    ImageView hero2_OC_imageview;
+    ImageView hero2_talent_imageview;
+    ImageView hero3_aghs_imageview;
+    ImageView hero3_OC_imageview;
+    ImageView hero3_talent_imageview;
+    ImageView hero4_aghs_imageview;
+    ImageView hero4_OC_imageview;
+    ImageView hero4_talent_imageview;
+    ImageView hero5_aghs_imageview;
+    ImageView hero5_OC_imageview;
+    ImageView hero5_talent_imageview;
     TextView game_time_text_view;
     Button roshan_respawn_button;
     Button aegis_reclaim_button;
     Button select_hero_button;
+    Button game_start_button;
     long gameStartTime;
     long roshanDeadTime;
     long roshanEarliestRespawnTime;
@@ -127,9 +144,8 @@ public class MainActivity extends AppCompatActivity {
     double hero3CDFactor = 1;
     double hero4CDFactor = 1;
     double hero5CDFactor = 1;
-
     int[] ultTimes = new int[5 * 3];
-
+    int listStyle;
     //used to play the roshan respawn sound effect
     MediaPlayer mediaplayer;
     //used to determine if the roshan respwn sound effect has played
@@ -280,6 +296,8 @@ public class MainActivity extends AppCompatActivity {
         hero4_time_textview = (TextView) findViewById(R.id.hero4_time_textview);
         hero5_time_textview = (TextView) findViewById(R.id.hero5_time_textview);
 
+        ultimate_timer_textview = (TextView) findViewById(R.id.ultimate_timer_textview);
+
         hero1_1_button = (Button) findViewById(R.id.hero1_1_button);
         hero1_2_button = (Button) findViewById(R.id.hero1_2_button);
         hero1_3_button = (Button) findViewById(R.id.hero1_3_button);
@@ -310,6 +328,26 @@ public class MainActivity extends AppCompatActivity {
         hero4_layout_overlay = (LinearLayout) findViewById(R.id.hero4_layout_overlay);
         hero5_layout_overlay = (LinearLayout) findViewById(R.id.hero5_layout_overlay);
 
+        hero1_aghs_imageview = (ImageView) findViewById(R.id.hero1_aghs_imageview);
+        hero1_OC_imageview = (ImageView) findViewById(R.id.hero1_OC_imageview);
+        hero1_talent_imageview = (ImageView) findViewById(R.id.hero1_talent_imageview);
+
+        hero2_aghs_imageview = (ImageView) findViewById(R.id.hero2_aghs_imageview);
+        hero2_OC_imageview = (ImageView) findViewById(R.id.hero2_OC_imageview);
+        hero2_talent_imageview = (ImageView) findViewById(R.id.hero2_talent_imageview);
+
+        hero3_aghs_imageview = (ImageView) findViewById(R.id.hero3_aghs_imageview);
+        hero3_OC_imageview = (ImageView) findViewById(R.id.hero3_OC_imageview);
+        hero3_talent_imageview = (ImageView) findViewById(R.id.hero3_talent_imageview);
+
+        hero4_aghs_imageview = (ImageView) findViewById(R.id.hero4_aghs_imageview);
+        hero4_OC_imageview = (ImageView) findViewById(R.id.hero4_OC_imageview);
+        hero4_talent_imageview = (ImageView) findViewById(R.id.hero4_talent_imageview);
+
+        hero5_aghs_imageview = (ImageView) findViewById(R.id.hero5_aghs_imageview);
+        hero5_OC_imageview = (ImageView) findViewById(R.id.hero5_OC_imageview);
+        hero5_talent_imageview = (ImageView) findViewById(R.id.hero5_talent_imageview);
+
         played = true;
         game_time_text_view = (TextView) findViewById(R.id.game_time_text_view);
         roshan_respawn_button = (Button) findViewById(R.id.roshan_respawn_button);
@@ -324,17 +362,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Button b = (Button) v;
-                if (b.getText().equals("Pause")) {
+                game_start_button = (Button) v;
+                if (game_start_button.getText().equals("Pause")) {
                     timerHandler.removeCallbacks(timerRunnable);
-                    b.setText("Resume");
-                } else if (b.getText().equals("New Game")) {
+                    game_start_button.setText("Resume");
+                } else if (game_start_button.getText().equals("New Game")) {
                     gameStartTime = System.currentTimeMillis();
                     timerHandler.postDelayed(timerRunnable, 0);
-                    b.setText("Pause");
-                } else if (b.getText().equals("Resume")) {
+                    game_start_button.setText("Pause");
+                } else if (game_start_button.getText().equals("Resume")) {
                     timerHandler.postDelayed(timerRunnable, 0);
-                    b.setText("Pause");
+                    game_start_button.setText("Pause");
                 }
             }
         });
@@ -461,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (gameStartTime != 0) {
+        if (gameStartTime != 0 && game_start_button.getText() == "Pause") {
             timerHandler.postDelayed(timerRunnable, 0);
         }
         //this use a constant 5 but should really use the MAX_SELECTED_HEROES static int
@@ -478,9 +516,26 @@ public class MainActivity extends AppCompatActivity {
                     hero1_textview_overlay.setText(selectedHeroes[0]);
                     hero1_layout.setVisibility(View.VISIBLE);
                     hereos_selected_layout.setVisibility(View.VISIBLE);
+                    ultimate_timer_textview.setVisibility(View.VISIBLE);
                 } else {
                     hereos_selected_layout.setVisibility(View.INVISIBLE);
                     hero1_layout.setVisibility(View.INVISIBLE);
+                    ultimate_timer_textview.setVisibility(View.INVISIBLE);
+                    hero1_OC_imageview.setVisibility(View.INVISIBLE);
+                    hero1_aghs_imageview.setVisibility(View.INVISIBLE);
+                    hero1_talent_imageview.setVisibility(View.INVISIBLE);
+                    hero2_OC_imageview.setVisibility(View.INVISIBLE);
+                    hero2_aghs_imageview.setVisibility(View.INVISIBLE);
+                    hero2_talent_imageview.setVisibility(View.INVISIBLE);
+                    hero3_OC_imageview.setVisibility(View.INVISIBLE);
+                    hero3_aghs_imageview.setVisibility(View.INVISIBLE);
+                    hero3_talent_imageview.setVisibility(View.INVISIBLE);
+                    hero4_OC_imageview.setVisibility(View.INVISIBLE);
+                    hero4_aghs_imageview.setVisibility(View.INVISIBLE);
+                    hero4_talent_imageview.setVisibility(View.INVISIBLE);
+                    hero5_OC_imageview.setVisibility(View.INVISIBLE);
+                    hero5_aghs_imageview.setVisibility(View.INVISIBLE);
+                    hero5_talent_imageview.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[1] != null) {
                     hero2_textview.setText(selectedHeroes[1]);
@@ -512,9 +567,41 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 hereos_selected_layout.setVisibility(View.INVISIBLE);
+                ultimate_timer_textview.setVisibility(View.INVISIBLE);
+                hero1_OC_imageview.setVisibility(View.INVISIBLE);
+                hero1_aghs_imageview.setVisibility(View.INVISIBLE);
+                hero1_talent_imageview.setVisibility(View.INVISIBLE);
+                hero2_OC_imageview.setVisibility(View.INVISIBLE);
+                hero2_aghs_imageview.setVisibility(View.INVISIBLE);
+                hero2_talent_imageview.setVisibility(View.INVISIBLE);
+                hero3_OC_imageview.setVisibility(View.INVISIBLE);
+                hero3_aghs_imageview.setVisibility(View.INVISIBLE);
+                hero3_talent_imageview.setVisibility(View.INVISIBLE);
+                hero4_OC_imageview.setVisibility(View.INVISIBLE);
+                hero4_aghs_imageview.setVisibility(View.INVISIBLE);
+                hero4_talent_imageview.setVisibility(View.INVISIBLE);
+                hero5_OC_imageview.setVisibility(View.INVISIBLE);
+                hero5_aghs_imageview.setVisibility(View.INVISIBLE);
+                hero5_talent_imageview.setVisibility(View.INVISIBLE);
             }
         } else {
             hereos_selected_layout.setVisibility(View.INVISIBLE);
+            ultimate_timer_textview.setVisibility(View.INVISIBLE);
+            hero1_OC_imageview.setVisibility(View.INVISIBLE);
+            hero1_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero1_talent_imageview.setVisibility(View.INVISIBLE);
+            hero2_OC_imageview.setVisibility(View.INVISIBLE);
+            hero2_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero2_talent_imageview.setVisibility(View.INVISIBLE);
+            hero3_OC_imageview.setVisibility(View.INVISIBLE);
+            hero3_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero3_talent_imageview.setVisibility(View.INVISIBLE);
+            hero4_OC_imageview.setVisibility(View.INVISIBLE);
+            hero4_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero4_talent_imageview.setVisibility(View.INVISIBLE);
+            hero5_OC_imageview.setVisibility(View.INVISIBLE);
+            hero5_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero5_talent_imageview.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -551,28 +638,18 @@ public class MainActivity extends AppCompatActivity {
 
         // String array for alert dialog multi choice items
         String[] modifiers = new String[]{
-                "Octerine Core",
+                "Octarine Core",
                 "Talent 10%",
                 "Talent 12%",
                 "Talent 15%",
                 "Talent 20%",
-                "aghanim scepter, does nothing ATM!",
-                "KOTL chakra magic, does nothing!!"
+                "Aghanim scepter"
         };
 
-        // Boolean array for initial selected items
-        final boolean[] checkedModifiers = new boolean[]{
-                false, // Octerine
-                false, // 10%
-                false, // 12%
-                false, // 15%
-                false, // 20%
-                false, // aghs
-                false  // kotl
-        };
+        checkForPreviousModifiers(heronumber);
 
         // Convert the color array to list
-        final List<String> modifiersList = Arrays.asList(modifiers);
+        final List<String> modifiersList = Arrays.asList(determineApproriateList(heronumber));
 
         // Set multiple choice items for alert dialog
                 /*
@@ -592,7 +669,7 @@ public class MainActivity extends AppCompatActivity {
                         which The position of the item in the list that was clicked.
                         isChecked True if the click checked the item, else false.
                  */
-        builder.setMultiChoiceItems(modifiers, checkedModifiers, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setMultiChoiceItems(determineApproriateList(heronumber), checkedModifiers, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 
@@ -620,20 +697,193 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Do something when click positive button
                 double cooldownModifier = 1;
+
+                //all heroes can do this
                 if (checkedModifiers[0]) {
                     cooldownModifier = (cooldownModifier * 0.75);
                 }
-                if (checkedModifiers[1]) {
-                    cooldownModifier = (cooldownModifier * 0.9);
-                }
-                if (checkedModifiers[2]) {
-                    cooldownModifier = (cooldownModifier * 0.88);
-                }
-                if (checkedModifiers[3]) {
-                    cooldownModifier = (cooldownModifier * 0.85);
-                }
-                if (checkedModifiers[4]) {
-                    cooldownModifier = (cooldownModifier * 0.80);
+
+                switch (listStyle) {
+                    case 1:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 0.9);
+                        }
+                        break;
+
+                    case 2:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 0.88);
+                        }
+                        break;
+
+                    case 3:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 0.85);
+                        }
+                        break;
+
+                    case 4:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 80);
+                        }
+                        break;
+
+                    case 5:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 0.9);
+                        }
+                        break;
+
+                    case 6:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 0.88);
+                        }
+                        break;
+
+                    case 7:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 0.85);
+                        }
+                        break;
+
+                    case 8:
+                        if (checkedModifiers[1]) {
+                            cooldownModifier = (cooldownModifier * 0.80);
+                        }
+                        break;
+
+                    case 9:
+                        String name;
+                        name = getSelectedHeroName(heronumber);
+                        if (checkedModifiers[1]) {
+                            if (name.equals("Axe")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 6 * 1000;
+                                        ultTimes[1] = 6 * 1000;
+                                        ultTimes[2] = 6 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 6 * 1000;
+                                        ultTimes[4] = 6 * 1000;
+                                        ultTimes[5] = 6 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 6 * 1000;
+                                        ultTimes[7] = 6 * 1000;
+                                        ultTimes[8] = 6 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 6 * 1000;
+                                        ultTimes[10] = 6 * 1000;
+                                        ultTimes[11] = 6 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 6 * 1000;
+                                        ultTimes[13] = 6 * 1000;
+                                        ultTimes[14] = 6 * 1000;
+                                        break;
+                                }
+                            } else if (name.equals("Clockwerk")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 12 * 1000;
+                                        ultTimes[1] = 12 * 1000;
+                                        ultTimes[2] = 12 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 12 * 1000;
+                                        ultTimes[4] = 12 * 1000;
+                                        ultTimes[5] = 12 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 12 * 1000;
+                                        ultTimes[7] = 12 * 1000;
+                                        ultTimes[8] = 12 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 12 * 1000;
+                                        ultTimes[10] = 12 * 1000;
+                                        ultTimes[11] = 12 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 12 * 1000;
+                                        ultTimes[13] = 12 * 1000;
+                                        ultTimes[14] = 12 * 1000;
+                                        break;
+                                }
+                            }
+                        } else {
+                            if (name.equals("Axe")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 75 * 1000;
+                                        ultTimes[1] = 65 * 1000;
+                                        ultTimes[2] = 55 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 75 * 1000;
+                                        ultTimes[4] = 65 * 1000;
+                                        ultTimes[5] = 55 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 75 * 1000;
+                                        ultTimes[7] = 65 * 1000;
+                                        ultTimes[8] = 55 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 75 * 1000;
+                                        ultTimes[10] = 65 * 1000;
+                                        ultTimes[11] = 55 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 75 * 1000;
+                                        ultTimes[13] = 65 * 1000;
+                                        ultTimes[14] = 5 * 1000;
+                                        break;
+                                }
+                            } else if (name.equals("Clockwerk")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 70 * 1000;
+                                        ultTimes[1] = 55 * 1000;
+                                        ultTimes[2] = 40 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 70 * 1000;
+                                        ultTimes[4] = 55 * 1000;
+                                        ultTimes[5] = 1402 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 70 * 1000;
+                                        ultTimes[7] = 55 * 1000;
+                                        ultTimes[8] = 40 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 70 * 1000;
+                                        ultTimes[10] = 55 * 1000;
+                                        ultTimes[11] = 40 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 70 * 1000;
+                                        ultTimes[13] = 55 * 1000;
+                                        ultTimes[14] = 40 * 1000;
+                                        break;
+                                }
+                            }
+                        }
+                        break;
+
+                    case 10:
+                        break;
+
+                    case 11:
+                        if (checkedModifiers[1]){
+                            cooldownModifier = (cooldownModifier * 0.75);
+                        }
+                        break;
+                    default:
+                        break;
                 }
                 if (heronumber == 1) {
                     hero1CDFactor = cooldownModifier;
@@ -650,6 +900,7 @@ public class MainActivity extends AppCompatActivity {
                 if (heronumber == 5) {
                     hero5CDFactor = cooldownModifier;
                 }
+                displayCooldownIcons(checkedModifiers, heronumber);
             }
         });
 
@@ -665,7 +916,502 @@ public class MainActivity extends AppCompatActivity {
         // Display the alert dialog on interface
         dialog.show();
     }
+
+    public void displayCooldownIcons(boolean[] modifier, int heroNumber) {
+        if (modifier[0]) {
+            switch (heroNumber) {
+                case 1:
+                    hero1_OC_imageview.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    hero2_OC_imageview.setVisibility(View.VISIBLE);
+                    break;
+                case 3:
+                    hero3_OC_imageview.setVisibility(View.VISIBLE);
+                    break;
+                case 4:
+                    hero4_OC_imageview.setVisibility(View.VISIBLE);
+                    break;
+                case 5:
+                    hero5_OC_imageview.setVisibility(View.VISIBLE);
+                    break;
+            }
+        } else {
+            switch (heroNumber) {
+                case 1:
+                    hero1_OC_imageview.setVisibility(View.INVISIBLE);
+                    break;
+                case 2:
+                    hero2_OC_imageview.setVisibility(View.INVISIBLE);
+                    break;
+                case 3:
+                    hero3_OC_imageview.setVisibility(View.INVISIBLE);
+                    break;
+                case 4:
+                    hero4_OC_imageview.setVisibility(View.INVISIBLE);
+                    break;
+                case 5:
+                    hero5_OC_imageview.setVisibility(View.INVISIBLE);
+                    break;
+            }
+        }
+        if (listStyle != 9 && listStyle != 10) {
+            if (modifier[1]) {
+                switch (heroNumber) {
+                    case 1:
+                        hero1_talent_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        hero2_talent_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        hero3_talent_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 4:
+                        hero4_talent_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 5:
+                        hero5_talent_imageview.setVisibility(View.VISIBLE);
+                        break;
+                }
+            } else {
+                switch (heroNumber) {
+                    case 1:
+                        hero1_talent_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 2:
+                        hero2_talent_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 3:
+                        hero3_talent_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 4:
+                        hero4_talent_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 5:
+                        hero5_talent_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                }
+            }
+
+            if (listStyle == 1 || listStyle == 2 || listStyle == 3 || listStyle == 4) {
+                if (modifier[2]) {
+                    switch (heroNumber) {
+                        case 1:
+                            hero1_aghs_imageview.setVisibility(View.VISIBLE);
+                            break;
+                        case 2:
+                            hero2_aghs_imageview.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            hero3_aghs_imageview.setVisibility(View.VISIBLE);
+                            break;
+                        case 4:
+                            hero4_aghs_imageview.setVisibility(View.VISIBLE);
+                            break;
+                        case 5:
+                            hero5_aghs_imageview.setVisibility(View.VISIBLE);
+                            break;
+                    }
+                } else {
+                    switch (heroNumber) {
+                        case 1:
+                            hero1_aghs_imageview.setVisibility(View.INVISIBLE);
+                            break;
+                        case 2:
+                            hero2_aghs_imageview.setVisibility(View.INVISIBLE);
+                            break;
+                        case 3:
+                            hero3_aghs_imageview.setVisibility(View.INVISIBLE);
+                            break;
+                        case 4:
+                            hero4_aghs_imageview.setVisibility(View.INVISIBLE);
+                            break;
+                        case 5:
+                            hero5_aghs_imageview.setVisibility(View.INVISIBLE);
+                            break;
+                    }
+                }
+            }
+
+        } else if (listStyle == 9) {
+            if (modifier[1]) {
+                switch (heroNumber) {
+                    case 1:
+                        hero1_aghs_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        hero2_aghs_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        hero3_aghs_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 4:
+                        hero4_aghs_imageview.setVisibility(View.VISIBLE);
+                        break;
+                    case 5:
+                        hero5_aghs_imageview.setVisibility(View.VISIBLE);
+                        break;
+                }
+            } else {
+                switch (heroNumber) {
+                    case 1:
+                        hero1_aghs_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 2:
+                        hero2_aghs_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 3:
+                        hero3_aghs_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 4:
+                        hero4_aghs_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                    case 5:
+                        hero5_aghs_imageview.setVisibility(View.INVISIBLE);
+                        break;
+                }
+            }
+        }
+    }
+
+    public String[] determineApproriateList(int selectedHeroNumber) {
+        String heroName;
+        heroName = getSelectedHeroName(selectedHeroNumber);
+        listStyle = styleFromName(heroName);
+        String[] list = {"test"};
+
+        switch (listStyle) {
+            case 1:
+                String[] list1 = new String[3];
+                list1[0] = "Octarine Core";
+                list1[1] = "10% Reduction Talent";
+                list1[2] = "Aghanims Scepter";
+                return list1;
+
+            case 2:
+                String[] list2 = new String[3];
+                list2[0] = "Octarine Core";
+                list2[1] = "12% Reduction Talent";
+                list2[2] = "Aghanims Scepter";
+                return list2;
+
+            case 3:
+                String[] list3 = new String[3];
+                list3[0] = "Octarine Core";
+                list3[1] = "15% Reduction Talent";
+                list3[2] = "Aghanims Scepter";
+                return list3;
+
+            case 4:
+                String[] list4 = new String[3];
+                list4[0] = "Octarine Core";
+                list4[1] = "20% Reduction Talent";
+                list4[2] = "Aghanims Scepter";
+                return list4;
+
+            case 5:
+                String[] list5 = new String[2];
+                list5[0] = "Octarine Core";
+                list5[1] = "10% Reduction Talent";
+                return list5;
+
+            case 6:
+                String[] list6 = new String[2];
+                list6[0] = "Octarine Core";
+                list6[1] = "12% Reduction Talent";
+                return list6;
+
+            case 7:
+                String[] list7 = new String[2];
+                list7[0] = "Octarine Core";
+                list7[1] = "15% Reduction Talent";
+                return list7;
+
+            case 8:
+                String[] list8 = new String[2];
+                list8[0] = "Octarine Core";
+                list8[1] = "20% Reduction Talent";
+                return list8;
+
+            case 9:
+                String[] list9 = new String[2];
+                list9[0] = "Octarine Core";
+                list9[1] = "Aghanims Scepter";
+                return list9;
+
+            case 10:
+                String[] list10 = new String[1];
+                list10[0] = "Octarine Core";
+                return list10;
+
+            case 11:
+                String[] list11 = new String[2];
+                list11[0] = "Octarine Core";
+                list11[1] = "25% Reduction Talent";
+                return list11;
+
+            default:
+                return list;
+        }
+    }
+
+    public int styleFromName(String name) {
+        int style = 0;
+
+        //10% Talent
+        //aghs
+        if (name.equals("1")) {
+            style = 1;
+
+            //12% Talent
+            //aghs
+        } else if (name.equals("2")) {
+            style = 2;
+
+            //15% Talent
+            //aghs
+        } else if (name.equals("3")) {
+            style = 3;
+
+            //20% talent
+            //aghs
+        } else if (name.equals("4")) {
+            style = 4;
+
+            //10% talent
+        } else if (name.equals("Arc Warden") ||
+                name.equals("Death Prophet")) {
+            style = 5;
+
+            //12% Talent
+        } else if (name.equals("Beastmaster") ||
+                name.equals("Dark Seer") ||
+                name.equals("Morphling")) {
+            style = 6;
+
+            //15% Talent
+        } else if (name.equals("Abaddon") ||
+                name.equals("Batrider") ||
+                name.equals("Disruptor") ||
+                name.equals("Enigma") ||
+                name.equals("Lycan")) {
+            style = 7;
+
+            //20% Talent
+        } else if (name.equals("Broodmother") ||
+                name.equals("Chaos Knight") ||
+                name.equals("Gyrocopter")) {
+            style = 8;
+
+            //Aghs
+        } else if (name.equals("Axe") ||
+                name.equals("Clockwerk") ||
+                name.equals("Faceless Void") ||
+                name.equals("Lion")) {
+            style = 9;
+
+            //just OC
+        } else if (name.equals("Alchemist") ||
+                name.equals("Ancient Apparition") ||
+                name.equals("Anti-Mage") ||
+                name.equals("Bane") ||
+                name.equals("Bloodseeker") ||
+                name.equals("Bounty Hunter") ||
+                name.equals("Brewmaster") ||
+                name.equals("Bristleback") ||
+                name.equals("Centaur Warrunner") ||
+                name.equals("Chen") ||
+                name.equals("Clinkz") ||
+                name.equals("Crystal Maiden") ||
+                name.equals("Dazzle") ||
+                name.equals("Doom") ||
+                name.equals("Dragon Knight") ||
+                name.equals("Drow Ranger") ||
+                name.equals("Earth Spirit") ||
+                name.equals("Earthshaker") ||
+                name.equals("Elder Titan") ||
+                name.equals("Ember Spirit") ||
+                name.equals("Enchantress") ||
+                name.equals("Huskar") ||
+                name.equals("Invoker") ||
+                name.equals("Io") ||
+                name.equals("Jakiro") ||
+                name.equals("Juggernaut") ||
+                name.equals("Keeper of the Light") ||
+                name.equals("Kunkka") ||
+                name.equals("Leshrac") ||
+                name.equals("Lich") ||
+                name.equals("Lifestealer") ||
+                name.equals("Lina") ||
+                name.equals("Lone Druid") ||
+                name.equals("Luna") ||
+                name.equals("Magnus") ||
+                name.equals("Medusa") ||
+                name.equals("Meepo") ||
+                name.equals("Mirana") ||
+                name.equals("Monkey King")) {
+            style = 10;
+        } else if (name.equals("Legion Commander")) {
+            style = 11;
+        }
+        return style;
+    }
+
+    public void checkForPreviousModifiers(int heronumber) {
+        switch (heronumber) {
+            case 1:
+                if (hero1_OC_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[0] = true;
+                } else {
+                    checkedModifiers[0] = false;
+                }
+                if (hero1_talent_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[1] = true;
+                } else {
+                    checkedModifiers[1] = false;
+                }
+                if (hero1_aghs_imageview.getVisibility() == View.VISIBLE) {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = true;
+                    } else {
+                        checkedModifiers[2] = true;
+                    }
+                } else {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = false;
+                    } else {
+                        checkedModifiers[2] = false;
+                    }
+                }
+                break;
+            case 2:
+                if (hero2_OC_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[0] = true;
+                } else {
+                    checkedModifiers[0] = false;
+                }
+                if (hero2_talent_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[1] = true;
+                } else {
+                    checkedModifiers[1] = false;
+                }
+                if (hero2_aghs_imageview.getVisibility() == View.VISIBLE) {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = true;
+                    } else {
+                        checkedModifiers[2] = true;
+                    }
+                } else {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = false;
+                    } else {
+                        checkedModifiers[2] = false;
+                    }
+                }
+                break;
+
+            case 3:
+                if (hero3_OC_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[0] = true;
+                } else {
+                    checkedModifiers[0] = false;
+                }
+                if (hero3_talent_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[1] = true;
+                } else {
+                    checkedModifiers[1] = false;
+                }
+                if (hero3_aghs_imageview.getVisibility() == View.VISIBLE) {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = true;
+                    } else {
+                        checkedModifiers[2] = true;
+                    }
+                } else {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = false;
+                    } else {
+                        checkedModifiers[2] = false;
+                    }
+                }
+                break;
+            case 4:
+                if (hero4_OC_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[0] = true;
+                } else {
+                    checkedModifiers[0] = false;
+                }
+                if (hero4_talent_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[1] = true;
+                } else {
+                    checkedModifiers[1] = false;
+                }
+                if (hero4_aghs_imageview.getVisibility() == View.VISIBLE) {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = true;
+                    } else {
+                        checkedModifiers[2] = true;
+                    }
+                } else {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = false;
+                    } else {
+                        checkedModifiers[2] = false;
+                    }
+                }
+                break;
+            case 5:
+                if (hero5_OC_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[0] = true;
+                } else {
+                    checkedModifiers[0] = false;
+                }
+                if (hero5_talent_imageview.getVisibility() == View.VISIBLE) {
+                    checkedModifiers[1] = true;
+                } else {
+                    checkedModifiers[1] = false;
+                }
+                if (hero5_aghs_imageview.getVisibility() == View.VISIBLE) {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = true;
+                    } else {
+                        checkedModifiers[2] = true;
+                    }
+                } else {
+                    if (listStyle == 9) {
+                        checkedModifiers[1] = false;
+                    } else {
+                        checkedModifiers[2] = false;
+                    }
+                }
+                break;
+        }
+    }
+
+    public String getSelectedHeroName(int heronumber) {
+        String name;
+
+        switch (heronumber) {
+            case 1:
+                name = (String) hero1_textview.getText();
+                break;
+            case 2:
+                name = (String) hero2_textview.getText();
+                break;
+            case 3:
+                name = (String) hero3_textview.getText();
+                break;
+            case 4:
+                name = (String) hero4_textview.getText();
+                break;
+            case 5:
+                name = (String) hero5_textview.getText();
+                break;
+            default:
+                name = null;
+                break;
+        }
+        return name;
+    }
 }
-
-
-
