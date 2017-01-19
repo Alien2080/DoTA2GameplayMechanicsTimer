@@ -7,19 +7,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 //import android.graphics.Color;
 //import android.graphics.drawable.ColorDrawable;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.Bundle;
 //import android.text.Layout;
 //import android.util.Log;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 //import android.view.ViewGroup;
 //import android.view.ViewGroup.LayoutParams;
 //import android.view.WindowManager;
 
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +37,7 @@ import org.w3c.dom.Text;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import static android.R.attr.button;
 import static android.R.attr.name;
@@ -65,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
             false, // Octarine
             false, // Talent
             false, // Aghs
+    };
+    final boolean[] optionsChecked = {
+            false,
+            false
     };
     TextView hero1_textview;
     TextView hero2_textview;
@@ -145,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
     double hero4CDFactor = 1;
     double hero5CDFactor = 1;
     int[] ultTimes = new int[5 * 3];
+    String[] selectedHeroes;
+    boolean roshanSoundOption;
+    boolean screenAlwaysOnOption;
+
     int listStyle;
     //used to play the roshan respawn sound effect
     MediaPlayer mediaplayer;
@@ -204,46 +219,57 @@ public class MainActivity extends AppCompatActivity {
             int secondsHero5Ult = (int) (millisHero5Ult / 1000);
             int minutesHero5Ult = secondsHero5Ult / 60;
             secondsHero5Ult = secondsHero5Ult % 60;
-
-            if (System.currentTimeMillis() <= hero1UltTime) {
-                hero1_time_textview.setText(String.format("%d:%02d", minutesHero1Ult, secondsHero1Ult));
-                hero1_layout_overlay.setVisibility(View.VISIBLE);
-                hero1_layout.setVisibility(View.INVISIBLE);
-            } else {
-                hero1_layout_overlay.setVisibility(View.INVISIBLE);
-                hero1_layout.setVisibility(View.VISIBLE);
-            }
-            if (System.currentTimeMillis() <= hero2UltTime) {
-                hero2_time_textview.setText(String.format("%d:%02d", minutesHero2Ult, secondsHero2Ult));
-                hero2_layout_overlay.setVisibility(View.VISIBLE);
-                hero2_layout.setVisibility(View.INVISIBLE);
-            } else {
-                hero2_layout_overlay.setVisibility(View.INVISIBLE);
-                hero2_layout.setVisibility(View.VISIBLE);
-            }
-            if (System.currentTimeMillis() <= hero3UltTime) {
-                hero3_time_textview.setText(String.format("%d:%02d", minutesHero3Ult, secondsHero3Ult));
-                hero3_layout_overlay.setVisibility(View.VISIBLE);
-                hero3_layout.setVisibility(View.INVISIBLE);
-            } else {
-                hero3_layout_overlay.setVisibility(View.INVISIBLE);
-                hero3_layout.setVisibility(View.VISIBLE);
-            }
-            if (System.currentTimeMillis() <= hero4UltTime) {
-                hero4_time_textview.setText(String.format("%d:%02d", minutesHero4Ult, secondsHero4Ult));
-                hero4_layout_overlay.setVisibility(View.VISIBLE);
-                hero4_layout.setVisibility(View.INVISIBLE);
-            } else {
-                hero4_layout_overlay.setVisibility(View.INVISIBLE);
-                hero4_layout.setVisibility(View.VISIBLE);
-            }
-            if (System.currentTimeMillis() <= hero5UltTime) {
-                hero5_time_textview.setText(String.format("%d:%02d", minutesHero5Ult, secondsHero5Ult));
-                hero5_layout_overlay.setVisibility(View.VISIBLE);
-                hero5_layout.setVisibility(View.INVISIBLE);
-            } else {
-                hero5_layout_overlay.setVisibility(View.INVISIBLE);
-                hero5_layout.setVisibility(View.VISIBLE);
+            if (selectedHeroes != null) {
+                if (selectedHeroes[0] != null) {
+                    if (System.currentTimeMillis() <= hero1UltTime) {
+                        hero1_time_textview.setText(String.format("%d:%02d", minutesHero1Ult, secondsHero1Ult));
+                        hero1_layout_overlay.setVisibility(View.VISIBLE);
+                        hero1_layout.setVisibility(View.INVISIBLE);
+                    } else {
+                        hero1_layout_overlay.setVisibility(View.INVISIBLE);
+                        hero1_layout.setVisibility(View.VISIBLE);
+                    }
+                }
+                if (selectedHeroes[1] != null) {
+                    if (System.currentTimeMillis() <= hero2UltTime) {
+                        hero2_time_textview.setText(String.format("%d:%02d", minutesHero2Ult, secondsHero2Ult));
+                        hero2_layout_overlay.setVisibility(View.VISIBLE);
+                        hero2_layout.setVisibility(View.INVISIBLE);
+                    } else {
+                        hero2_layout_overlay.setVisibility(View.INVISIBLE);
+                        hero2_layout.setVisibility(View.VISIBLE);
+                    }
+                }
+                if (selectedHeroes[2] != null) {
+                    if (System.currentTimeMillis() <= hero3UltTime) {
+                        hero3_time_textview.setText(String.format("%d:%02d", minutesHero3Ult, secondsHero3Ult));
+                        hero3_layout_overlay.setVisibility(View.VISIBLE);
+                        hero3_layout.setVisibility(View.INVISIBLE);
+                    } else {
+                        hero3_layout_overlay.setVisibility(View.INVISIBLE);
+                        hero3_layout.setVisibility(View.VISIBLE);
+                    }
+                }
+                if (selectedHeroes[3] != null) {
+                    if (System.currentTimeMillis() <= hero4UltTime) {
+                        hero4_time_textview.setText(String.format("%d:%02d", minutesHero4Ult, secondsHero4Ult));
+                        hero4_layout_overlay.setVisibility(View.VISIBLE);
+                        hero4_layout.setVisibility(View.INVISIBLE);
+                    } else {
+                        hero4_layout_overlay.setVisibility(View.INVISIBLE);
+                        hero4_layout.setVisibility(View.VISIBLE);
+                    }
+                }
+                if (selectedHeroes[4] != null) {
+                    if (System.currentTimeMillis() <= hero5UltTime) {
+                        hero5_time_textview.setText(String.format("%d:%02d", minutesHero5Ult, secondsHero5Ult));
+                        hero5_layout_overlay.setVisibility(View.VISIBLE);
+                        hero5_layout.setVisibility(View.INVISIBLE);
+                    } else {
+                        hero5_layout_overlay.setVisibility(View.INVISIBLE);
+                        hero5_layout.setVisibility(View.VISIBLE);
+                    }
+                }
             }
             aegis_reclaim_button.setText("aegis reclaim\n" + String.format("%d:%02d", minutesAegis, secondsAegis));
             if (System.currentTimeMillis() <= roshanEarliestRespawnTime) {
@@ -252,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                 roshan_respawn_button.setText("roshan respawn\nNow and " + String.format("%d:%02d", minutesMax, secondsMax));
             } else if (System.currentTimeMillis() >= roshanLatestRespawnTime) {
                 roshan_respawn_button.setText("roshan respawn\nNow");
-                if (!played) {
+                if (roshanSoundOption && !played) {
                     mediaplayer.start();
                     played = true;
                 }
@@ -268,6 +294,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Restore preferences
+        SharedPreferences settings = getSharedPreferences("optionsFile", 0);
+        roshanSoundOption = settings.getBoolean("roshOption", false);
+        screenAlwaysOnOption = settings.getBoolean("screenOnOption", false);
+
         if (savedInstanceState != null) {
             gameStartTime = savedInstanceState.getLong("gameStartTime");
             timerHandler.postDelayed(timerRunnable, 0);
@@ -276,8 +307,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //to stop the screen from turning off, will cause battery drain
-        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+        if (screenAlwaysOnOption) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
         hero1_textview = (TextView) findViewById(R.id.hero1_textview);
         hero2_textview = (TextView) findViewById(R.id.hero2_textview);
         hero3_textview = (TextView) findViewById(R.id.hero3_textview);
@@ -379,6 +411,127 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * On selecting action bar icons
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                settingsDialog();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Launching new activity
+     */
+    private void settingsDialog() {
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        final String[] optionsList = {
+                "Play a sound effect when Roshan is guaranteed have respawned",
+                "Keep screen on always, will use more battery"
+        };
+
+        if (roshanSoundOption == true) {
+            optionsChecked[0] = true;
+        } else {
+            optionsChecked[0] = false;
+        }
+        if (screenAlwaysOnOption == true) {
+            optionsChecked[1] = true;
+        } else {
+            optionsChecked[1] = false;
+        }
+
+        final List<String> modifiersList = Arrays.asList(optionsList);
+
+        // Set multiple choice items for alert dialog
+                /*
+                    AlertDialog.Builder setMultiChoiceItems(CharSequence[] items, boolean[]
+                    checkedItems, DialogInterface.OnMultiChoiceClickListener listener)
+                        Set a list of items to be displayed in the dialog as the content,
+                        you will be notified of the selected item via the supplied listener.
+                 */
+                /*
+                    DialogInterface.OnMultiChoiceClickListener
+                    public abstract void onClick (DialogInterface dialog, int which, boolean isChecked)
+
+                        This method will be invoked when an item in the dialog is clicked.
+
+                        Parameters
+                        dialog The dialog where the selection was made.
+                        which The position of the item in the list that was clicked.
+                        isChecked True if the click checked the item, else false.
+                 */
+        builder.setMultiChoiceItems(optionsList, optionsChecked, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                // Update the current focused item's checked status
+                optionsChecked[which] = isChecked;
+
+                // Get the current focused item
+                String currentItem = modifiersList.get(which);
+
+                // Notify the current action
+                Toast.makeText(getApplicationContext(),
+                        currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Specify the dialog is not cancelable
+        builder.setCancelable(false);
+
+        // Set a title for alert dialog
+        builder.setTitle("Options");
+
+        // Set the positive/yes button click listener
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click positive button
+                if (optionsChecked[0]) {
+                    roshanSoundOption = true;
+                } else {
+                    roshanSoundOption = false;
+                }
+                if (optionsChecked[1]) {
+                    screenAlwaysOnOption = true;
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                } else {
+                    screenAlwaysOnOption = false;
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            }
+        });
+
+        // Set the neutral/cancel button click listener
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click the neutral button
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        // Display the alert dialog on interface
+        dialog.show();
+    }
+
+    @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         gameStartTime = savedInstanceState.getLong("gameStartTime");
@@ -403,6 +556,19 @@ public class MainActivity extends AppCompatActivity {
 
     //called when select_hero_button is clicked
     public void heroSelect(View view) {
+        if (selectedHeroes != null) {
+            selectedHeroes[0] = null;
+            selectedHeroes[1] = null;
+            selectedHeroes[2] = null;
+            selectedHeroes[3] = null;
+            selectedHeroes[4] = null;
+            hero1UltTime = 0;
+            hero2UltTime = 0;
+            hero3UltTime = 0;
+            hero4UltTime = 0;
+            hero5UltTime = 0;
+        }
+
         Intent intent = new Intent(this, HeroPickerActivity.class);
         startActivity(intent);
     }
@@ -496,24 +662,42 @@ public class MainActivity extends AppCompatActivity {
         timerHandler.removeCallbacks(timerRunnable);
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences settings = getSharedPreferences("optionsFile", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("roshOption", roshanSoundOption);
+        editor.putBoolean("screenOnOption", screenAlwaysOnOption);
+        // Commit the edits!
+        editor.commit();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+
         if (gameStartTime != 0 && game_start_button.getText() == "Pause") {
             timerHandler.postDelayed(timerRunnable, 0);
         }
         //this use a constant 5 but should really use the MAX_SELECTED_HEROES static int
-        String[] selectedHeroes;
+
+        String[] selectedAbilities;
         //gets String array of selected heroes from hero select screen
         Intent intent = getIntent();
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             selectedHeroes = intent.getStringArrayExtra("selectedHeroes");
             ultTimes = intent.getIntArrayExtra("selectedHeroesUltTimes");
+            selectedAbilities = intent.getStringArrayExtra("abilityNames");
             if (selectedHeroes != null) {
+                select_hero_button.setText("Reset Heroes");
                 if (selectedHeroes[0] != null) {
-                    hero1_textview.setText(selectedHeroes[0]);
-                    hero1_textview_overlay.setText(selectedHeroes[0]);
+                    hero1_textview.setText(selectedHeroes[0] + "\n" + selectedAbilities[0]);
+                    hero1_textview_overlay.setText(selectedHeroes[0] + "\n" + selectedAbilities[0]);
                     hero1_layout.setVisibility(View.VISIBLE);
                     hereos_selected_layout.setVisibility(View.VISIBLE);
                     ultimate_timer_textview.setVisibility(View.VISIBLE);
@@ -538,34 +722,35 @@ public class MainActivity extends AppCompatActivity {
                     hero5_talent_imageview.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[1] != null) {
-                    hero2_textview.setText(selectedHeroes[1]);
-                    hero2_textview_overlay.setText(selectedHeroes[1]);
+                    hero2_textview.setText(selectedHeroes[1] + "\n" + selectedAbilities[1]);
+                    hero2_textview_overlay.setText(selectedHeroes[1] + "\n" + selectedAbilities[1]);
                     hero2_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero2_layout.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[2] != null) {
-                    hero3_textview.setText(selectedHeroes[2]);
-                    hero3_textview_overlay.setText(selectedHeroes[2]);
+                    hero3_textview.setText(selectedHeroes[2] + "\n" + selectedAbilities[2]);
+                    hero3_textview_overlay.setText(selectedHeroes[2] + "\n" + selectedAbilities[2]);
                     hero3_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero3_layout.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[3] != null) {
-                    hero4_textview.setText(selectedHeroes[3]);
-                    hero4_textview_overlay.setText(selectedHeroes[3]);
+                    hero4_textview.setText(selectedHeroes[3] + "\n" + selectedAbilities[3]);
+                    hero4_textview_overlay.setText(selectedHeroes[3] + "\n" + selectedAbilities[3]);
                     hero4_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero4_layout.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[4] != null) {
-                    hero5_textview.setText(selectedHeroes[4]);
-                    hero5_textview_overlay.setText(selectedHeroes[4]);
+                    hero5_textview.setText(selectedHeroes[4] + "\n" + selectedAbilities[4]);
+                    hero5_textview_overlay.setText(selectedHeroes[4] + "\n" + selectedAbilities[4]);
                     hero5_layout.setVisibility(View.VISIBLE);
                 } else {
                     hero5_layout.setVisibility(View.INVISIBLE);
                 }
             } else {
+                select_hero_button.setText("Select Enemy Heroes");
                 hereos_selected_layout.setVisibility(View.INVISIBLE);
                 ultimate_timer_textview.setVisibility(View.INVISIBLE);
                 hero1_OC_imageview.setVisibility(View.INVISIBLE);
@@ -753,6 +938,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 9:
+                        //Aghs changes cooldown of these heroes
+                        //Still need to add Faceless, Lion, Necro
                         String name;
                         name = getSelectedHeroName(heronumber);
                         if (checkedModifiers[1]) {
@@ -878,7 +1065,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 11:
-                        if (checkedModifiers[1]){
+                        if (checkedModifiers[1]) {
                             cooldownModifier = (cooldownModifier * 0.75);
                         }
                         break;
@@ -1076,9 +1263,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String[] determineApproriateList(int selectedHeroNumber) {
-        String heroName;
-        heroName = getSelectedHeroName(selectedHeroNumber);
-        listStyle = styleFromName(heroName);
+
+        listStyle = styleFromName(selectedHeroes[selectedHeroNumber - 1]);
         String[] list = {"test"};
 
         switch (listStyle) {
@@ -1208,7 +1394,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (name.equals("Axe") ||
                 name.equals("Clockwerk") ||
                 name.equals("Faceless Void") ||
-                name.equals("Lion")) {
+                name.equals("Lion") ||
+                name.equals("Necrophos")) {
             style = 9;
 
             //just OC
@@ -1250,7 +1437,15 @@ public class MainActivity extends AppCompatActivity {
                 name.equals("Medusa") ||
                 name.equals("Meepo") ||
                 name.equals("Mirana") ||
-                name.equals("Monkey King")) {
+                name.equals("Monkey King") ||
+                name.equals("Naga Siren") ||
+                name.equals("Nature's Prophet") ||
+                name.equals("Night Stalker") ||
+                name.equals("Nyx") ||
+                name.equals("Ogre Magi") ||
+                name.equals("Omni Knight") ||
+                name.equals("Oracle") ||
+                name.equals("Outworld Devourer")) {
             style = 10;
         } else if (name.equals("Legion Commander")) {
             style = 11;
@@ -1412,6 +1607,6 @@ public class MainActivity extends AppCompatActivity {
                 name = null;
                 break;
         }
-        return name;
+        return selectedHeroes[heronumber];
     }
 }
