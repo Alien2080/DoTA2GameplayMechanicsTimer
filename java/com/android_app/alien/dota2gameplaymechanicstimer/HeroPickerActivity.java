@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -128,9 +129,9 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int DRAGON_KNIGHT_CD_L2 = (115 * 1000);
     static int DRAGON_KNIGHT_CD_L3 = (115 * 1000);
 
-    static int DROW_CD_L1 = (0 * 1000);
-    static int DROW_CD_L2 = (0 * 1000);
-    static int DROW_CD_L3 = (0 * 1000);
+    static int DROW_PRESICION_AURA_L1 = (100 * 1000);
+    static int DROW_PRESICION_AURA_L2 = (100 * 1000);
+    static int DROW_PRESICION_AURA_L3 = (100 * 1000);
 
     static int EARTH_SPIRIT_CD_L1 = (100 * 1000);
     static int EARTH_SPIRIT_CD_L2 = (90 * 1000);
@@ -144,9 +145,9 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int ELDER_TITAN_CD_L2 = (100 * 1000);
     static int ELDER_TITAN_CD_L3 = (100 * 1000);
 
-    static int EMBER_SPIRIT_CD_L1 = (45 * 1000);
-    static int EMBER_SPIRIT_CD_L2 = (45 * 1000);
-    static int EMBER_SPIRIT_CD_L3 = (45 * 1000);
+    static int EMBER_SPIRIT_FLAME_GUARD_CD_L1 = (30 * 1000);
+    static int EMBER_SPIRIT_FLAME_GUARD_CD_L2 = (30 * 1000);
+    static int EMBER_SPIRIT_FLAME_GUARD_CD_L3 = (30 * 1000);
 
     static int ENCHANTRESS_CD_L1 = (0 * 1000);
     static int ENCHANTRESS_CD_L2 = (0 * 1000);
@@ -168,9 +169,9 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int HUSKAR_CD_L2 = (12 * 1000);
     static int HUSKAR_CD_L3 = (12 * 1000);
 
-    static int INVOKER_CD_L1 = (6 * 1000);
-    static int INVOKER_CD_L2 = (6 * 1000);
-    static int INVOKER_CD_L3 = (6 * 1000);
+    static int INVOKER_DEAFENING_BLAST_CD_L1 = (6 * 1000);
+    static int INVOKER_DEAFENING_BLAST_CD_L2 = (6 * 1000);
+    static int INVOKER_DEAFENING_BLAST_CD_L3 = (6 * 1000);
 
     static int IO_CD_L1 = (90 * 1000);
     static int IO_CD_L2 = (75 * 1000);
@@ -196,9 +197,9 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int LC_CD_L2 = (50 * 1000);
     static int LC_CD_L3 = (50 * 1000);
 
-    static int LESHRAC_CD_L1 = (1 * 1000);
-    static int LESHRAC_CD_L2 = (1 * 1000);
-    static int LESHRAC_CD_L3 = (1 * 1000);
+    static int LESHRAC_DIABOLIC_EDICT_CD_L1 = (22 * 1000);
+    static int LESHRAC_DIABOLIC_EDICT_CD_L2 = (22 * 1000);
+    static int LESHRAC_DIABOLIC_EDICT_CD_L3 = (22 * 1000);
 
     static int LICH_CD_L1 = (120 * 1000);
     static int LICH_CD_L2 = (90 * 1000);
@@ -216,9 +217,9 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int LION_CD_L2 = (100 * 1000);
     static int LION_CD_L3 = (40 * 1000);
 
-    static int LONE_DRUID_CD_L1 = (0 * 1000);
-    static int LONE_DRUID_CD_L2 = (0 * 1000);
-    static int LONE_DRUID_CD_L3 = (0 * 1000);
+    static int LONE_DRUID_SPIRIT_BEAR_CD_L1 = (120 * 1000);
+    static int LONE_DRUID_SPIRIT_BEAR_CD_L2 = (120 * 1000);
+    static int LONE_DRUID_SPIRIT_BEAR_CD_L3 = (120 * 1000);
 
     static int LUNA_CD_L1 = (140 * 1000);
     static int LUNA_CD_L2 = (140 * 1000);
@@ -251,6 +252,42 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int MORPH_CD_L1 = (80 * 1000);
     static int MORPH_CD_L2 = (80 * 1000);
     static int MORPH_CD_L3 = (80 * 1000);
+
+    static int NAGA_ULT_CD_L1 = (180 * 1000);
+    static int NAGA_ULT_CD_L2 = (120 * 1000);
+    static int NAGA_ULT_CD_L3 = (60 * 1000);
+
+    static int NP_ULT_CD_L1 = (90 * 1000);
+    static int NP_ULT_CD_L2 = (75 * 1000);
+    static int NP_ULT_CD_L3 = (60 * 1000);
+
+    static int NECRO_ULT_CD_L1 = (100 * 1000);
+    static int NECRO_ULT_CD_L2 = (85 * 1000);
+    static int NECRO_ULT_CD_L3 = (70 * 1000);
+
+    static int NIGHT_STALKER_ULT_CD_L1 = (160 * 1000);
+    static int NIGHT_STALKER_ULT_CD_L2 = (120 * 1000);
+    static int NIGHT_STALKER_ULT_CD_L3 = (80 * 1000);
+
+    static int NYX_ULT_CD_L1 = (70 * 1000);
+    static int NYX_ULT_CD_L2 = (60 * 1000);
+    static int NYX_ULT_CD_L3 = (50 * 1000);
+
+    static int ORGE_MAGI_BLOODLUST_CD_L1 = (20 * 1000);
+    static int ORGE_MAGI_BLOODLUST_CD_L2 = (20 * 1000);
+    static int ORGE_MAGI_BLOODLUST_CD_L3 = (20 * 1000);
+
+    static int OMNI_ULT_CD_L1 = (160 * 1000);
+    static int OMNI_ULT_CD_L2 = (160 * 1000);
+    static int OMNI_ULT_CD_L3 = (160 * 1000);
+
+    static int ORACLE_ULT_CD_L1 = (100 * 1000);
+    static int ORACLE_ULT_CD_L2 = (65 * 1000);
+    static int ORACLE_ULT_CD_L3 = (30 * 1000);
+
+    static int OD_ULT_CD_L1 = (160 * 1000);
+    static int OD_ULT_CD_L2 = (160 * 1000);
+    static int OD_ULT_CD_L3 = (160 * 1000);
 
     //default cooldown time of each heroes ultimate ability, the position in array relates to the heros name in heroNames array x3
     int[] ultTimes = new int[]{
@@ -332,9 +369,9 @@ public class HeroPickerActivity extends AppCompatActivity {
             DRAGON_KNIGHT_CD_L1,
             DRAGON_KNIGHT_CD_L2,
             DRAGON_KNIGHT_CD_L3,
-            DROW_CD_L1 ,
-            DROW_CD_L2 ,
-            DROW_CD_L3,
+            DROW_PRESICION_AURA_L1 ,
+            DROW_PRESICION_AURA_L2 ,
+            DROW_PRESICION_AURA_L3,
             EARTH_SPIRIT_CD_L1,
             EARTH_SPIRIT_CD_L2,
             EARTH_SPIRIT_CD_L3,
@@ -344,9 +381,9 @@ public class HeroPickerActivity extends AppCompatActivity {
             ELDER_TITAN_CD_L1,
             ELDER_TITAN_CD_L2,
             ELDER_TITAN_CD_L3,
-            EMBER_SPIRIT_CD_L1,
-            EMBER_SPIRIT_CD_L2,
-            EMBER_SPIRIT_CD_L3,
+            EMBER_SPIRIT_FLAME_GUARD_CD_L1,
+            EMBER_SPIRIT_FLAME_GUARD_CD_L2,
+            EMBER_SPIRIT_FLAME_GUARD_CD_L3,
             ENCHANTRESS_CD_L1,
             ENCHANTRESS_CD_L2,
             ENCHANTRESS_CD_L3,
@@ -362,9 +399,9 @@ public class HeroPickerActivity extends AppCompatActivity {
             HUSKAR_CD_L1,
             HUSKAR_CD_L2 ,
             HUSKAR_CD_L3,
-            INVOKER_CD_L1,
-            INVOKER_CD_L2,
-            INVOKER_CD_L3,
+            INVOKER_DEAFENING_BLAST_CD_L1,
+            INVOKER_DEAFENING_BLAST_CD_L2,
+            INVOKER_DEAFENING_BLAST_CD_L3,
             IO_CD_L1,
             IO_CD_L2,
             IO_CD_L3,
@@ -383,9 +420,9 @@ public class HeroPickerActivity extends AppCompatActivity {
             LC_CD_L1 ,
             LC_CD_L2,
             LC_CD_L3,
-            LESHRAC_CD_L1 ,
-            LESHRAC_CD_L2,
-            LESHRAC_CD_L3,
+            LESHRAC_DIABOLIC_EDICT_CD_L1 ,
+            LESHRAC_DIABOLIC_EDICT_CD_L2,
+            LESHRAC_DIABOLIC_EDICT_CD_L3,
             LICH_CD_L1 ,
             LICH_CD_L2,
             LICH_CD_L3,
@@ -398,9 +435,9 @@ public class HeroPickerActivity extends AppCompatActivity {
             LION_CD_L1,
             LION_CD_L2 ,
             LION_CD_L3,
-            LONE_DRUID_CD_L1,
-            LONE_DRUID_CD_L2,
-            LONE_DRUID_CD_L3,
+            LONE_DRUID_SPIRIT_BEAR_CD_L1,
+            LONE_DRUID_SPIRIT_BEAR_CD_L2,
+            LONE_DRUID_SPIRIT_BEAR_CD_L3,
             LUNA_CD_L1,
             LUNA_CD_L2,
             LUNA_CD_L3,
@@ -422,16 +459,121 @@ public class HeroPickerActivity extends AppCompatActivity {
             MONKEY_KING_CD_L1,
             MONKEY_KING_CD_L2,
             MONKEY_KING_CD_L3,
-            MORPH_CD_L1 ,
-             MORPH_CD_L2 ,
+            MORPH_CD_L1,
+            MORPH_CD_L2,
             MORPH_CD_L3,
+            NAGA_ULT_CD_L1,
+            NAGA_ULT_CD_L2,
+            NAGA_ULT_CD_L3,
+            NP_ULT_CD_L1,
+            NP_ULT_CD_L2,
+            NP_ULT_CD_L3,
+            NECRO_ULT_CD_L1,
+            NECRO_ULT_CD_L2,
+            NECRO_ULT_CD_L3,
+            NIGHT_STALKER_ULT_CD_L1,
+            NIGHT_STALKER_ULT_CD_L2,
+            NIGHT_STALKER_ULT_CD_L3,
+            NYX_ULT_CD_L1,
+            NYX_ULT_CD_L2,
+            NYX_ULT_CD_L3,
+            ORGE_MAGI_BLOODLUST_CD_L1,
+            ORGE_MAGI_BLOODLUST_CD_L2,
+            ORGE_MAGI_BLOODLUST_CD_L3,
+            OMNI_ULT_CD_L1,
+            OMNI_ULT_CD_L2,
+            OMNI_ULT_CD_L3,
+            ORACLE_ULT_CD_L1,
+            ORACLE_ULT_CD_L2,
+            ORACLE_ULT_CD_L3,
+            OD_ULT_CD_L1,
+            OD_ULT_CD_L2,
+            OD_ULT_CD_L3,
+
 };
 
     ListView hero_list_view;
+    TextView hero1_textview;
+    TextView hero2_textview;
+    TextView hero3_textview;
+    TextView hero4_textview;
+    TextView hero5_textview;
     String[] heroSelected = new String[MAX_SELECTED_HEROES];
+    String[] abilitySelected = new String [MAX_SELECTED_HEROES];
     //each hero has 3 levels of ultimate and thus 3 ultimate cooldown times
     int[] heroSelectedUltTimes = new int[MAX_SELECTED_HEROES * 3];
     int i = 0;
+
+    String [] abilityName = {
+            "Borrowed Time",
+            "Chemical Rage",
+            "Ice Blast",
+            "Mana Void",
+            "Tempest Double",
+            "Culling Blade",
+            "Fiend's Grip",
+            "Flaming Lasso",
+            "Primal Roar",
+            "Rupture",
+            "Track",
+            "Primal Split",
+            "Really?",
+            "Insatiable Hunger",
+            "Stampede",
+            "Phantasm",
+            "Hand of God",
+            "Death Pact",
+            "Hookshot",
+            "Freezing Field",
+            "Wall of Replica",
+            "Weave",
+            "Exorcism",
+            "Static Storm",
+            "DOOM",
+            "Elder Dragon Form",
+            "Presicion Aura",
+            "Magnetize",
+            "Echo Slam",
+            "Earth Splitter",
+            "Flame Guard",
+            "Nature's Attendants",
+            "Black Hole",
+            "Chronosphere",
+            "Call Down",
+            "Life Break",
+            "Deafening Blast",
+            "Relocate",
+            "Macropyre",
+            "Omnislash",
+            "Illuminate",
+            "Ghostship",
+            "Duel",
+            "Diabolic Edict",
+            "Chain Frost",
+            "Infest",
+            "Laguna Blade",
+            "Finger of Death",
+            "Summon Spirit Bear",
+            "Eclipse",
+            "Shapeshift",
+            "Reverse Polarity",
+            "Stone Gaze",
+            "Meepo",
+            "Moonlight Shadow",
+            "Wukong's Command",
+            "Replicate",
+            "Song of the Siren",
+            "Wrath of Nature",
+            "Reaper's Scyth",
+            "Darkness",
+            "Vendetta",
+            "Bloodlust",
+            "Guardian Angel",
+            "False Promise",
+            "Sanity's Eclipse"
+
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -439,6 +581,11 @@ public class HeroPickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hero_picker);
 
         hero_list_view = (ListView) findViewById(R.id.hero_list_view);
+        hero1_textview = (TextView)  findViewById(R.id.selected_hero1_hero_select_textview);
+        hero2_textview = (TextView)  findViewById(R.id.selected_hero2_hero_select_textview);
+        hero3_textview = (TextView)  findViewById(R.id.selected_hero3_hero_select_textview);
+        hero4_textview = (TextView)  findViewById(R.id.selected_hero4_hero_select_textview);
+        hero5_textview = (TextView)  findViewById(R.id.selected_hero5_hero_select_textview);
 
         //position in array links the hero to their ultimate cooldown time by having the time in the same position as the hero name x3
         String[] heroNames = new String[]{
@@ -577,9 +724,31 @@ public class HeroPickerActivity extends AppCompatActivity {
 
                 // Add hero name to selectedHero array and ult time to heroSelectedUltTimes array to be passed with activity switch
                 heroSelected[i] = itemValue;
+                abilitySelected[i] = abilityName[position];
                 heroSelectedUltTimes[i * 3] = ultTimes[position * 3];
                 heroSelectedUltTimes[(i * 3) + 1] = ultTimes[(position * 3) + 1];
                 heroSelectedUltTimes[(i * 3) + 2] = ultTimes[(position * 3) + 2];
+
+                switch (i + 1){
+                    case 1:
+                        hero1_textview.setText("1: " + heroSelected[i] + "\n" + abilitySelected[i]);
+                        break;
+                    case 2:
+                        hero2_textview.setText("2: " + heroSelected[i] + "\n" + abilitySelected[i]);
+                        break;
+                    case 3:
+                        hero3_textview.setText("3: " + heroSelected[i] + "\n" + abilitySelected[i]);
+                        break;
+                    case 4:
+                        hero4_textview.setText("4: " + heroSelected[i] + "\n" + abilitySelected[i]);
+                        break;
+                    case 5:
+                        hero5_textview.setText("5: " + heroSelected[i] + "\n" + abilitySelected[i]);
+                        break;
+                }
+
+
+
                 i++;
                 if (i >= MAX_SELECTED_HEROES) {
                     i = 0;
@@ -599,6 +768,7 @@ public class HeroPickerActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("selectedHeroes", heroSelected);
         intent.putExtra("selectedHeroesUltTimes", heroSelectedUltTimes);
+        intent.putExtra("abilityNames", abilitySelected);
         startActivity(intent);
     }
 }
