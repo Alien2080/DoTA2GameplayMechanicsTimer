@@ -441,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
         // Build an AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         final String[] optionsList = {
-                "Play a sound effect when Roshan is guaranteed have respawned",
+                "Play a sound effect when Roshan is guaranteed to have respawned",
                 "Keep screen on always, will use more battery"
         };
 
@@ -939,7 +939,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case 9:
                         //Aghs changes cooldown of these heroes
-                        //Still need to add Faceless, Lion, Necro
+                        //Still need to add Faceless, Lion, Necro, Pugna, QOP, Rubick
                         String name;
                         name = getSelectedHeroName(heronumber);
                         if (checkedModifiers[1]) {
@@ -1352,7 +1352,7 @@ public class MainActivity extends AppCompatActivity {
 
             //12% Talent
             //aghs
-        } else if (name.equals("2")) {
+        } else if (name.equals("Queen of Pain")) {
             style = 2;
 
             //15% Talent
@@ -1362,7 +1362,7 @@ public class MainActivity extends AppCompatActivity {
 
             //20% talent
             //aghs
-        } else if (name.equals("4")) {
+        } else if (name.equals("Rubick")) {
             style = 4;
 
             //10% talent
@@ -1381,13 +1381,17 @@ public class MainActivity extends AppCompatActivity {
                 name.equals("Batrider") ||
                 name.equals("Disruptor") ||
                 name.equals("Enigma") ||
-                name.equals("Lycan")) {
+                name.equals("Lycan") ||
+                name.equals("Phantom Lancer") ||
+                name.equals("Treant Protector"))
+        {
             style = 7;
 
             //20% Talent
         } else if (name.equals("Broodmother") ||
                 name.equals("Chaos Knight") ||
-                name.equals("Gyrocopter")) {
+                name.equals("Gyrocopter") ||
+                name.equals("Tidehunter")) {
             style = 8;
 
             //Aghs
@@ -1395,7 +1399,17 @@ public class MainActivity extends AppCompatActivity {
                 name.equals("Clockwerk") ||
                 name.equals("Faceless Void") ||
                 name.equals("Lion") ||
-                name.equals("Necrophos")) {
+                name.equals("Necrophos") ||
+                name.equals("Pugna") ||
+                name.equals("Shadow Demon") ||
+                name.equals("Slark") ||
+                name.equals("Spirit Breaker") ||
+                name.equals("Ursa") ||
+                name.equals("Vengeful Spirit") ||
+                name.equals("Venomancer") ||
+                name.equals("Viper") ||
+                name.equals("Weaver") ||
+                name.equals("Windranger")) {
             style = 9;
 
             //just OC
@@ -1445,9 +1459,42 @@ public class MainActivity extends AppCompatActivity {
                 name.equals("Ogre Magi") ||
                 name.equals("Omni Knight") ||
                 name.equals("Oracle") ||
-                name.equals("Outworld Devourer")) {
+                name.equals("Outworld Devourer") ||
+                name.equals("Phantom Assassin") ||
+                name.equals("Phoenix") ||
+                name.equals("Puck") ||
+                name.equals("Pudge") ||
+                name.equals("Razor") ||
+                name.equals("Riki") ||
+                name.equals("Sand King") ||
+                name.equals("Shadow Fiend") ||
+                name.equals("Shadow Shaman") ||
+                name.equals("Silencer")  ||
+                name.equals("Skywrath Mahe") ||
+                name.equals("Slardar") ||
+                name.equals("Spectre") ||
+                name.equals("Storm Spirit") ||
+                name.equals("Sven") ||
+                name.equals("Templar Assassin") ||
+                name.equals("Terrorblade") ||
+                name.equals("Timbersaw") ||
+                name.equals("Tinker") ||
+                name.equals("Tiny") ||
+                name.equals("Troll Warlord") ||
+                name.equals("Tusk") ||
+                name.equals("Underlord") ||
+                name.equals("Undying") ||
+                name.equals("Visage") ||
+                name.equals("Warlock") ||
+                name.equals("Winter Wyvern") ||
+                name.equals("Witch Doctor") ||
+                name.equals("Wraith King") ||
+                name.equals("Zues"))
+               {
             style = 10;
-        } else if (name.equals("Legion Commander")) {
+        } else if (name.equals("Legion Commander") ||
+                name.equals("Sniper") ||
+                name.equals("Techies")) {
             style = 11;
         }
         return style;

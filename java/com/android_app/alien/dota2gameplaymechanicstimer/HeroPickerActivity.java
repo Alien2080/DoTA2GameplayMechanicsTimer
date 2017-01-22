@@ -289,6 +289,194 @@ public class HeroPickerActivity extends AppCompatActivity {
     static int OD_ULT_CD_L2 = (160 * 1000);
     static int OD_ULT_CD_L3 = (160 * 1000);
 
+    static int PA_DAGGER_CD_L1 = (160 * 1000);
+    static int PA_DAGGER_CD_L2 = (160 * 1000);
+    static int PA_DAGGER_CD_L3 = (160 * 1000);
+
+    static int PHANTOM_LANCER_CD_L1 = (0 * 1000);
+    static int PHANTOM_LANCER_CD_L2 = (0 * 1000);
+    static int PHANTOM_LANCER_CD_L3 = (0 * 1000);
+
+    static int PHOENIX_ULT_CD_L1 = (110 * 1000);
+    static int PHOENIX_ULT_CD_L2 = (110 * 1000);
+    static int PHOENIX_ULT_CD_L3 = (110 * 1000);
+
+    static int PUCK_ULT_CD_L1 = (70 * 1000);
+    static int PUCK_ULT_CD_L2 = (65 * 1000);
+    static int PUCK_ULT_CD_L3 = (60 * 1000);
+
+    static int PUDGE_ULT_CD_L1 = (30 * 1000);
+    static int PUDGE_ULT_CD_L2 = (25 * 1000);
+    static int PUDGE_ULT_CD_L3 = (20 * 1000);
+
+    static int PUGNA_ULT_CD_L1 = (22 * 1000);
+    static int PUGNA_ULT_CD_L2 = (22 * 1000);
+    static int PUGNA_ULT_CD_L3 = (22 * 1000);
+
+    static int QOP_ULT_CD_L1 = (135 * 1000);
+    static int QOP_ULT_CD_L2 = (135 * 1000);
+    static int QOP_ULT_CD_L3 = (135 * 1000);
+
+    static int RAZOR_ULT_CD_L1 = (80 * 1000);
+    static int RAZOR_ULT_CD_L2 = (70 * 1000);
+    static int RAZOR_ULT_CD_L3 = (60 * 1000);
+
+    static int RIKI_ULT_CD_L1 = (40 * 1000);
+    static int RIKI_ULT_CD_L2 = (35 * 1000);
+    static int RIKI_ULT_CD_L3 = (30 * 1000);
+
+    static int RUBICK_ULT_CD_L1 = (20 * 1000);
+    static int RUBICK_ULT_CD_L2 = (18 * 1000);
+    static int RUBICK_ULT_CD_L3 = (16 * 1000);
+
+    static int SAND_KING_ULT_CD_L1 = (120 * 1000);
+    static int SAND_KING_ULT_CD_L2 = (110 * 1000);
+    static int SAND_KING_ULT_CD_L3 = (100 * 1000);
+
+    static int SHADOW_DEMON_ULT_CD_L1 = (50 * 1000);
+    static int SHADOW_DEMON_ULT_CD_L2 = (50 * 1000);
+    static int SHADOW_DEMON_ULT_CD_L3 = (50 * 1000);
+
+    static int SHADOW_FIEND_ULT_CD_L1 = (120 * 1000);
+    static int SHADOW_FIEND_ULT_CD_L2 = (110 * 1000);
+    static int SHADOW_FIEND_ULT_CD_L3 = (100 * 1000);
+
+    static int SHADOW_SHAMAN_ULT_CD_L1 = (120 * 1000);
+    static int SHADOW_SHAMAN_ULT_CD_L2 = (120 * 1000);
+    static int SHADOW_SHAMAN_ULT_CD_L3 = (120 * 1000);
+
+    static int SILENCER_ULT_CD_L1 = (130 * 1000);
+    static int SILENCER_ULT_CD_L2 = (130 * 1000);
+    static int SILENCER_ULT_CD_L3 = (130 * 1000);
+
+    static int SKYWRATH_ULT_CD_L1 = (60 * 1000);
+    static int SKYWRATH_ULT_CD_L2 = (40 * 1000);
+    static int SKYWRATH_ULT_CD_L3 = (20 * 1000);
+
+    static int SLARDAR_ULT_CD_L1 = (5 * 1000);
+    static int SLARDAR_ULT_CD_L2 = (5 * 1000);
+    static int SLARDAR_ULT_CD_L3 = (5 * 1000);
+
+    static int SLARK_ULT_CD_L1 = (60 * 1000);
+    static int SLARK_ULT_CD_L2 = (60 * 1000);
+    static int SLARK_ULT_CD_L3 = (60 * 1000);
+
+    static int SNIPER_ULT_CD_L1 = (20 * 1000);
+    static int SNIPER_ULT_CD_L2 = (15 * 1000);
+    static int SNIPER_ULT_CD_L3 = (10 * 1000);
+
+    static int SPECTRE_ULT_CD_L1 = (140 * 1000);
+    static int SPECTRE_ULT_CD_L2 = (130 * 1000);
+    static int SPECTRE_ULT_CD_L3 = (120 * 1000);
+
+    static int SPIRIT_BREAKER_ULT_CD_L1 = (80 * 1000);
+    static int SPIRIT_BREAKER_ULT_CD_L2 = (70 * 1000);
+    static int SPIRIT_BREAKER_ULT_CD_L3 = (60 * 1000);
+
+    static int STORM_SPIRIT_ULT_CD_L1 = (0 * 1000);
+    static int STORM_SPIRIT_ULT_CD_L2 = (0 * 1000);
+    static int STORM_SPIRIT_ULT_CD_L3 = (0 * 1000);
+
+    static int SVEN_ULT_CD_L1 = (80 * 1000);
+    static int SVEN_ULT_CD_L2 = (80 * 1000);
+    static int SVEN_ULT_CD_L3 = (80 * 1000);
+
+    static int TECHIES_BLAST_OFF_CD_L1 = (35 * 1000);
+    static int TECHIES_BLAST_OFF_CD_L2 = (35 * 1000);
+    static int TECHIES_BLAST_OFF_CD_L3 = (35 * 1000);
+
+    static int PA_REFRACTION_CD_L1 = (17 * 1000);
+    static int PA_REFRACTION_CD_L2 = (17 * 1000);
+    static int PA_REFRACTION_CD_L3 = (17 * 1000);
+
+    static int TERRORBLADE_METAMORPHOSIS_CD_L1 = (140 * 1000);
+    static int TERRORBLADE_METAMORPHOSIS_CD_L2 = (140 * 1000);
+    static int TERRORBLADE_METAMORPHOSIS_CD_L3 = (140 * 1000);
+
+    static int TIDEHUNTER_ULT_CD_L1 = (150 * 1000);
+    static int TIDEHUNTER_ULT_CD_L2 = (150 * 1000);
+    static int TIDEHUNTER_ULT_CD_L3 = (150 * 1000);
+
+    static int TIMBERSAW_ULT_CD_L1 = (8 * 1000);
+    static int TIMBERSAW_ULT_CD_L2 = (8 * 1000);
+    static int TIMBERSAW_ULT_CD_L3 = (8 * 1000);
+
+    static int TINKER_CD_L1 = (0 * 1000);
+    static int TINKER_CD_L2 = (0 * 1000);
+    static int TINKER_CD_L3 = (0 * 1000);
+
+    static int TINY_AVALANCHE_CD_L1 = (17 * 1000);
+    static int TINY_AVALANCHE_CD_L2 = (17 * 1000);
+    static int TINY_AVALANCHE_CD_L3 = (17 * 1000);
+
+    static int TREANT_PROTECTOR_ULT_CD_L1 = (70 * 1000);
+    static int TREANT_PROTECTOR_ULT_CD_L2 = (70 * 1000);
+    static int TREANT_PROTECTOR_ULT_CD_L3 = (70 * 1000);
+
+    static int TROLL_WARLORD_ULT_CD_L1 = (30 * 1000);
+    static int TROLL_WARLORD_ULT_CD_L2 = (30 * 1000);
+    static int TROLL_WARLORD_ULT_CD_L3 = (30 * 1000);
+
+    static int TUSK_ULT_CD_L1 = (36 * 1000);
+    static int TUSK_ULT_CD_L2 = (24 * 1000);
+    static int TUSK_ULT_CD_L3 = (12 * 1000);
+
+    static int UNDERLORD_ULT_CD_L1 = (130 * 1000);
+    static int UNDERLORD_ULT_CD_L2 = (120 * 1000);
+    static int UNDERLORD_ULT_CD_L3 = (110 * 1000);
+
+    static int UNDYING_ULT_CD_L1 = (75 * 1000);
+    static int UNDYING_ULT_CD_L2 = (75 * 1000);
+    static int UNDYING_ULT_CD_L3 = (75 * 1000);
+
+    static int URSA_ULT_CD_L1 = (50 * 1000);
+    static int URSA_ULT_CD_L2 = (40 * 1000);
+    static int URSA_ULT_CD_L3 = (30 * 1000);
+
+    static int VENGEFUL_SPIRIT_ULT_CD_L1 = (45 * 1000);
+    static int VENGEFUL_SPIRIT_ULT_CD_L2 = (45 * 1000);
+    static int VENGEFUL_SPIRIT_ULT_CD_L3 = (45 * 1000);
+
+    static int VENOMANCER_ULT_CD_L1 = (140 * 1000);
+    static int VENOMANCER_ULT_CD_L2 = (120 * 1000);
+    static int VENOMANCER_ULT_CD_L3 = (100 * 1000);
+
+    static int VIPER_ULT_CD_L1 = (70 * 1000);
+    static int VIPER_ULT_CD_L2 = (50 * 1000);
+    static int VIPER_ULT_CD_L3 = (30 * 1000);
+
+    static int VISAGE_ULT_CD_L1 = (160 * 1000);
+    static int VISAGE_ULT_CD_L2 = (145 * 1000);
+    static int VISAGE_ULT_CD_L3 = (130 * 1000);
+
+    static int WARLOCK_ULT_CD_L1 = (165 * 1000);
+    static int WARLOCK_ULT_CD_L2 = (165 * 1000);
+    static int WARLOCK_ULT_CD_L3 = (165 * 1000);
+
+    static int WEAVER_ULT_CD_L1 = (60 * 1000);
+    static int WEAVER_ULT_CD_L2 = (50 * 1000);
+    static int WEAVER_ULT_CD_L3 = (40 * 1000);
+
+    static int WINDRANGER_ULT_CD_L1 = (60 * 1000);
+    static int WINDRANGER_ULT_CD_L2 = (60 * 1000);
+    static int WINDRANGER_ULT_CD_L3 = (60 * 1000);
+
+    static int WINTER_WYVERN_ULT_CD_L1 = (80 * 1000);
+    static int WINTER_WYVERN_ULT_CD_L2 = (80 * 1000);
+    static int WINTER_WYVERN_ULT_CD_L3 = (80 * 1000);
+
+    static int WITCH_DOCTOR_ULT_CD_L1 = (80 * 1000);
+    static int WITCH_DOCTOR_ULT_CD_L2 = (80 * 1000);
+    static int WITCH_DOCTOR_ULT_CD_L3 = (80 * 1000);
+
+    static int WRAITH_KING_ULT_CD_L1 = (240 * 1000);
+    static int WRAITH_KING_ULT_CD_L2 = (140 * 1000);
+    static int WRAITH_KING_ULT_CD_L3 = (40 * 1000);
+
+    static int ZUES_ULT_CD_L1 = (90 * 1000);
+    static int ZUES_ULT_CD_L2 = (90 * 1000);
+    static int ZUES_ULT_CD_L3 = (90 * 1000);
+
     //default cooldown time of each heroes ultimate ability, the position in array relates to the heros name in heroNames array x3
     int[] ultTimes = new int[]{
             ABBADON_ULT_CD_L1,
@@ -489,7 +677,147 @@ public class HeroPickerActivity extends AppCompatActivity {
             OD_ULT_CD_L1,
             OD_ULT_CD_L2,
             OD_ULT_CD_L3,
-
+            PA_DAGGER_CD_L1,
+            PA_DAGGER_CD_L2,
+            PA_DAGGER_CD_L3,
+            PHANTOM_LANCER_CD_L1,
+            PHANTOM_LANCER_CD_L2,
+            PHANTOM_LANCER_CD_L3,
+            PHOENIX_ULT_CD_L1,
+            PHOENIX_ULT_CD_L2,
+            PHOENIX_ULT_CD_L3,
+            PUCK_ULT_CD_L1,
+            PUCK_ULT_CD_L2,
+            PUCK_ULT_CD_L3,
+            PUDGE_ULT_CD_L1,
+            PUDGE_ULT_CD_L2,
+            PUDGE_ULT_CD_L3,
+            PUGNA_ULT_CD_L1,
+            PUGNA_ULT_CD_L2,
+            PUGNA_ULT_CD_L3,
+            QOP_ULT_CD_L1,
+            QOP_ULT_CD_L2,
+            QOP_ULT_CD_L3,
+            RAZOR_ULT_CD_L1,
+            RAZOR_ULT_CD_L2,
+            RAZOR_ULT_CD_L3,
+            RIKI_ULT_CD_L1,
+            RIKI_ULT_CD_L2,
+            RIKI_ULT_CD_L3,
+            RUBICK_ULT_CD_L1,
+            RUBICK_ULT_CD_L2,
+            RUBICK_ULT_CD_L3,
+            SAND_KING_ULT_CD_L1,
+            SAND_KING_ULT_CD_L2,
+            SAND_KING_ULT_CD_L3,
+            SHADOW_DEMON_ULT_CD_L1,
+            SHADOW_DEMON_ULT_CD_L2,
+            SHADOW_DEMON_ULT_CD_L3,
+            SHADOW_FIEND_ULT_CD_L1,
+            SHADOW_FIEND_ULT_CD_L2,
+            SHADOW_FIEND_ULT_CD_L3,
+            SHADOW_SHAMAN_ULT_CD_L1,
+            SHADOW_SHAMAN_ULT_CD_L2,
+            SHADOW_SHAMAN_ULT_CD_L3,
+            SILENCER_ULT_CD_L1,
+            SILENCER_ULT_CD_L2,
+            SILENCER_ULT_CD_L3,
+            SKYWRATH_ULT_CD_L1,
+            SKYWRATH_ULT_CD_L2,
+            SKYWRATH_ULT_CD_L3,
+            SLARDAR_ULT_CD_L1,
+            SLARDAR_ULT_CD_L2,
+            SLARDAR_ULT_CD_L3,
+            SLARK_ULT_CD_L1,
+            SLARK_ULT_CD_L2,
+            SLARK_ULT_CD_L3,
+            SNIPER_ULT_CD_L1,
+            SNIPER_ULT_CD_L2,
+            SNIPER_ULT_CD_L3,
+            SPECTRE_ULT_CD_L1,
+            SPECTRE_ULT_CD_L2,
+            SPECTRE_ULT_CD_L3,
+            SPIRIT_BREAKER_ULT_CD_L1,
+            SPIRIT_BREAKER_ULT_CD_L2,
+            SPIRIT_BREAKER_ULT_CD_L3,
+            STORM_SPIRIT_ULT_CD_L1,
+            STORM_SPIRIT_ULT_CD_L2,
+            STORM_SPIRIT_ULT_CD_L3,
+            SVEN_ULT_CD_L1,
+            SVEN_ULT_CD_L2,
+            SVEN_ULT_CD_L3,
+            TECHIES_BLAST_OFF_CD_L1,
+            TECHIES_BLAST_OFF_CD_L2,
+            TECHIES_BLAST_OFF_CD_L3,
+            PA_REFRACTION_CD_L1,
+            PA_REFRACTION_CD_L2,
+            PA_REFRACTION_CD_L3,
+            TERRORBLADE_METAMORPHOSIS_CD_L1,
+            TERRORBLADE_METAMORPHOSIS_CD_L2,
+            TERRORBLADE_METAMORPHOSIS_CD_L3,
+            TIDEHUNTER_ULT_CD_L1,
+            TIDEHUNTER_ULT_CD_L2,
+            TIDEHUNTER_ULT_CD_L3,
+            TIMBERSAW_ULT_CD_L1,
+            TIMBERSAW_ULT_CD_L2,
+            TIMBERSAW_ULT_CD_L3,
+            TINKER_CD_L1,
+            TINKER_CD_L2,
+            TINKER_CD_L3,
+            TINY_AVALANCHE_CD_L1,
+            TINY_AVALANCHE_CD_L2,
+            TINY_AVALANCHE_CD_L3,
+            TREANT_PROTECTOR_ULT_CD_L1,
+            TREANT_PROTECTOR_ULT_CD_L2,
+            TREANT_PROTECTOR_ULT_CD_L3,
+            TROLL_WARLORD_ULT_CD_L1,
+            TROLL_WARLORD_ULT_CD_L2,
+            TROLL_WARLORD_ULT_CD_L3,
+            TUSK_ULT_CD_L1,
+            TUSK_ULT_CD_L2,
+            TUSK_ULT_CD_L3,
+            UNDERLORD_ULT_CD_L1,
+            UNDERLORD_ULT_CD_L2,
+            UNDERLORD_ULT_CD_L3,
+            UNDYING_ULT_CD_L1,
+            UNDYING_ULT_CD_L2,
+            UNDYING_ULT_CD_L3,
+            URSA_ULT_CD_L1,
+            URSA_ULT_CD_L2,
+            URSA_ULT_CD_L3,
+            VENGEFUL_SPIRIT_ULT_CD_L1,
+            VENGEFUL_SPIRIT_ULT_CD_L2,
+            VENGEFUL_SPIRIT_ULT_CD_L3,
+            VENOMANCER_ULT_CD_L1,
+            VENOMANCER_ULT_CD_L2,
+            VENOMANCER_ULT_CD_L3,
+            VIPER_ULT_CD_L1,
+            VIPER_ULT_CD_L2,
+            VIPER_ULT_CD_L3,
+            VISAGE_ULT_CD_L1,
+            VISAGE_ULT_CD_L2,
+            VISAGE_ULT_CD_L3,
+            WARLOCK_ULT_CD_L1,
+            WARLOCK_ULT_CD_L2,
+            WARLOCK_ULT_CD_L3,
+            WEAVER_ULT_CD_L1,
+            WEAVER_ULT_CD_L2,
+            WEAVER_ULT_CD_L3,
+            WINDRANGER_ULT_CD_L1,
+            WINDRANGER_ULT_CD_L2,
+            WINDRANGER_ULT_CD_L3,
+            WINTER_WYVERN_ULT_CD_L1,
+            WINTER_WYVERN_ULT_CD_L2,
+            WINTER_WYVERN_ULT_CD_L3,
+            WITCH_DOCTOR_ULT_CD_L1,
+            WITCH_DOCTOR_ULT_CD_L2,
+            WITCH_DOCTOR_ULT_CD_L3,
+            WRAITH_KING_ULT_CD_L1,
+            WRAITH_KING_ULT_CD_L2,
+            WRAITH_KING_ULT_CD_L3,
+            ZUES_ULT_CD_L1,
+            ZUES_ULT_CD_L2,
+            ZUES_ULT_CD_L3
 };
 
     ListView hero_list_view;
@@ -570,9 +898,52 @@ public class HeroPickerActivity extends AppCompatActivity {
             "Bloodlust",
             "Guardian Angel",
             "False Promise",
-            "Sanity's Eclipse"
-
-
+            "Sanity's Eclipse",
+            "Stifling Dagger",
+            "PL never sleeps",
+            "Supernova",
+            "Dream Coil",
+            "Dismember",
+            "Life Drain",
+            "Sonic Wave",
+            "Eye of the Storm",
+            "Tricks of the Trade",
+            "Spell Steal",
+            "Epicenter",
+            "Demonic Purge",
+            "Requiem of Souls",
+            "Mass Serpent Ward",
+            "Global Silence",
+            "Mystic Flare",
+            "Corrosive Haze",
+            "Shadow Dance",
+            "Assassinate",
+            "Haunt",
+            "Nether Strike",
+            "Ball Lightning",
+            "God's Strength",
+            "Blast Off!",
+            "Refraction",
+            "Metamorphosis",
+            "Chakram",
+            "Do you even DOTA?",
+            "Overgrowth",
+            "Battle Trance",
+            "Walrus PUNCH!",
+            "Dark Rift",
+            "Flesh Golem",
+            "Enrage",
+            "Nether Swap",
+            "Poison Nova",
+            "Viper Strike",
+            "Summon Familiars",
+            "Chaotic Offering",
+            "Time Lapse",
+            "Focus Fire",
+            "Winter's Curse",
+            "Death Ward",
+            "Reincarnation",
+            "Thundergod's Wrath"
     };
 
     @Override
