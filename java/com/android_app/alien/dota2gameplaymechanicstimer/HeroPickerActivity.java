@@ -1128,9 +1128,9 @@ public class HeroPickerActivity extends AppCompatActivity {
                 }
 
                 // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        itemValue, Toast.LENGTH_LONG)
-                        .show();
+               // Toast.makeText(getApplicationContext(),
+                //        itemValue, Toast.LENGTH_LONG)
+                //        .show();
             }
 
         });
