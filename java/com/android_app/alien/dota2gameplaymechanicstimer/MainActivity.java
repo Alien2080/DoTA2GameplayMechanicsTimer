@@ -140,6 +140,15 @@ public class MainActivity extends AppCompatActivity {
     Button aegis_reclaim_button;
     Button select_hero_button;
     Button game_start_button;
+    long pauseTime = 0;
+    long pauseTimeAccumilated1 = 0;
+    long pauseTimeAccumilated2 = 0;
+    long pauseTimeAccumilated3 = 0;
+    long pauseTimeAccumilated4 = 0;
+    long pauseTimeAccumilated5 = 0;
+    long pauseTimeAccumilatedGame = 0;
+    long pauseTimeAccumilatedRoshan = 0;
+    long pauseTimeAccumilatedAegis = 0;
     long gameStartTime;
     long roshanDeadTime;
     long roshanEarliestRespawnTime;
@@ -174,118 +183,123 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-            long millis = System.currentTimeMillis() - gameStartTime;
+            long millis = System.currentTimeMillis() - gameStartTime - pauseTimeAccumilatedGame;
             int seconds = (int) (millis / 1000);
             int minutes = seconds / 60;
             seconds = seconds % 60;
             game_time_text_view.setText(String.format("%02d:%02d", minutes, seconds));
 
-            long millisMin = roshanEarliestRespawnTime - System.currentTimeMillis();
+            long millisMin = roshanEarliestRespawnTime - System.currentTimeMillis() + pauseTimeAccumilatedRoshan;
             int secondsMin = (int) (millisMin / 1000);
             int minutesMin = secondsMin / 60;
             secondsMin = secondsMin % 60;
 
-            long millisMax = roshanLatestRespawnTime - System.currentTimeMillis();
+            long millisMax = roshanLatestRespawnTime - System.currentTimeMillis() + pauseTimeAccumilatedRoshan;
             int secondsMax = (int) (millisMax / 1000);
             int minutesMax = secondsMax / 60;
             secondsMax = secondsMax % 60;
 
-            long millisAegis = aegisReclaimTime - System.currentTimeMillis();
+            long millisAegis = aegisReclaimTime - System.currentTimeMillis() + pauseTimeAccumilatedAegis;
             int secondsAegis = (int) (millisAegis / 1000);
             int minutesAegis = secondsAegis / 60;
             secondsAegis = secondsAegis % 60;
 
-            long millisHero1Ult = hero1UltTime - System.currentTimeMillis();
+            long millisHero1Ult = hero1UltTime - System.currentTimeMillis() + pauseTimeAccumilated1;
             int secondsHero1Ult = (int) (millisHero1Ult / 1000);
             int minutesHero1Ult = secondsHero1Ult / 60;
             secondsHero1Ult = secondsHero1Ult % 60;
 
-            long millisHero2Ult = hero2UltTime - System.currentTimeMillis();
+            long millisHero2Ult = hero2UltTime - System.currentTimeMillis() + pauseTimeAccumilated2;
             int secondsHero2Ult = (int) (millisHero2Ult / 1000);
             int minutesHero2Ult = secondsHero2Ult / 60;
             secondsHero2Ult = secondsHero2Ult % 60;
 
-            long millisHero3Ult = hero3UltTime - System.currentTimeMillis();
+            long millisHero3Ult = hero3UltTime - System.currentTimeMillis() + pauseTimeAccumilated3;
             int secondsHero3Ult = (int) (millisHero3Ult / 1000);
             int minutesHero3Ult = secondsHero3Ult / 60;
             secondsHero3Ult = secondsHero3Ult % 60;
 
-            long millisHero4Ult = hero4UltTime - System.currentTimeMillis();
+            long millisHero4Ult = hero4UltTime - System.currentTimeMillis() + pauseTimeAccumilated4;
             int secondsHero4Ult = (int) (millisHero4Ult / 1000);
             int minutesHero4Ult = secondsHero4Ult / 60;
             secondsHero4Ult = secondsHero4Ult % 60;
 
-            long millisHero5Ult = hero5UltTime - System.currentTimeMillis();
+            long millisHero5Ult = hero5UltTime - System.currentTimeMillis() + pauseTimeAccumilated5;
             int secondsHero5Ult = (int) (millisHero5Ult / 1000);
             int minutesHero5Ult = secondsHero5Ult / 60;
             secondsHero5Ult = secondsHero5Ult % 60;
             if (selectedHeroes != null) {
                 if (selectedHeroes[0] != null) {
-                    if (System.currentTimeMillis() <= hero1UltTime) {
+                    if (System.currentTimeMillis() <= hero1UltTime + pauseTimeAccumilated1) {
                         hero1_time_textview.setText(String.format("%d:%02d", minutesHero1Ult, secondsHero1Ult));
                         hero1_layout_overlay.setVisibility(View.VISIBLE);
                         hero1_layout.setVisibility(View.INVISIBLE);
                     } else {
+                        pauseTimeAccumilated1 = 0;
                         hero1_layout_overlay.setVisibility(View.INVISIBLE);
                         hero1_layout.setVisibility(View.VISIBLE);
                     }
-                }else{
+                } else {
                     hero1_layout.setVisibility(View.INVISIBLE);
                     hero1_layout_overlay.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[1] != null) {
-                    if (System.currentTimeMillis() <= hero2UltTime) {
+                    if (System.currentTimeMillis() <= hero2UltTime + pauseTimeAccumilated2) {
                         hero2_time_textview.setText(String.format("%d:%02d", minutesHero2Ult, secondsHero2Ult));
                         hero2_layout_overlay.setVisibility(View.VISIBLE);
                         hero2_layout.setVisibility(View.INVISIBLE);
                     } else {
+                        pauseTimeAccumilated2 = 0;
                         hero2_layout_overlay.setVisibility(View.INVISIBLE);
                         hero2_layout.setVisibility(View.VISIBLE);
                     }
-                }else{
+                } else {
                     hero2_layout.setVisibility(View.INVISIBLE);
                     hero2_layout_overlay.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[2] != null) {
-                    if (System.currentTimeMillis() <= hero3UltTime) {
+                    if (System.currentTimeMillis() <= hero3UltTime + pauseTimeAccumilated3) {
                         hero3_time_textview.setText(String.format("%d:%02d", minutesHero3Ult, secondsHero3Ult));
                         hero3_layout_overlay.setVisibility(View.VISIBLE);
                         hero3_layout.setVisibility(View.INVISIBLE);
                     } else {
+                        pauseTimeAccumilated3 = 0;
                         hero3_layout_overlay.setVisibility(View.INVISIBLE);
                         hero3_layout.setVisibility(View.VISIBLE);
                     }
-                }else{
+                } else {
                     hero3_layout.setVisibility(View.INVISIBLE);
                     hero3_layout_overlay.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[3] != null) {
-                    if (System.currentTimeMillis() <= hero4UltTime) {
+                    if (System.currentTimeMillis() <= hero4UltTime + pauseTimeAccumilated4) {
                         hero4_time_textview.setText(String.format("%d:%02d", minutesHero4Ult, secondsHero4Ult));
                         hero4_layout_overlay.setVisibility(View.VISIBLE);
                         hero4_layout.setVisibility(View.INVISIBLE);
                     } else {
+                        pauseTimeAccumilated4 = 0;
                         hero4_layout_overlay.setVisibility(View.INVISIBLE);
                         hero4_layout.setVisibility(View.VISIBLE);
                     }
-                }else{
+                } else {
                     hero4_layout.setVisibility(View.INVISIBLE);
                     hero4_layout_overlay.setVisibility(View.INVISIBLE);
                 }
                 if (selectedHeroes[4] != null) {
-                    if (System.currentTimeMillis() <= hero5UltTime) {
+                    if (System.currentTimeMillis() <= hero5UltTime + pauseTimeAccumilated5) {
                         hero5_time_textview.setText(String.format("%d:%02d", minutesHero5Ult, secondsHero5Ult));
                         hero5_layout_overlay.setVisibility(View.VISIBLE);
                         hero5_layout.setVisibility(View.INVISIBLE);
                     } else {
+                        pauseTimeAccumilated5 = 0;
                         hero5_layout_overlay.setVisibility(View.INVISIBLE);
                         hero5_layout.setVisibility(View.VISIBLE);
                     }
-                }else{
+                } else {
                     hero5_layout.setVisibility(View.INVISIBLE);
                     hero5_layout_overlay.setVisibility(View.INVISIBLE);
                 }
-            }else{
+            } else {
                 hero1_layout.setVisibility(View.INVISIBLE);
                 hero2_layout.setVisibility(View.INVISIBLE);
                 hero3_layout.setVisibility(View.INVISIBLE);
@@ -307,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
             if (System.currentTimeMillis() >= aegisReclaimTime) {
                 aegis_reclaim_button.setText("aegis reclaim\n done");
             }
+            timerHandler.removeCallbacks(timerRunnable);
             timerHandler.postDelayed(this, 500);
         }
     };
@@ -417,14 +432,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 game_start_button = (Button) v;
                 if (game_start_button.getText().equals("Pause")) {
+
                     timerHandler.removeCallbacks(timerRunnable);
+                    pauseTime = System.currentTimeMillis();
                     game_start_button.setText("Resume");
                 } else if (game_start_button.getText().equals("New Game")) {
                     gameStartTime = System.currentTimeMillis();
                     timerHandler.postDelayed(timerRunnable, 0);
                     game_start_button.setText("Pause");
                 } else if (game_start_button.getText().equals("Resume")) {
+
+                    pauseTimeAccumilated1 += System.currentTimeMillis() - pauseTime;
+                    pauseTimeAccumilated2 += System.currentTimeMillis() - pauseTime;
+                    pauseTimeAccumilated3 += System.currentTimeMillis() - pauseTime;
+                    pauseTimeAccumilated4 += System.currentTimeMillis() - pauseTime;
+                    pauseTimeAccumilated5 += System.currentTimeMillis() - pauseTime;
+                    pauseTimeAccumilatedGame += System.currentTimeMillis() - pauseTime;
+                    pauseTimeAccumilatedRoshan += System.currentTimeMillis() - pauseTime;
+                    pauseTimeAccumilatedAegis += System.currentTimeMillis() - pauseTime;
+
                     timerHandler.postDelayed(timerRunnable, 0);
+
                     game_start_button.setText("Pause");
                 }
             }
@@ -566,13 +594,13 @@ public class MainActivity extends AppCompatActivity {
         roshanEarliestRespawnTime = roshanDeadTime + ROSHAN_MIN_RESPAWN;
         roshanLatestRespawnTime = roshanDeadTime + ROSHAN_MAX_RESPAWN;
         aegisReclaimTime = roshanDeadTime + AEGIS_RECLAIM_TIME;
-        //  timerHandler.postDelayed(timerRunnable, 0);
+        pauseTimeAccumilatedRoshan = 0;
     }
 
     //called when aegis_button is clicked
     public void aegisTimer(View view) {
         aegisReclaimTime = System.currentTimeMillis() + AEGIS_RECLAIM_TIME;
-        // timerHandler.postDelayed(timerRunnable, 0);
+        pauseTimeAccumilatedAegis = 0;
     }
 
     //called when select_hero_button is clicked
@@ -590,6 +618,19 @@ public class MainActivity extends AppCompatActivity {
             hero3UltTime = 0;
             hero4UltTime = 0;
             hero5UltTime = 0;
+            pauseTimeAccumilated1 = 0;
+            pauseTimeAccumilated2 = 0;
+            pauseTimeAccumilated3 = 0;
+            pauseTimeAccumilated4 = 0;
+            pauseTimeAccumilated5 = 0;
+            hero1CDFactor = 1;
+            hero2CDFactor = 1;
+            hero3CDFactor = 1;
+            hero4CDFactor = 1;
+            hero5CDFactor = 1;
+            checkedModifiers[0] = false;
+            checkedModifiers[1] = false;
+            checkedModifiers[2] = false;
         }
 
         Intent intent = new Intent(this, HeroPickerActivity.class);
@@ -724,6 +765,17 @@ public class MainActivity extends AppCompatActivity {
                     hero1_layout.setVisibility(View.VISIBLE);
                     hereos_selected_layout.setVisibility(View.VISIBLE);
                     ultimate_timer_textview.setVisibility(View.VISIBLE);
+
+                    if (ultTimes[0] == ultTimes[1]) {
+                        hero1_1_button.setVisibility(View.INVISIBLE);
+                        hero1_3_button.setVisibility(View.INVISIBLE);
+                        hero1_2_button.setText("ALL LEVELS");
+                    } else {
+                        hero1_1_button.setVisibility(View.VISIBLE);
+                        hero1_3_button.setVisibility(View.VISIBLE);
+                        hero1_2_button.setText("LEVEL 2");
+                    }
+
                 } else {
                     hereos_selected_layout.setVisibility(View.INVISIBLE);
                     hero1_layout.setVisibility(View.INVISIBLE);
@@ -748,6 +800,15 @@ public class MainActivity extends AppCompatActivity {
                     hero2_textview.setText(selectedHeroes[1] + "\n" + selectedAbilities[1]);
                     hero2_textview_overlay.setText(selectedHeroes[1] + "\n" + selectedAbilities[1]);
                     hero2_layout.setVisibility(View.VISIBLE);
+                    if (ultTimes[3] == ultTimes[4]) {
+                        hero2_1_button.setVisibility(View.INVISIBLE);
+                        hero2_3_button.setVisibility(View.INVISIBLE);
+                        hero2_2_button.setText("ALL LEVELS");
+                    } else {
+                        hero2_1_button.setVisibility(View.VISIBLE);
+                        hero2_3_button.setVisibility(View.VISIBLE);
+                        hero2_2_button.setText("LEVEL 2");
+                    }
                 } else {
                     hero2_layout.setVisibility(View.INVISIBLE);
                 }
@@ -755,22 +816,59 @@ public class MainActivity extends AppCompatActivity {
                     hero3_textview.setText(selectedHeroes[2] + "\n" + selectedAbilities[2]);
                     hero3_textview_overlay.setText(selectedHeroes[2] + "\n" + selectedAbilities[2]);
                     hero3_layout.setVisibility(View.VISIBLE);
+
+                    if (ultTimes[6] == ultTimes[7]) {
+                        hero3_1_button.setVisibility(View.INVISIBLE);
+                        hero3_3_button.setVisibility(View.INVISIBLE);
+                        hero3_2_button.setText("ALL LEVELS");
+                    } else {
+                        hero3_1_button.setVisibility(View.VISIBLE);
+                        hero3_3_button.setVisibility(View.VISIBLE);
+                        hero3_2_button.setText("LEVEL 2");
+                    }
+
                 } else {
                     hero3_layout.setVisibility(View.INVISIBLE);
+
+
                 }
                 if (selectedHeroes[3] != null) {
                     hero4_textview.setText(selectedHeroes[3] + "\n" + selectedAbilities[3]);
                     hero4_textview_overlay.setText(selectedHeroes[3] + "\n" + selectedAbilities[3]);
                     hero4_layout.setVisibility(View.VISIBLE);
+
+                    if (ultTimes[9] == ultTimes[10]) {
+                        hero4_1_button.setVisibility(View.INVISIBLE);
+                        hero4_3_button.setVisibility(View.INVISIBLE);
+                        hero4_2_button.setText("ALL LEVELS");
+                    } else {
+                        hero4_1_button.setVisibility(View.VISIBLE);
+                        hero4_3_button.setVisibility(View.VISIBLE);
+                        hero4_2_button.setText("LEVEL 2");
+                    }
                 } else {
                     hero4_layout.setVisibility(View.INVISIBLE);
+
+
                 }
                 if (selectedHeroes[4] != null) {
                     hero5_textview.setText(selectedHeroes[4] + "\n" + selectedAbilities[4]);
                     hero5_textview_overlay.setText(selectedHeroes[4] + "\n" + selectedAbilities[4]);
                     hero5_layout.setVisibility(View.VISIBLE);
+
+                    if (ultTimes[12] == ultTimes[13]) {
+                        hero5_1_button.setVisibility(View.INVISIBLE);
+                        hero5_3_button.setVisibility(View.INVISIBLE);
+                        hero5_2_button.setText("ALL LEVELS");
+                    } else {
+                        hero5_1_button.setVisibility(View.VISIBLE);
+                        hero5_3_button.setVisibility(View.VISIBLE);
+                        hero5_2_button.setText("LEVEL 2");
+                    }
                 } else {
                     hero5_layout.setVisibility(View.INVISIBLE);
+
+
                 }
             } else {
                 select_hero_button.setText("Select Enemy Heroes");
@@ -810,6 +908,22 @@ public class MainActivity extends AppCompatActivity {
             hero5_OC_imageview.setVisibility(View.INVISIBLE);
             hero5_aghs_imageview.setVisibility(View.INVISIBLE);
             hero5_talent_imageview.setVisibility(View.INVISIBLE);
+
+            hero1_1_button.setVisibility(View.VISIBLE);
+            hero1_3_button.setVisibility(View.VISIBLE);
+            hero1_2_button.setText("LEVEL 2");
+            hero2_1_button.setVisibility(View.VISIBLE);
+            hero2_3_button.setVisibility(View.VISIBLE);
+            hero2_2_button.setText("LEVEL 2");
+            hero3_1_button.setVisibility(View.VISIBLE);
+            hero3_3_button.setVisibility(View.VISIBLE);
+            hero3_2_button.setText("LEVEL 2");
+            hero4_1_button.setVisibility(View.VISIBLE);
+            hero4_3_button.setVisibility(View.VISIBLE);
+            hero4_2_button.setText("LEVEL 2");
+            hero5_1_button.setVisibility(View.VISIBLE);
+            hero5_3_button.setVisibility(View.VISIBLE);
+            hero5_2_button.setText("LEVEL 2");
         }
     }
 
@@ -1406,8 +1520,7 @@ public class MainActivity extends AppCompatActivity {
                 name.equals("Enigma") ||
                 name.equals("Lycan") ||
                 name.equals("Phantom Lancer") ||
-                name.equals("Treant Protector"))
-        {
+                name.equals("Treant Protector")) {
             style = 7;
 
             //20% Talent
@@ -1492,7 +1605,7 @@ public class MainActivity extends AppCompatActivity {
                 name.equals("Sand King") ||
                 name.equals("Shadow Fiend") ||
                 name.equals("Shadow Shaman") ||
-                name.equals("Silencer")  ||
+                name.equals("Silencer") ||
                 name.equals("Skywrath Mahe") ||
                 name.equals("Slardar") ||
                 name.equals("Spectre") ||
@@ -1512,8 +1625,7 @@ public class MainActivity extends AppCompatActivity {
                 name.equals("Winter Wyvern") ||
                 name.equals("Witch Doctor") ||
                 name.equals("Wraith King") ||
-                name.equals("Zeus"))
-               {
+                name.equals("Zeus")) {
             style = 10;
         } else if (name.equals("Legion Commander") ||
                 name.equals("Sniper") ||
