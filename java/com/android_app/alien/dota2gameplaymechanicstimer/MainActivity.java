@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
     String[] selectedHeroes;
     boolean roshanSoundOption;
     boolean screenAlwaysOnOption;
+    boolean welcomeTextPlayed = false;
 
     int listStyle;
     //used to play the roshan respawn sound effect
@@ -329,6 +330,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!welcomeTextPlayed){
+            Toast.makeText(getApplicationContext(),
+                            "Welcome! Select up to 5 heroes \nand start game timer to begin", Toast.LENGTH_LONG)
+                            .show();
+        }
+        welcomeTextPlayed = true;
 
         // Restore preferences
         SharedPreferences settings = getSharedPreferences("optionsFile", 0);
@@ -606,7 +614,6 @@ public class MainActivity extends AppCompatActivity {
     //called when select_hero_button is clicked
     public void heroSelect(View view) {
         if (selectedHeroes != null) {
-
             selectedHeroes[0] = null;
             selectedHeroes[1] = null;
             selectedHeroes[2] = null;
@@ -631,6 +638,22 @@ public class MainActivity extends AppCompatActivity {
             checkedModifiers[0] = false;
             checkedModifiers[1] = false;
             checkedModifiers[2] = false;
+            hero1_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero1_OC_imageview.setVisibility(View.INVISIBLE);
+            hero1_talent_imageview.setVisibility(View.INVISIBLE);
+            hero2_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero2_OC_imageview.setVisibility(View.INVISIBLE);
+            hero2_talent_imageview.setVisibility(View.INVISIBLE);
+            hero3_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero3_OC_imageview.setVisibility(View.INVISIBLE);
+            hero3_talent_imageview.setVisibility(View.INVISIBLE);
+            hero4_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero4_OC_imageview.setVisibility(View.INVISIBLE);
+            hero4_talent_imageview.setVisibility(View.INVISIBLE);
+            hero5_aghs_imageview.setVisibility(View.INVISIBLE);
+            hero5_OC_imageview.setVisibility(View.INVISIBLE);
+            hero5_talent_imageview.setVisibility(View.INVISIBLE);
+
         }
 
         Intent intent = new Intent(this, HeroPickerActivity.class);
@@ -759,6 +782,10 @@ public class MainActivity extends AppCompatActivity {
             selectedAbilities = intent.getStringArrayExtra("abilityNames");
             if (selectedHeroes != null) {
                 select_hero_button.setText("Reset Heroes");
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Click hero names to choose CD modifiers", Toast.LENGTH_LONG)
+                        .show();
                 if (selectedHeroes[0] != null) {
                     hero1_textview.setText(selectedHeroes[0] + "\n" + selectedAbilities[0]);
                     hero1_textview_overlay.setText(selectedHeroes[0] + "\n" + selectedAbilities[0]);
@@ -1002,8 +1029,8 @@ public class MainActivity extends AppCompatActivity {
                 String currentItem = modifiersList.get(which);
 
                 // Notify the current action
-                Toast.makeText(getApplicationContext(),
-                        currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),
+                //        currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -1076,7 +1103,6 @@ public class MainActivity extends AppCompatActivity {
 
                     case 9:
                         //Aghs changes cooldown of these heroes
-                        //Still need to add Faceless, Lion, Necro, Pugna, QOP, Rubick
                         String name;
                         name = getSelectedHeroName(heronumber);
                         if (checkedModifiers[1]) {
@@ -1136,6 +1162,426 @@ public class MainActivity extends AppCompatActivity {
                                         ultTimes[14] = 12 * 1000;
                                         break;
                                 }
+                            } else if (name.equals("Faceless Void")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 60 * 1000;
+                                        ultTimes[1] = 60 * 1000;
+                                        ultTimes[2] = 60 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 60 * 1000;
+                                        ultTimes[4] = 60 * 1000;
+                                        ultTimes[5] = 60 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 60 * 1000;
+                                        ultTimes[7] = 60 * 1000;
+                                        ultTimes[8] = 60 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 60 * 1000;
+                                        ultTimes[10] = 60 * 1000;
+                                        ultTimes[11] = 60 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 60 * 1000;
+                                        ultTimes[13] = 60 * 1000;
+                                        ultTimes[14] = 60 * 1000;
+                                        break;
+                                }
+                            } else if (name.equals("Lion")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 100 * 1000;
+                                        ultTimes[1] = 60 * 1000;
+                                        ultTimes[2] = 20 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 100 * 1000;
+                                        ultTimes[4] = 60 * 1000;
+                                        ultTimes[5] = 20 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 100 * 1000;
+                                        ultTimes[7] = 60 * 1000;
+                                        ultTimes[8] = 20 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 100 * 1000;
+                                        ultTimes[10] = 60 * 1000;
+                                        ultTimes[11] = 20 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 100 * 1000;
+                                        ultTimes[13] = 60 * 1000;
+                                        ultTimes[14] = 20 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Necrophos")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 55 * 1000;
+                                        ultTimes[1] = 40 * 1000;
+                                        ultTimes[2] = 25 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 55 * 1000;
+                                        ultTimes[4] = 40 * 1000;
+                                        ultTimes[5] = 25 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 55 * 1000;
+                                        ultTimes[7] = 40 * 1000;
+                                        ultTimes[8] = 25 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 55 * 1000;
+                                        ultTimes[10] = 40 * 1000;
+                                        ultTimes[11] = 25 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 55 * 1000;
+                                        ultTimes[13] = 40 * 1000;
+                                        ultTimes[14] = 25 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Pugna")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 0 * 1000;
+                                        ultTimes[1] = 0 * 1000;
+                                        ultTimes[2] = 0 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 0 * 1000;
+                                        ultTimes[4] = 0 * 1000;
+                                        ultTimes[5] = 0 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 0 * 1000;
+                                        ultTimes[7] = 0 * 1000;
+                                        ultTimes[8] = 0 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 0 * 1000;
+                                        ultTimes[10] = 0 * 1000;
+                                        ultTimes[11] = 0 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 0 * 1000;
+                                        ultTimes[13] = 0 * 1000;
+                                        ultTimes[14] = 0 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Queen of Pain")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 40 * 1000;
+                                        ultTimes[1] = 40 * 1000;
+                                        ultTimes[2] = 40 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 40 * 1000;
+                                        ultTimes[4] = 40 * 1000;
+                                        ultTimes[5] = 40 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 40 * 1000;
+                                        ultTimes[7] = 40 * 1000;
+                                        ultTimes[8] = 40 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 40 * 1000;
+                                        ultTimes[10] = 40 * 1000;
+                                        ultTimes[11] = 40 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 40 * 1000;
+                                        ultTimes[13] = 40 * 1000;
+                                        ultTimes[14] = 40 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Rubick")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 2 * 1000;
+                                        ultTimes[1] = 2 * 1000;
+                                        ultTimes[2] = 2 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 2 * 1000;
+                                        ultTimes[4] = 2 * 1000;
+                                        ultTimes[5] = 2 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 2 * 1000;
+                                        ultTimes[7] = 2 * 1000;
+                                        ultTimes[8] = 2 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 2 * 1000;
+                                        ultTimes[10] = 2 * 1000;
+                                        ultTimes[11] = 2 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 2 * 1000;
+                                        ultTimes[13] = 2 * 1000;
+                                        ultTimes[14] = 2 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Shadow Demon")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 0 * 1000;
+                                        ultTimes[1] = 0 * 1000;
+                                        ultTimes[2] = 0 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 0 * 1000;
+                                        ultTimes[4] = 0 * 1000;
+                                        ultTimes[5] = 0 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 0 * 1000;
+                                        ultTimes[7] = 0 * 1000;
+                                        ultTimes[8] = 0 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 0 * 1000;
+                                        ultTimes[10] = 0 * 1000;
+                                        ultTimes[11] = 0 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 0 * 1000;
+                                        ultTimes[13] = 0 * 1000;
+                                        ultTimes[14] = 0 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Slark")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 30 * 1000;
+                                        ultTimes[1] = 30 * 1000;
+                                        ultTimes[2] = 30 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 30 * 1000;
+                                        ultTimes[4] = 30 * 1000;
+                                        ultTimes[5] = 30 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 30 * 1000;
+                                        ultTimes[7] = 30 * 1000;
+                                        ultTimes[8] = 30 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 30 * 1000;
+                                        ultTimes[10] = 30 * 1000;
+                                        ultTimes[11] = 30 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 30 * 1000;
+                                        ultTimes[13] = 30 * 1000;
+                                        ultTimes[14] = 30 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Spirit Breaker")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 20 * 1000;
+                                        ultTimes[1] = 20 * 1000;
+                                        ultTimes[2] = 20 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 20 * 1000;
+                                        ultTimes[4] = 20 * 1000;
+                                        ultTimes[5] = 20 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 20 * 1000;
+                                        ultTimes[7] = 20 * 1000;
+                                        ultTimes[8] = 20 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 20 * 1000;
+                                        ultTimes[10] = 20 * 1000;
+                                        ultTimes[11] = 20 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 20 * 1000;
+                                        ultTimes[13] = 20 * 1000;
+                                        ultTimes[14] = 20 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Ursa")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 30 * 1000;
+                                        ultTimes[1] = 24 * 1000;
+                                        ultTimes[2] = 18 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 30 * 1000;
+                                        ultTimes[4] = 24 * 1000;
+                                        ultTimes[5] = 18 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 30 * 1000;
+                                        ultTimes[7] = 24 * 1000;
+                                        ultTimes[8] = 18 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 30 * 1000;
+                                        ultTimes[10] = 24 * 1000;
+                                        ultTimes[11] = 18 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 30 * 1000;
+                                        ultTimes[13] = 24 * 1000;
+                                        ultTimes[14] = 18 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Vengeful Spirit")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 10 * 1000;
+                                        ultTimes[1] = 10 * 1000;
+                                        ultTimes[2] = 10 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 10 * 1000;
+                                        ultTimes[4] = 10 * 1000;
+                                        ultTimes[5] = 10 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 10 * 1000;
+                                        ultTimes[7] = 10 * 1000;
+                                        ultTimes[8] = 10 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 10 * 1000;
+                                        ultTimes[10] = 10 * 1000;
+                                        ultTimes[11] = 10 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 10 * 1000;
+                                        ultTimes[13] = 10 * 1000;
+                                        ultTimes[14] = 10 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Venomancer")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 140 * 1000;
+                                        ultTimes[1] = 120 * 1000;
+                                        ultTimes[2] = 60 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 140 * 1000;
+                                        ultTimes[4] = 120 * 1000;
+                                        ultTimes[5] = 60 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 140 * 1000;
+                                        ultTimes[7] = 120 * 1000;
+                                        ultTimes[8] = 60 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 140 * 1000;
+                                        ultTimes[10] = 120 * 1000;
+                                        ultTimes[11] = 60 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 140 * 1000;
+                                        ultTimes[13] = 120 * 1000;
+                                        ultTimes[14] = 60 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Viper")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 10 * 1000;
+                                        ultTimes[1] = 10 * 1000;
+                                        ultTimes[2] = 10 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 10 * 1000;
+                                        ultTimes[4] = 10 * 1000;
+                                        ultTimes[5] = 10 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 10 * 1000;
+                                        ultTimes[7] = 10 * 1000;
+                                        ultTimes[8] = 10 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 10 * 1000;
+                                        ultTimes[10] = 10 * 1000;
+                                        ultTimes[11] = 10 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 10 * 1000;
+                                        ultTimes[13] = 10 * 1000;
+                                        ultTimes[14] = 10 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Weaver")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 16 * 1000;
+                                        ultTimes[1] = 16 * 1000;
+                                        ultTimes[2] = 16 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 16 * 1000;
+                                        ultTimes[4] = 16 * 1000;
+                                        ultTimes[5] = 16 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 16 * 1000;
+                                        ultTimes[7] = 16 * 1000;
+                                        ultTimes[8] = 16 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 16 * 1000;
+                                        ultTimes[10] = 16 * 1000;
+                                        ultTimes[11] = 16 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 16 * 1000;
+                                        ultTimes[13] = 16 * 1000;
+                                        ultTimes[14] = 16 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Windranger")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 15 * 1000;
+                                        ultTimes[1] = 15 * 1000;
+                                        ultTimes[2] = 15 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 15 * 1000;
+                                        ultTimes[4] = 15 * 1000;
+                                        ultTimes[5] = 15 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 15 * 1000;
+                                        ultTimes[7] = 15 * 1000;
+                                        ultTimes[8] = 15 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 15 * 1000;
+                                        ultTimes[10] = 15 * 1000;
+                                        ultTimes[11] = 15 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 15 * 1000;
+                                        ultTimes[13] = 15 * 1000;
+                                        ultTimes[14] = 15 * 1000;
+                                        break;
+                                }
                             }
                         } else {
                             if (name.equals("Axe")) {
@@ -1176,7 +1622,7 @@ public class MainActivity extends AppCompatActivity {
                                     case 2:
                                         ultTimes[3] = 70 * 1000;
                                         ultTimes[4] = 55 * 1000;
-                                        ultTimes[5] = 1402 * 1000;
+                                        ultTimes[5] = 40 * 1000;
                                         break;
                                     case 3:
                                         ultTimes[6] = 70 * 1000;
@@ -1194,8 +1640,428 @@ public class MainActivity extends AppCompatActivity {
                                         ultTimes[14] = 40 * 1000;
                                         break;
                                 }
+                            } else if (name.equals("Faceless Void")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 140 * 1000;
+                                        ultTimes[1] = 125 * 1000;
+                                        ultTimes[2] = 110 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 140 * 1000;
+                                        ultTimes[4] = 125 * 1000;
+                                        ultTimes[5] = 110 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 140 * 1000;
+                                        ultTimes[7] = 125 * 1000;
+                                        ultTimes[8] = 110 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 140 * 1000;
+                                        ultTimes[10] = 125 * 1000;
+                                        ultTimes[11] = 110 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 140 * 1000;
+                                        ultTimes[13] = 125 * 1000;
+                                        ultTimes[14] = 110 * 1000;
+                                        break;
+                                }
+                            } else if (name.equals("Lion")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 160 * 1000;
+                                        ultTimes[1] = 100 * 1000;
+                                        ultTimes[2] = 40 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 160 * 1000;
+                                        ultTimes[4] = 100 * 1000;
+                                        ultTimes[5] = 40 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 160 * 1000;
+                                        ultTimes[7] = 100 * 1000;
+                                        ultTimes[8] = 40 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 160 * 1000;
+                                        ultTimes[10] = 100 * 1000;
+                                        ultTimes[11] = 40 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 160 * 1000;
+                                        ultTimes[13] = 100 * 1000;
+                                        ultTimes[14] = 40 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Necrophos")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 100 * 1000;
+                                        ultTimes[1] = 85 * 1000;
+                                        ultTimes[2] = 70 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 100 * 1000;
+                                        ultTimes[4] = 85 * 1000;
+                                        ultTimes[5] = 70 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 100 * 1000;
+                                        ultTimes[7] = 85 * 1000;
+                                        ultTimes[8] = 70 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 100 * 1000;
+                                        ultTimes[10] = 85 * 1000;
+                                        ultTimes[11] = 70 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 100 * 1000;
+                                        ultTimes[13] = 85 * 1000;
+                                        ultTimes[14] = 70 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Pugna")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 22 * 1000;
+                                        ultTimes[1] = 22 * 1000;
+                                        ultTimes[2] = 22 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 22 * 1000;
+                                        ultTimes[4] = 22 * 1000;
+                                        ultTimes[5] = 22 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 22 * 1000;
+                                        ultTimes[7] = 22 * 1000;
+                                        ultTimes[8] = 22 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 22 * 1000;
+                                        ultTimes[10] = 22 * 1000;
+                                        ultTimes[11] = 22 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 22 * 1000;
+                                        ultTimes[13] = 22 * 1000;
+                                        ultTimes[14] = 22 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Queen of Pain")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 135 * 1000;
+                                        ultTimes[1] = 135 * 1000;
+                                        ultTimes[2] = 135 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 135 * 1000;
+                                        ultTimes[4] = 135 * 1000;
+                                        ultTimes[5] = 135 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 135 * 1000;
+                                        ultTimes[7] = 135 * 1000;
+                                        ultTimes[8] = 135 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 135 * 1000;
+                                        ultTimes[10] = 135 * 1000;
+                                        ultTimes[11] = 135 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 135 * 1000;
+                                        ultTimes[13] = 135 * 1000;
+                                        ultTimes[14] = 135 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Rubick")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 20 * 1000;
+                                        ultTimes[1] = 18 * 1000;
+                                        ultTimes[2] = 16 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 20 * 1000;
+                                        ultTimes[4] = 18 * 1000;
+                                        ultTimes[5] = 16 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 20 * 1000;
+                                        ultTimes[7] = 18 * 1000;
+                                        ultTimes[8] = 16 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 20 * 1000;
+                                        ultTimes[10] = 18 * 1000;
+                                        ultTimes[11] = 16 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 20 * 1000;
+                                        ultTimes[13] = 18 * 1000;
+                                        ultTimes[14] = 16 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Shadow Demon")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 50 * 1000;
+                                        ultTimes[1] = 50 * 1000;
+                                        ultTimes[2] = 50 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 50 * 1000;
+                                        ultTimes[4] = 50 * 1000;
+                                        ultTimes[5] = 50 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 50 * 1000;
+                                        ultTimes[7] = 50 * 1000;
+                                        ultTimes[8] = 50 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 50 * 1000;
+                                        ultTimes[10] = 50 * 1000;
+                                        ultTimes[11] = 50 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 50 * 1000;
+                                        ultTimes[13] = 50 * 1000;
+                                        ultTimes[14] = 50 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Slark")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 60 * 1000;
+                                        ultTimes[1] = 60 * 1000;
+                                        ultTimes[2] = 60 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 60 * 1000;
+                                        ultTimes[4] = 60 * 1000;
+                                        ultTimes[5] = 60 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 60 * 1000;
+                                        ultTimes[7] = 60 * 1000;
+                                        ultTimes[8] = 60 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 60 * 1000;
+                                        ultTimes[10] = 60 * 1000;
+                                        ultTimes[11] = 60 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 60 * 1000;
+                                        ultTimes[13] = 60 * 1000;
+                                        ultTimes[14] = 60 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Spirit Breaker")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 80 * 1000;
+                                        ultTimes[1] = 70 * 1000;
+                                        ultTimes[2] = 60 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 80 * 1000;
+                                        ultTimes[4] = 70 * 1000;
+                                        ultTimes[5] = 60 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 80 * 1000;
+                                        ultTimes[7] = 70 * 1000;
+                                        ultTimes[8] = 60 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 80 * 1000;
+                                        ultTimes[10] = 70 * 1000;
+                                        ultTimes[11] = 60 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 80 * 1000;
+                                        ultTimes[13] = 70 * 1000;
+                                        ultTimes[14] = 60 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Ursa")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 50 * 1000;
+                                        ultTimes[1] = 40 * 1000;
+                                        ultTimes[2] = 30 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 50 * 1000;
+                                        ultTimes[4] = 40 * 1000;
+                                        ultTimes[5] = 30 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 50 * 1000;
+                                        ultTimes[7] = 40 * 1000;
+                                        ultTimes[8] = 30 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 50 * 1000;
+                                        ultTimes[10] = 40 * 1000;
+                                        ultTimes[11] = 30 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 50 * 1000;
+                                        ultTimes[13] = 40 * 1000;
+                                        ultTimes[14] = 30 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Vengeful Spirit")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 45 * 1000;
+                                        ultTimes[1] = 45 * 1000;
+                                        ultTimes[2] = 45 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 45 * 1000;
+                                        ultTimes[4] = 45 * 1000;
+                                        ultTimes[5] = 45 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 45 * 1000;
+                                        ultTimes[7] = 45 * 1000;
+                                        ultTimes[8] = 45 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 45 * 1000;
+                                        ultTimes[10] = 45 * 1000;
+                                        ultTimes[11] = 45 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 45 * 1000;
+                                        ultTimes[13] = 45 * 1000;
+                                        ultTimes[14] = 45 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Venomancer")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 140 * 1000;
+                                        ultTimes[1] = 120 * 1000;
+                                        ultTimes[2] = 100 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 140 * 1000;
+                                        ultTimes[4] = 120 * 1000;
+                                        ultTimes[5] = 100 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 140 * 1000;
+                                        ultTimes[7] = 120 * 1000;
+                                        ultTimes[8] = 100 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 140 * 1000;
+                                        ultTimes[10] = 120 * 1000;
+                                        ultTimes[11] = 100 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 140 * 1000;
+                                        ultTimes[13] = 120 * 1000;
+                                        ultTimes[14] = 100 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Viper")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 70 * 1000;
+                                        ultTimes[1] = 50 * 1000;
+                                        ultTimes[2] = 30 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 70 * 1000;
+                                        ultTimes[4] = 50 * 1000;
+                                        ultTimes[5] = 30 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 70 * 1000;
+                                        ultTimes[7] = 50 * 1000;
+                                        ultTimes[8] = 30 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 70 * 1000;
+                                        ultTimes[10] = 50 * 1000;
+                                        ultTimes[11] = 30 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 70 * 1000;
+                                        ultTimes[13] = 50 * 1000;
+                                        ultTimes[14] = 30 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Weaver")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 60 * 1000;
+                                        ultTimes[1] = 50 * 1000;
+                                        ultTimes[2] = 40 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 60 * 1000;
+                                        ultTimes[4] = 50 * 1000;
+                                        ultTimes[5] = 40 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 60 * 1000;
+                                        ultTimes[7] = 50 * 1000;
+                                        ultTimes[8] = 40 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 60 * 1000;
+                                        ultTimes[10] = 50 * 1000;
+                                        ultTimes[11] = 40 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 60 * 1000;
+                                        ultTimes[13] = 50 * 1000;
+                                        ultTimes[14] = 40 * 1000;
+                                        break;
+                                }
+                            }else if (name.equals("Windranger")) {
+                                switch (heronumber) {
+                                    case 1:
+                                        ultTimes[0] = 60 * 1000;
+                                        ultTimes[1] = 60 * 1000;
+                                        ultTimes[2] = 60 * 1000;
+                                        break;
+                                    case 2:
+                                        ultTimes[3] = 60 * 1000;
+                                        ultTimes[4] = 60 * 1000;
+                                        ultTimes[5] = 60 * 1000;
+                                        break;
+                                    case 3:
+                                        ultTimes[6] = 60 * 1000;
+                                        ultTimes[7] = 60 * 1000;
+                                        ultTimes[8] = 60 * 1000;
+                                        break;
+                                    case 4:
+                                        ultTimes[9] = 60 * 1000;
+                                        ultTimes[10] = 60 * 1000;
+                                        ultTimes[11] = 60 * 1000;
+                                        break;
+                                    case 5:
+                                        ultTimes[12] = 60 * 1000;
+                                        ultTimes[13] = 60 * 1000;
+                                        ultTimes[14] = 60 * 1000;
+                                        break;
+                                }
                             }
-                        }
+                            }
                         break;
 
                     case 10:
@@ -1789,6 +2655,6 @@ public class MainActivity extends AppCompatActivity {
                 name = null;
                 break;
         }
-        return selectedHeroes[heronumber];
+        return selectedHeroes[heronumber-1];
     }
 }
